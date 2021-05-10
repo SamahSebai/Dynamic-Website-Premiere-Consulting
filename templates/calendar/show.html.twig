@@ -1,0 +1,324 @@
+{% extends 'basefront.html.twig' %}
+
+{% block title %}évènement{% endblock %}
+
+
+
+
+{% block stylesheets %}
+
+
+
+    <style id='tribe-events-calendar-style-inline-css' type='text/css'>
+        .tribe-events-calendar td.tribe-events-present div[id*="tribe-events-daynum-"],
+        #tribe_events_filters_wrapper input[type=submit],
+        .tribe-events-button,
+        #tribe-events .tribe-events-button,
+        .tribe-events-button.tribe-inactive,
+        #tribe-events .tribe-events-button:hover,
+        .tribe-events-button:hover,
+        .tribe-events-button.tribe-active:hover {
+            background-color: #3764eb;
+        }
+
+        #tribe-events-content .tribe-events-tooltip h4,
+        #tribe_events_filters_wrapper .tribe_events_slider_val,
+        .single-tribe_events a.tribe-events-ical,
+        .single-tribe_events a.tribe-events-gcal {
+            color: #3764eb;
+        }
+
+        .tribe-grid-allday .tribe-events-week-allday-single,
+        .tribe-grid-body .tribe-events-week-hourly-single,
+        .tribe-grid-allday .tribe-events-week-allday-single:hover,
+        .tribe-grid-body .tribe-events-week-hourly-single:hover {
+            background-color: #3764eb;
+            border-color: rgba(0, 0, 0, 0.3);
+        }
+
+        .tribe-events-list .tribe-events-loop .tribe-event-featured,
+        .tribe-events-list #tribe-events-day.tribe-events-loop .tribe-event-featured,
+        .type-tribe_events.tribe-events-photo-event.tribe-event-featured .tribe-events-photo-event-wrap,
+        .type-tribe_events.tribe-events-photo-event.tribe-event-featured .tribe-events-photo-event-wrap:hover {
+            background-color: #3764eb;
+        }
+
+        #tribe-events-content table.tribe-events-calendar .type-tribe_events.tribe-event-featured {
+            background-color: #3764eb;
+        }
+
+        .tribe-events-list-widget .tribe-event-featured,
+        .tribe-events-venue-widget .tribe-event-featured,
+        .tribe-mini-calendar-list-wrapper .tribe-event-featured,
+        .tribe-events-adv-list-widget .tribe-event-featured .tribe-mini-calendar-event {
+            background-color: #3764eb;
+        }
+
+        .tribe-grid-body .tribe-event-featured.tribe-events-week-hourly-single {
+            background-color: rgba(55, 100, 235, .7);
+            border-color: #3764eb;
+        }
+
+        .tribe-grid-body .tribe-event-featured.tribe-events-week-hourly-single:hover {
+            background-color: #3764eb;
+        }
+
+        .tribe-button {
+            background-color: #3764eb;
+            color: #fff;
+        }
+
+        .tribe-button:hover,
+        .tribe-button:active,
+        .tribe-button:focus {
+            background-color: #133fc2;
+        }
+
+        #tribe-events .tribe-event-featured .tribe-button:hover {
+            color: #0c287d;
+        }
+
+        #tribe-events-content a,
+        .tribe-events-event-meta a {
+            color: #141827;
+        }
+
+        #tribe_events_filters_wrapper input[type=submit],
+        .tribe-events-button,
+        #tribe-events .tribe-events-button,
+        .tribe-events-button.tribe-inactive,
+        #tribe-events .tribe-events-button:hover,
+        .tribe-events-button:hover,
+        .tribe-events-button.tribe-active:hover {
+            background-color: #3764eb;
+        }
+
+        .tribe-events-list .tribe-events-event-cost span {
+            background-color: #ffffff;
+            border-color: #d8d8d8;
+            color: #333333;
+        }
+
+        #tribe-events .tribe-events-calendar td.tribe-events-othermonth,
+        #tribe-events .tribe-grid-allday,
+        #tribe-events .tribe-events-calendar td:hover {
+            background-color: #f1f1f1;
+        }
+
+        #tribe-events .tribe-events-calendar td,
+        #tribe-events .tribe-week-grid-block div,
+        #tribe-events .tribe-events-grid,
+        #tribe-events .tribe-grid-allday,
+        #tribe-events .tribe-events-grid .tribe-scroller,
+        #tribe-events .tribe-events-grid .tribe-grid-body .column,
+        #tribe-events .tribe-events-grid .tribe-grid-allday .column {
+            border-color: #d2d2d2;
+        }
+
+        .events-archive.events-gridview #tribe-events-content table .type-tribe_events,
+        .tribe-events-shortcode .tribe-events-month table .type-tribe_events {
+            border-color: #e4e4e4;
+        }
+
+        .tribe-events-calendar td.tribe-events-past div[id*="tribe-events-daynum-"],
+        .tribe-events-calendar td.tribe-events-past div[id*="tribe-events-daynum-"] > a {
+            background-color: #d2d2d2;
+        }
+
+        .tribe-events-calendar div[id*="tribe-events-daynum-"],
+        .tribe-events-calendar div[id*="tribe-events-daynum-"] a {
+            background-color: #acacac;
+        }
+
+        .tribe-events-calendar thead th,
+        .tribe-events-grid .tribe-grid-header .tribe-grid-content-wrap .column,
+        .tribe-grid-header {
+            background-color: #464646;
+            border-left-color: #464646;
+            border-right-color: #464646;
+        }
+
+        #tribe-events td.tribe-events-present div[id*="tribe-events-daynum-"],
+        #tribe-events td.tribe-events-present div[id*="tribe-events-daynum-"] > a {
+            background-color: #3764eb;
+            color: #fff;
+        }
+
+        #tribe-events .tribe-events-grid .tribe-grid-header div.tribe-week-today {
+            background-color: #3764eb;
+        }
+
+        .tribe-grid-allday .tribe-events-week-allday-single,
+        .tribe-grid-body .tribe-events-week-hourly-single,
+        .tribe-grid-allday .tribe-events-week-allday-single:hover,
+        .tribe-grid-body .tribe-events-week-hourly-single:hover {
+            background-color: #3764eb;
+            background-color: rgba(55, 100, 235, .75);
+            border-color: #133fc2
+        }
+
+
+        .single-tribe_events .tribe-events-event-meta {
+            background-color: #fafafa;
+            color: #333333;
+        }
+
+        .single-tribe_events .tribe-events-single-event-title {
+            color: #333;
+        }
+    </style>
+
+{% endblock %}
+
+
+
+
+
+ 
+
+
+{% block body %}
+
+    <section class="ftco-section ">
+        <div class="container">
+            <div class="row justify-content-center mb-5 pb-3">
+                <div class="col-md-7 text-center heading-section ftco-animate">
+                    <span class="subheading">Agenda</span>
+                    <h2 class="mb-4"><span>Nos évènement</span></h2>
+                </div>
+            </div>
+            <div class="ftco-search">
+                <div class="row">
+                    <div class="col-md-12 nav-link-wrap">
+                        <div class="nav nav-pills d-flex text-center" id="v-pills-tab" role="tablist"
+                             aria-orientation="vertical">
+                            <a class="nav-link ftco-animate active" id="v-pills-1-tab" data-toggle="pill"
+                               href="#v-pills-1" role="tab" aria-controls="v-pills-1" aria-selected="true">Semaine 1<span>{{ "now" |date("m/y") }}</span></a>
+
+                            <a class="nav-link ftco-animate" id="v-pills-2-tab" data-toggle="pill" href="#v-pills-2"
+                               role="tab" aria-controls="v-pills-2" aria-selected="false">semaine 2 <span>{{ "now"  |date("m/y") }}</span></a>
+
+                            <a class="nav-link ftco-animate" id="v-pills-3-tab" data-toggle="pill" href="#v-pills-3"
+                               role="tab" aria-controls="v-pills-3" aria-selected="false">semaine 3 <span>{{ "now"  |date("m/y") }}</span></a>
+
+                            <a class="nav-link ftco-animate" id="v-pills-4-tab" data-toggle="pill" href="#v-pills-4"
+                               role="tab" aria-controls="v-pills-4" aria-selected="false">semaine 4 <span>{{ "now"  |date("m/y") }}</span></a>
+
+                        </div>
+                    </div>
+                    <div class="col-md-12 tab-wrap">
+
+                        <div class="tab-content" id="v-pills-tabContent">
+
+
+
+                                <div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="day-1-tab">
+                                    {% for c in l1 %} <div class="speaker-wrap ftco-animate d-flex">
+                                        <div class="img speaker-img"
+                                             style="background-image: url(images/person_1.jpg);"></div>
+                                        <div class="text pl-md-5">
+
+                                            <span class="time">{{ c.delais}} </span>
+                                            <h2><a href="#">{{ c. theme }}</a></h2>
+                                            <h2><a href="#">{{ c. titre }}</a></h2>
+                                            <p>{{ c.description }}</p>
+                                            <h3 class="speaker-name">&mdash; <span class="position" > {{ c.start |date("m/d/Y") }}</span> <span
+                                                        class="position">{{ c.end|date("m/d/Y") }}</span>
+                                            </h3>
+
+                                            <h3>{{ c.localisation }}</h3>
+
+                                        </div>
+                                    </div>   {% endfor %}
+                                </div>
+
+                                    <div class="tab-pane fade" id="v-pills-2" role="tabpanel"
+                                         aria-labelledby="v-pills-day-2-tab">
+                                        {% for c in l2 %}   <div class="speaker-wrap ftco-animate d-flex">
+                                            <div class="img speaker-img"
+                                                 style="background-image: url(images/person_1.jpg);"></div>
+                                            <div class="text pl-md-5">
+
+                                                <span class="time">{{ c.delais }}</span>
+                                                <h2><a href="#">{{ c. theme }}</a></h2>
+                                                <h2><a href="#">{{ c. titre }}</a></h2>
+                                                <p>{{ c.description }}</p>
+                                               <h3 class="speaker-name">&mdash; <span class="position">{{ c.start|date("m/d/Y") }}</span>
+                                                    <span class="position">{{ c.end|date("m/d/Y")}}</span></h3>
+                                                <h3>{{ c.localisation }}</h3>
+
+                                            </div>
+                                        </div> {% endfor %}
+                                    </div>
+
+                                    <div class="tab-pane fade" id="v-pills-3" role="tabpanel"
+                                         aria-labelledby="v-pills-day-3-tab">
+                                        {% for c in l3 %} <div class="speaker-wrap ftco-animate d-flex">
+                                            <div class="img speaker-img"
+                                                 style="background-image: url(images/person_1.jpg);"></div>
+                                            <div class="text pl-md-5">
+
+                                                <span class="time">{{ c.delais }}</span>
+                                                <h2><a href="#">{{ c. theme }}</a></h2>
+                                                <h2><a href="#">{{ c. titre }}</a></h2>
+                                                <p>{{ c.description }}</p>
+                                                <h3 class="speaker-name">&mdash; <span class="position" >{{ c.start|date("m/d/Y")  }}</span> <span
+                                                            class="position">{{ c.end|date("m/d/Y")  }}</span></h3>
+                                                <h3>{{ c.localisation }}</h3>
+
+                                            </div>
+                                        </div>{% endfor %}
+                                    </div>
+
+                                    <div class="tab-pane fade" id="v-pills-4" role="tabpanel"
+                                         aria-labelledby="v-pills-day-4-tab">
+                                        {% for c in l4 %}
+                                        <div class="speaker-wrap ftco-animate d-flex">
+                                            <div class="img speaker-img"
+                                                 style="background-image: url(images/person_1.jpg);"></div>
+                                            <div class="text pl-md-5">
+
+                                                <span class="time">{{ c.delais }}</span>
+                                                <h2><a href="#">{{ c. theme }}</a></h2>
+                                                <h2><a href="#">{{ c. titre }}</a></h2>
+                                                <p>{{ c.description }}</p>
+                                                <h3 class="speaker-name">&mdash; <span class="position"> {{ c.start |date("m/d/Y")  }}</span> <span
+                                                            class="position">{{ c.end |date("m/d/Y") }}</span></h3>
+                                                <h3>{{ c.localisation }}</h3>
+
+                                            </div>
+                                        </div> {% endfor %}
+                                    </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+    <div id="footer" style="margin-bottom: 100px">
+        <div class="footer-newsletter">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                        <h4>Inscrivez-vous</h4>
+                        <p>Inscrivez-vous pour recevoir les notifications des nouveautés des domaines l'environnement,
+                            l'hygiène et la santé sécurité au travail</p>
+                        <form action="" method="post">
+                            <input type="email" name="email"><input type="submit" value="S'abonner">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+{% endblock %}

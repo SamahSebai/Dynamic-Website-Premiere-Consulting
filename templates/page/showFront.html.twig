@@ -1,0 +1,18 @@
+{% extends 'basefront.html.twig' %}
+
+{% block customstylesheet %}
+
+
+
+{% endblock %}
+
+
+{% block title %}{{ page.titre }}{% endblock %}
+
+{% block body %}
+    {{ include(template_from_string(page.contenu)) }}
+{% endblock %}
+
+{% block javascript %}
+
+{% endblock %}

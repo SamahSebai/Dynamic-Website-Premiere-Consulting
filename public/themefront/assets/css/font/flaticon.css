@@ -1,0 +1,47 @@
+@font-face {
+    font-family: "flaticon";
+    src: url("./flaticon.ttf?dd25f96197b2899a4aee96f8997ca194") format("truetype"),
+url("./flaticon.woff?dd25f96197b2899a4aee96f8997ca194") format("woff"),
+url("./flaticon.woff2?dd25f96197b2899a4aee96f8997ca194") format("woff2"),
+url("./flaticon.eot?dd25f96197b2899a4aee96f8997ca194#iefix") format("embedded-opentype"),
+url("./flaticon.svg?dd25f96197b2899a4aee96f8997ca194#flaticon") format("svg");
+}
+
+i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
+    font-family: flaticon !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.flaticon-career:before {
+    content: "\f101";
+}
+.flaticon-coach:before {
+    content: "\f102";
+}
+.flaticon-coaching:before {
+    content: "\f103";
+}
+.flaticon-cogwheel:before {
+    content: "\f104";
+}
+.flaticon-handshake:before {
+    content: "\f105";
+}
+.flaticon-training:before {
+    content: "\f106";
+}
+.flaticon-transferring:before {
+    content: "\f107";
+}
+.flaticon-website:before {
+    content: "\f108";
+}
+.flaticon-work:before {
+    content: "\f109";
+}

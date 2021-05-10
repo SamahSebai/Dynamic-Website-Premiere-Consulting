@@ -1,0 +1,253 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}New Article{% endblock %}
+ {% block stylesheets %}
+ <link href="{{asset('themeBack/assets/css/hummingbird-treeview.css')}}" rel="stylesheet" type="text/css" />
+
+
+ {% endblock %}
+{% block body %}
+    <div class="card card-custom gutter-b example example-compact">
+        <div class="card-header">
+            <h3 class="card-title">Ajouter un Article</h3>
+        </div>
+        {{ form_start(form) }}
+
+
+        <div class="card-body">
+            <div class="form-group">
+                <label>Titre :</label>
+                {{ form_widget(form.titre ,{'attr':{'class':"form-control form-control-solid",'placeholder':"Entrer le titre"}}) }}
+            </div>
+            <div class="form-group">
+                <label>Auteur :</label>
+                {{ form_widget(form.auteur ,{'attr':{'class':"form-control form-control-solid",'placeholder':"Entrer l'auteur "}}) }}
+            </div>
+            <div class="form-group">
+                <label>Description :</label>
+                {{ form_widget(form.introduction ,{'attr':{'class':"form-control form-control-solid",'placeholder':"Entrer la description"}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.image) }}
+                {{ form_widget(form.image) }}
+
+
+            </div>
+            {#<div class="form-group">
+
+                    <select name="cat[]" multiple="multiple">
+                    <option value=""></option>
+                    {% for c in categories %}
+                        <option value="{{ c.id }}">{{ c }}</option>
+                    {% endfor %}
+                    </select>
+
+            </div>#}
+            {#  <div class="form-group">
+                <label>Categorie:</label>
+               <div id="kt_tree_3" class="tree-demo"></div>
+                <!--begin::Code example-->
+                <!--end::Code example-->
+            </div>  </div>
+                </div>
+            </div>#}
+
+
+            <div class="container">
+                <label>Categorie :</label>
+                <div class="row">
+
+
+
+
+
+
+<div id="treeview_container" class="hummingbird-treeview well h-scroll-large">
+  <div class="col-md-12"><ul id="treeview" class="hummingbird-base">
+   {% set i=0 %}
+                                        {% set l=0 %}
+                                        {% set c=0 %}
+                                        {% set j=1 %}
+                                       {# {% for i in 0..max %}#}
+                                        {% for j in 0.. ((tab[i]|length)-1) %}
+
+
+ <li><i class="fa fa-plus"></i> <label> <input name="cat[]" value="{{ tab[i][j].id }}" type="checkbox">{{ tab[i][j]}} </label>
+         {% if  (max>=1) %}   <ul>
+             {% for l  in 1..(max-1) %}
+                                    {% for  c in 0..((tab[l]|length)-1) %}
+
+
+
+                                        {% set p=tab[i][j] %}
+                                        {% set f=tab[l][c] %}
+
+                                        {% if f.parent==p  %}
+          <li><label> <input class="hummingbirdNoParent"  name="cat[]"  value="{{ tab[l][c].id }}" type="checkbox"> {{ tab[l][c]}} </label>
+</li> {% endif %}
+                                        {% endfor %}
+                                        {% endfor %}
+            </ul>{% endif %}
+        </li>
+
+                                {% endfor %}
+
+</ul>
+</div>
+
+
+
+
+
+
+
+
+                    </div>
+                </div>
+
+
+
+
+            <!--end::Card-->
+
+
+            <div class="form-group">
+                <label class="">Date d'ajout :</label>
+                <div class="col-lg-4 col-md-9 col-sm-12">
+                    <div class="input-group date" id="kt_datetimepicker_6" data-target-input="nearest">
+                        {{ form_widget(form.date_ajout ,{'attr':{'class':"form-control datetimepicker-input",'data-target':"#kt_datetimepicker_6"}}) }}
+                        <div class="input-group-append" data-target="#kt_datetimepicker_6" data-toggle="datetimepicker">
+															<span class="input-group-text">
+																<i class="ki ki-calendar"></i>
+															</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.contenu) }}
+
+
+                <div class="adjoined-bottom">
+                    <div class="grid-container">
+                        <div class="grid-width-100">
+                            {{ form_widget(form.contenu) }}
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <div class="card-footer">
+            <button type="submit" class="btn btn-primary mr-2">Enregistrer</button>
+            <button type="reset" class="btn btn-secondary"><a href="{{ path('article') }}">Retourner au liste</a>
+            </button>
+        </div>
+
+        {{ form_rest(form) }}
+        {{ form_end(form) }}
+
+
+        <!--end::Form-->
+
+    </div>
+    </div>
+    <script>
+        jQuery(document).ready(function () {
+
+
+                $('#kt_datetimepicker_6').datetimepicker({format: 'YYYY-MM-DD HH:mm'});
+            }
+        );</script>
+
+{% endblock %}
+
+{% block javascripts %}
+
+
+        <script src="{{ asset('themeBack/assets/js/CKEditor/ckeditor.js') }}"></script>
+
+        <script>
+
+
+            if (CKEDITOR.env.ie && CKEDITOR.env.version < 9)
+                CKEDITOR.tools.enableHtml5Elements(document);
+
+            // The trick to keep the editor in the sample quite small
+            // unless user specified own height.
+            CKEDITOR.config.height = 150;
+            CKEDITOR.config.width = 'auto';
+
+            var initSample = (function () {
+                var wysiwygareaAvailable = isWysiwygareaAvailable(),
+                    isBBCodeBuiltIn = !!CKEDITOR.plugins.get('bbcode');
+
+                return function () {
+                    var editorElement = CKEDITOR.document.getById('article_contenu');
+
+                    // :(((
+                    if (isBBCodeBuiltIn) {
+                        editorElement.setHtml(
+                            'Hello world!\n\n' +
+                            'I\'m an instance of [url=https://ckeditor.com]CKEditor[/url].'
+                        );
+                    }
+
+                    // Depending on the wysiwygarea plugin availability initialize classic or inline editor.
+                    if (wysiwygareaAvailable) {
+                        CKEDITOR.replace('article_contenu');
+                    } else {
+                        editorElement.setAttribute('contenteditable', 'true');
+                        CKEDITOR.inline('article_contenu');
+
+                        // TODO we can consider displaying some info box that
+                        // without wysiwygarea the classic editor may not work.
+                    }
+                };
+
+                function isWysiwygareaAvailable() {
+                    // If in development mode, then the wysiwygarea must be available.
+                    // Split REV into two strings so builder does not replace it :D.
+                    if (CKEDITOR.revision == ( '%RE' + 'V%' )) {
+                        return true;
+                    }
+
+                    return !!CKEDITOR.plugins.get('wysiwygarea');
+                }
+            })();
+
+
+            initSample();
+        </script>
+
+
+        <script src="{{ asset('themeBack/assets/assets/js/scripts.bundle.js') }}"></script>
+        <script src="{{ asset('themeBack/assets/assets/plugins/custom/prismjs/prismjs.bundle.js') }}"></script>
+
+
+
+    <script src="{{ asset('themeBack/assets/js/logger.js') }}"></script>
+    <script src="{{ asset('themeBack/assets/js/treeview.js') }}"></script>
+ <script src="{{ asset('themeBack/assets/js/hummingbird-treeview.js') }}"></script>
+
+    <script>
+
+
+    $("#treeview").hummingbird();
+
+        $('#treeview-checkbox-demo').treeview({
+            debug : true,
+            data : []
+        });
+        $('#show-values').on('click', function(){
+            $('#values').text(
+                $('#treeview-checkbox-demo').treeview('selectedValues')
+            );
+        });
+    </script>
+
+    {% endblock %}

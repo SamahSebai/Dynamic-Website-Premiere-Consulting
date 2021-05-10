@@ -1,0 +1,764 @@
+{% extends 'basefront.html.twig' %}
+
+{% block title %}list des formations{% endblock %}
+
+
+
+
+{% block body %}
+
+    <section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_1.jpg');">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row no-gutters slider-text align-items-center justify-content-center">
+                <div class="col-md-9 ftco-animate text-center">
+                    <h1 class="mb-2 bread">Formation</h1>
+                    <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Acceuil <i
+                                        class="ion-ios-arrow-forward"></i></a></span> <span>Formation<i
+                                    class="ion-ios-arrow-forward"></i></span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="ftco-section" style="background-image: url(images/04/bgn-industries.png);padding-top:80px;">
+        <div class="container px-4 ">
+            <div class="row gx-5">
+                <div class="col">
+
+                    <div class="text" style="width:100%;padding-right:50px ">
+                        <div class="section-tittle ">
+                            <h2>Nos Formations</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="service" id="service">
+        <div class="container">
+            <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s" style="padding-bottom:30px">
+
+                <p>Depuis sa création en 2008, Première Consulting SARL a fait le choix essentiel d’investir dans la
+                    compétence humaine et la technologie afin d’aider ses clients et ses partenaires à atteindre leurs
+                    objectifs et à gagner en efficacité.
+
+                    De ce fait on vous propose diverses formules de formations adaptées à vos besoins :</p>
+
+            </div>
+
+        </div>
+    </div>
+    <!-- ======= Features Section ======= -->
+    <section id="features" class="features">
+        <div class="container" data-aos="fade-up">
+
+            <div class="row" data-aos="zoom-in" data-aos-delay="100">
+                <div class="col-lg-4 col-md-4">
+                    <div class="icon-box">
+                        <i class="icon-check" style="color:#5578ff;"></i>
+                        <h3> Standard Inter -entreprises.</h3>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 mt-4 mt-md-0">
+                    <div class="icon-box">
+                        <i class="icon-check" style="color: #e80368;"></i>
+                        <h3>Standard Intra-entreprise.</h3>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 mt-4 mt-md-0">
+                    <div class="icon-box">
+                        <i class="icon-check" style="color:#5578ff ;"></i>
+                        <h3>Personnalisées- Coaching et conduite du changement.</h3>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+    <!-- End Features Section -->
+
+
+    <section class="ftco-section ftco-about" id="section-counter">
+        <div class="container consult-wrap">
+            <div class="row d-flex align-items-stretch">
+
+                <div class="col wrap-about ftco-animate py-md-5 pl-md-5">
+
+                    <div class="tabulation-2 mt-4">
+                        <ul class="nav nav-pills nav-fill d-md-flex d-block">
+                            <li class="nav-item d-flex flex-column">
+                                <a class="nav-link active py-2 text-left " data-toggle="tab" href="#home1"><span
+                                            class="fas fa-award"></span> Systèmes de Management Q/S/E et sociétale</a>
+                            </li>
+                            <li class="nav-item px-lg-2 d-flex flex-column text-left">
+                                <a class="nav-link py-2 text-left  " data-toggle="tab" href="#home2"><span
+                                            class="fas fa-award"></span> Santé, sécurité du travail</a>
+                            </li>
+                            <li class="nav-item d-flex flex-column text-left">
+                                <a class="nav-link py-2 text-left  " data-toggle="tab" href="#home3"><span
+                                            class="fas fa-award"></span> Outils & Techniques</a>
+                            </li>
+
+                            <li class="nav-item  px-lg-2 d-flex flex-column text-left">
+                                <a class="nav-link py-2  " data-toggle="tab" href="#home4"><span
+                                            class="fas fa-award"></span>Environnement
+                                </a>
+                            </li>
+                            <li class="nav-item px-lg-2 d-flex flex-column text-left">
+                                <a class="nav-link py-2 text-left " data-toggle="tab" href="#home5"><span
+                                            class="fas fa-award"></span> Risques industriels /classement/ incendie</a>
+                            </li>
+
+                            <li class="nav-item px-lg-2 d-flex flex-column text-left">
+                                <a class="nav-link py-2 text-left " data-toggle="tab" href="#home6"><span
+                                            class="fas fa-award"></span>Communication</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content bg-light rounded mt-2">
+
+                            <div class="tab-pane container p-0 active" id="home1">
+                                <section class="services">
+                                    <div class="container">
+
+                                        <div class="row">
+                                            {% for formation in F1 %}
+                                                <div class="col-md-6 col-lg-3 d-flex align-items-stretch"
+                                                     data-aos="fade-up" data-aos-delay="200">
+                                                    <div class="icon-box icon-box-blue">
+                                                        <div class="icon"><i class="bx bx-world"></i></div>
+                                                        <h4 class="title"><a
+                                                                    href="">{{ formation.getIntituleMission }}</a></h4>
+                                                        <p class="description">{{ formation.Description }} </p>
+                                                        <button class="btnA card_btn" data-toggle="modal"
+                                                                data-target="#val{{ formation.id }}">voir plus
+                                                        </button>
+                                                    </div>
+
+                                                </div>
+
+                                            {% endfor %}
+                                        </div>
+
+                                    </div>
+                                </section>
+
+                            </div>
+                            <div class="tab-pane container p-0 fade" id="home2">
+
+                                <section class="services">
+                                    <div class="container">
+
+                                        <div class="row">
+                                            {% for formation in F2 %}
+                                                <div class="col-md-6 col-lg-3 d-flex align-items-stretch"
+                                                     data-aos="fade-up" data-aos-delay="200">
+                                                    <div class="icon-box icon-box-blue">
+                                                        <div class="icon"><i class="bx bx-world"></i></div>
+                                                        <h4 class="title"><a href="">{{ formation.IntituleMission }}</a>
+                                                        </h4>
+                                                        <p class="description">{{ formation.Description }} </p>
+
+                                                        <button class="btnA card_btn" data-toggle="modal"
+                                                                data-target="#val{{ formation.id }}">voir plus
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                            {% endfor %}
+                                        </div>
+
+                                    </div>
+                                </section>
+
+                            </div>
+                            <div class="tab-pane container p-0 fade" id="home3">
+
+
+                                <section class="services">
+                                    <div class="container">
+
+                                        <div class="row">
+                                            {% for formation in F3 %}
+
+                                                <div class="col-md-6 col-lg-3 d-flex align-items-stretch"
+                                                     data-aos="fade-up" data-aos-delay="200">
+                                                    <div class="icon-box icon-box-blue">
+                                                        <div class="icon"><i class="bx bx-world"></i></div>
+                                                        <h4 class="title"><a href="">{{ formation.IntituleMission }}</a>
+                                                        </h4>
+                                                        <p class="description">{{ formation.Description }} </p>
+                                                        <button class="btnA card_btn" data-toggle="modal"
+                                                                data-target="#val{{ formation.id }}">voir plus
+                                                        </button>
+                                                    </div>
+
+                                                </div>
+
+                                            {% endfor %}
+                                        </div>
+
+                                    </div>
+                                </section>
+                            </div>
+                            <div class="tab-pane container p-0 fade" id="home4">
+
+                                <section class="services">
+                                    <div class="container">
+
+                                        <div class="row">
+                                            {% for formation in F4 %}
+                                                <div class="col-md-6 col-lg-3 d-flex align-items-stretch"
+                                                     data-aos="fade-up" data-aos-delay="200">
+                                                    <div class="icon-box icon-box-blue">
+                                                        <div class="icon"><i class="bx bx-world"></i></div>
+                                                        <h4 class="title"><a href="">{{ formation.IntituleMission }}</a>
+                                                        </h4>
+                                                        <p class="description">{{ formation.Description }} </p>
+
+                                                        <button class="btnA card_btn" data-toggle="modal"
+                                                                data-target="#val{{ formation.id }}">voir plus
+                                                        </button>
+                                                    </div>
+
+                                                </div>
+
+                                            {% endfor %}
+                                        </div>
+
+                                    </div>
+                                </section>
+                            </div>
+                            <div class="tab-pane container p-0 fade" id="home5">
+                                <section class="services">
+                                    <div class="container">
+
+                                        <div class="row">
+                                            {% for formation in F5 %}
+                                                <div class="col-md-6 col-lg-3 d-flex align-items-stretch"
+                                                     data-aos="fade-up" data-aos-delay="200">
+                                                    <div class="icon-box icon-box-blue">
+                                                        <div class="icon"><i class="bx bx-world"></i></div>
+                                                        <h4 class="title"><a href="">{{ formation.IntituleMission }}</a>
+                                                        </h4>
+                                                        <p class="description">{{ formation.Description }} </p>
+
+                                                        <button class="btnA card_btn" data-toggle="modal"
+                                                                data-target="#val{{ formation.id }}">voir plus
+                                                        </button>
+                                                    </div>
+
+                                                </div>
+
+                                            {% endfor %}
+                                        </div>
+
+                                    </div>
+                                </section>
+
+                            </div>
+                            <div class="tab-pane container p-0 fade" id="home6">
+
+
+                                <section class="services">
+                                    <div class="container">
+
+                                        <div class="row">
+                                            {% for formation in F6 %}
+                                                <div class="col-md-6 col-lg-3 d-flex align-items-stretch"
+                                                     data-aos="fade-up" data-aos-delay="200">
+                                                    <div class="icon-box icon-box-blue">
+                                                        <div class="icon"><i class="bx bx-world"></i></div>
+                                                        <h4 class="title"><a
+                                                                    href="">{{ formation.getIntituleMission }}</a></h4>
+                                                        <p class="description">{{ formation.Description }} </p>
+
+                                                        <button class="btnA card_btn" data-toggle="modal"
+                                                                data-target="#val{{ formation.id }}">voir plus
+                                                        </button>
+                                                    </div>
+
+                                                </div>
+
+                                            {% endfor %}
+                                        </div>
+
+                                    </div>
+                                </section>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+
+
+    {% for formation in F1 %}
+        <div class="modal fade" id="val{{ formation.id }}" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabelSM">{{ formation.theme }}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+
+                        <div class="container mt-5 mb-5">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col">
+
+
+                                    <div class="row">
+                                            <div class="col-md-8">
+                                                {% for media in formation.getMedias() %}
+
+                                                    <div class="images p-3">
+
+                                                        <img src="{{ asset('upload/'~media.URL) }}" class="img-fluid">
+
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="product p-4">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div class="d-flex align-items-center">
+                                                    </div>
+                                                </div>
+                                                <div class="mt-4 mb-3"> <span
+                                                            class="text-uppercase text-muted brand">{{ formation.LocalisationMission }}</span>
+                                                    <h5 class="text-uppercase">{{ formation.getIntituleMission }}</h5>
+                                                    <div class="price d-flex flex-row align-items-center"> <span
+                                                                class="act-price">{{ formation.DateDebut|date("m/d/Y") }}</span>
+                                                        <span
+                                                                class="act-price">{{ formation.DateFin|date("m/d/Y") }}</span>
+                                                        <div class="ml-2"><small
+                                                                    class="dis-price">{{ formation.NbDeJour }}</small>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <p class="about">{{ formation.Description }}</p>
+                                                <div class="sizes mt-5">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">fermer</button>
+                        <button type="button" class="btn btn-primary">Demander</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {% endfor %}
+
+
+    {% for formation in F2 %}
+        <div class="modal fade" id="val{{ formation.id }}" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabelSM">{{ formation.theme }}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+
+                        <div class="container mt-5 mb-5">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col">
+
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            {% for media in formation.getMedias() %}
+
+                                                <div class="images p-3">
+
+                                                    <img src="{{ asset('upload/'~media.URL) }}"class="img-fluid">
+
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="product p-4">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div class="d-flex align-items-center">
+                                                    </div>
+                                                </div>
+                                                <div class="mt-4 mb-3"> <span
+                                                            class="text-uppercase text-muted brand">{{ formation.LocalisationMission }}</span>
+                                                    <h5 class="text-uppercase">{{ formation.getIntituleMission }}</h5>
+                                                    <div class="price d-flex flex-row align-items-center"> <span
+                                                                class="act-price">{{ formation.DateDebut|date("m/d/Y") }}</span>
+                                                        <span
+                                                                class="act-price">{{ formation.DateFin|date("m/d/Y") }}</span>
+                                                        <div class="ml-2"><small
+                                                                    class="dis-price">{{ formation.NbDeJour }}</small>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <p class="about">{{ formation.Description }}</p>
+                                                <div class="sizes mt-5">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">fermer</button>
+                        <button type="button" class="btn btn-primary">Demander</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {% endfor %}
+
+
+    {% for formation in F3 %}
+        <div class="modal fade" id="val{{ formation.id }}" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabelSM">{{ formation.theme }}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+
+                        <div class="container mt-5 mb-5">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col">
+
+
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                             {% for media in formation.getMedias() %}
+
+                                            <div class="images p-3">
+
+                                                <img src="{{ asset('upload/'~media.URL) }}" class="img-fluid">
+
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="product p-4">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div class="d-flex align-items-center">
+                                                    </div>
+                                                </div>
+                                                <div class="mt-4 mb-3"> <span
+                                                            class="text-uppercase text-muted brand">{{ formation.LocalisationMission }}</span>
+                                                    <h5 class="text-uppercase">{{ formation.getIntituleMission }}</h5>
+                                                    <div class="price d-flex flex-row align-items-center"> <span
+                                                                class="act-price">{{ formation.DateDebut|date("m/d/Y") }}</span>
+                                                        <span
+                                                                class="act-price">{{ formation.DateFin|date("m/d/Y") }}</span>
+                                                        <div class="ml-2"><small
+                                                                    class="dis-price">{{ formation.NbDeJour }}</small>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <p class="about">{{ formation.Description }}</p>
+                                                <div class="sizes mt-5">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">fermer</button>
+                        <button type="button" class="btn btn-primary">Demander</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {% endfor %}
+
+
+    {% for formation in F4 %}
+        <div class="modal fade" id="val{{ formation.id }}" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabelSM">{{ formation.theme }}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+
+                        <div class="container mt-5 mb-5">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            {% for media in formation.getMedias() %}
+
+                                                <div class="images p-3">
+
+                                                    <img src="{{ asset('upload/'~media.URL) }}"class="img-fluid">
+
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="product p-4">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div class="d-flex align-items-center">
+                                                    </div>
+                                                </div>
+                                                <div class="mt-4 mb-3"> <span
+                                                            class="text-uppercase text-muted brand">{{ formation.LocalisationMission }}</span>
+                                                    <h5 class="text-uppercase">{{ formation.getIntituleMission }}</h5>
+                                                    <div class="price d-flex flex-row align-items-center"> <span
+                                                                class="act-price">{{ formation.DateDebut|date("m/d/Y") }}</span>
+                                                        <span
+                                                                class="act-price">{{ formation.DateFin|date("m/d/Y") }}</span>
+                                                        <div class="ml-2"><small
+                                                                    class="dis-price">{{ formation.NbDeJour }}</small>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <p class="about">{{ formation.Description }}</p>
+                                                <div class="sizes mt-5">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">fermer</button>
+                        <button type="button" class="btn btn-primary">Demander</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {% endfor %}
+
+
+    {% for formation in F5 %}
+        <div class="modal fade" id="val{{ formation.id }}" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabelSM">{{ formation.theme }}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+
+                        <div class="container mt-5 mb-5">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="col-md-8">
+                                                {% for media in formation.getMedias() %}
+
+                                                    <div class="images p-3">
+
+                                                        <img src="{{ asset('upload/'~media.URL) }}"class="img-fluid">
+
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="product p-4">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div class="d-flex align-items-center">
+                                                    </div>
+                                                </div>
+                                                <div class="mt-4 mb-3"> <span
+                                                            class="text-uppercase text-muted brand">{{ formation.LocalisationMission }}</span>
+                                                    <h5 class="text-uppercase">{{ formation.getIntituleMission }}</h5>
+                                                    <div class="price d-flex flex-row align-items-center"> <span
+                                                                class="act-price">{{ formation.DateDebut|date("m/d/Y") }}</span>
+                                                        <span
+                                                                class="act-price">{{ formation.DateFin|date("m/d/Y") }}</span>
+                                                        <div class="ml-2"><small
+                                                                    class="dis-price">{{ formation.NbDeJour }}</small>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <p class="about">{{ formation.Description }}</p>
+                                                <div class="sizes mt-5">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">fermer</button>
+                        <button type="button" class="btn btn-primary">Demander</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {% endfor %}
+
+
+    {% for formation in F6 %}
+        <div class="modal fade" id="val{{ formation.id }}" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabelSM">{{ formation.theme }}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+
+                        <div class="container mt-5 mb-5">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col">
+                                    <div class="row">
+
+                                            <div class="col">
+                                                {% for media in formation.getMedias() %}
+
+                                                    <div class="images p-5">
+
+                                                        <img src="{{ asset('upload/'~media.URL) }}" class="img-fluid">
+
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+
+                                        <div class="col-md-8">
+                                            <div class="product p-4">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div class="d-flex align-items-center">
+                                                    </div>
+                                                </div>
+                                                <div class="mt-4 mb-3"> <span
+                                                            class="text-uppercase text-muted brand">{{ formation.LocalisationMission }}</span>
+                                                    <h5 class="text-uppercase">{{ formation.getIntituleMission }}</h5>
+                                                    <div class="price d-flex flex-row align-items-center"> <span
+                                                                class="act-price">{{ formation.DateDebut|date("m/d/Y") }}</span>
+                                                        <span
+                                                                class="act-price">{{ formation.DateFin|date("m/d/Y") }}</span>
+                                                        <div class="ml-2"><small
+                                                                    class="dis-price">{{ formation.NbDeJour }}</small>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <p class="about">{{ formation.Description }}</p>
+                                                <div class="sizes mt-5">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">fermer</button>
+                    <button type="button" class="btn btn-primary">Demander</button>
+                </div>
+            </div>
+        </div>
+        </div>
+
+    {% endfor %}
+
+
+
+
+
+
+
+
+
+
+    <div id="footer" style="margin-bottom: 100px">
+        <div class="footer-newsletter">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                        <h4>Inscrivez-vous</h4>
+                        <p>Inscrivez-vous pour recevoir les notifications des nouveautés des domaines l'environnement,
+                            l'hygiène et la santé sécurité au travail</p>
+                        <form action="" method="post">
+                            <input type="email" name="email"><input type="submit" value="S'abonner">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

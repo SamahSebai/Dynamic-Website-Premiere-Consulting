@@ -1,0 +1,208 @@
+{% extends 'basefront.html.twig' %}
+
+{% block title %}Description offres{% endblock %}
+
+{% block body %}
+
+
+    <section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_1.jpg');">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row no-gutters slider-text align-items-center justify-content-center">
+                <div class="col-md-9 ftco-animate text-left">
+                    <!-- Banner Starts Here -->
+                    <div class="heading-page header-text">
+                        <section class="page-heading">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="text-content">
+                                            <h4 style="color: #FFFFFF;margin: 0px;"></h4>
+                                            <h2 style="color: #FFFFFF;margin: 0px;">Intitulé offre</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                    <!-- Banner Ends Here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Page Content -->
+
+
+    <section class="blog-posts grid-system" style="padding-top: 100px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div>
+                        <img alt="" class="img-fluid wc-image" src="images/04/blog-post-19.jpg">
+                    </div>
+
+                    <br>
+                </div>
+
+                <div class="col-md-8">
+                    <div class="sidebar-item recent-posts">
+                        <div class="sidebar-heading">
+                            <h2 style="margin: 0px;">
+                                <i class="icon-calendar"></i> {{ offre.date |date('Y-m-d')}}
+                                <i class="icon-file"></i> {{ offre.type }}
+                            </h2>
+                        </div>
+
+                        <div class="content">
+                            <p>  <p>{{offre.qualification}}</p></p>
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="main-button">
+                                <a href="#">Condidature spontannée</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section contact-us">
+        <div class="container">
+            <div class="sidebar-item recent-posts">
+                <div class="sidebar-heading">
+                    <h2>Description</h2>
+                </div>
+
+                <div class="content">
+                    <p style="margin-bottom: 0px;font-size: 15px;font-weight: 400;color: #7a7a7a;line-height: 30px;">
+                        {{ offre.description }}</p>
+
+                    <br>
+
+
+                    <br>
+
+                    <p style="margin-bottom: 0px;font-size: 15px;font-weight: 400;color: #7a7a7a;line-height: 30px;">{{ offre.experience }}</p>
+                </div>
+
+                <br>
+                <br>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="sidebar-item recent-posts">
+                        <div class="sidebar-heading">
+                            <h2>A propos Première Consulting</h2>
+                        </div>
+
+                        <div class="content">
+                            <p class="lead"
+                               style="margin-bottom: 0px;font-size: 15px;font-weight: 400;color: #7a7a7a;line-height: 30px;">
+                                <i class="icon-map-marker"></i> Manouba </p>
+
+                            <br>
+
+                            <p style="margin-bottom: 0px;font-size: 15px;font-weight: 400;color: #7a7a7a;line-height: 30px;">
+                                Depuis sa création en 2008, Première Consulting SARL cabinet d’études, de Conseil et de Formation a fait le choix essentiel d’investir dans la compétence humaine et la technologie afin d’aider ses clients et partenaires à atteindre leurs objectifs et à gagner en efficacité.
+
+
+
+                                <br>
+
+                            <p style="margin-bottom: 0px;font-size: 15px;font-weight: 400;color: #7a7a7a;line-height: 30px;">
+                                Première consulting regroupe des collaborateurs hommes et femmes ingénieurs, architectes et technicien formés et impliqués désireux d’entreprendre et de créer des solutions pour les clients quels que soient les projets qui leur sont confiés.
+
+                                Notre approche est de proposer du service, du conseil et de la formation à forte valeur ajoutée, basés sur une approche pragmatique fortement orientée résultat.
+                            </p>
+
+                            <br>
+
+                            <p style="margin-bottom: 0px;font-size: 15px;font-weight: 400;color: #7a7a7a;line-height: 30px;">
+                                Pour ce faire, Première Consulting s’appuie sur la compétence de ses collaborateurs, des experts et son réseau de consultants hautement qualifiés bénéficiant d’une expérience significative qui apportent expertises et savoir-faire afin de répondre aux problématiques spécifiques qui leurs sont confiées.
+
+                                Convaincu de la pertinence de son positionnement, Première Consulting Sarl s’inscrit dans une logique de fort développement et a pour ambition de devenir un des leaders indépendants du conseil en Tunisie et Maghreb.</p>
+                            </p>
+
+                            <br>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="sidebar-item recent-posts">
+                        <div class="sidebar-heading">
+                            <h2>Contact Details</h2>
+                        </div>
+
+                        <div class="content">
+                            <p style="margin-bottom: 0px;font-size: 15px;font-weight: 400;color: #7a7a7a;line-height: 30px;">
+                                <span>Name</span>
+
+                                <br>
+
+                                <strong style="color:#d91a5b ">Première Consulting</strong>
+                            </p>
+
+                            <p style="margin-bottom: 0px;font-size: 15px;font-weight: 400;color: #7a7a7a;line-height: 30px;">
+                                <span>fax</span>
+
+                                <br>
+
+                                <strong>
+                                    <a href="fax:+216 71 607 361" style="color:#d91a5b ">+216 71 607 361</a>
+                                </strong>
+                            </p>
+
+                            <p style="margin-bottom: 0px;font-size: 15px;font-weight: 400;color: #7a7a7a;line-height: 30px;">
+                                <span>Telephone</span>
+
+                                <br>
+
+                                <strong>
+                                    <a href="tel:+216 71 601 561" style="color:#d91a5b ">+216 71 601 561</a>
+                                </strong>
+                            </p>
+
+                            <p style="margin-bottom: 0px;font-size: 15px;font-weight: 400;color: #7a7a7a;line-height: 30px;">
+                                <span>Email</span>
+
+                                <br>
+
+                                <strong>
+                                    <a href="mailto:contact@premiere-consulting.tn" style="color:#d91a5b ">contact@premiere-consulting.tn</a>
+                                </strong>
+                            </p>
+
+                            <p style="margin-bottom: 0px;font-size: 15px;font-weight: 400;color: #7a7a7a;line-height: 30px;">
+                                <span>Website</span>
+
+                                <br>
+
+                                <strong>
+                                    <a href="https://premiere-consulting.tn/" style="color:#d91a5b "
+                                    >https://premiere-consulting.tn/</a>
+                                </strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+{% endblock %}

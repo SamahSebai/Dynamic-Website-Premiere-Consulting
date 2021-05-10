@@ -1,0 +1,93 @@
+    {% extends 'basefront.html.twig' %}
+
+    {% block title %}Offres index{% endblock %}
+
+    {% block body %}
+  <section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_1.jpg');">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+            <div class="col-md-9 ftco-animate text-center">
+                <h1 class="mb-2 bread"> Nos Offres</h1>
+                <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Acceuil <i
+                        class="ion-ios-arrow-forward"></i></a></span> <span class="mr-2"><a
+                        href="NousRejoindre.html">  Nous Rejoindre</a>
+                </span>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<section class="ftco-section bg-light">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-9 pr-lg-4">
+                {% for offre in offres  %}
+                <div class="row">
+
+                    <div class="col-md-12 ftco-animate">
+                        <div class="job-post-item p-4 d-block d-lg-flex align-items-center">
+                            <div class="one-third mb-4 mb-md-0">
+                                <div class="job-post-item-header align-items-center">
+
+                                    <h2 class="mr-3 text-black"><a href="#">{{ offre.description }}</a></h2>
+                                </div>
+                                <div class="job-post-item-body d-block d-md-flex">
+                                    <div class="mr-3"><span class="icon-layers"></span> <a href="#">{{ offre.type }}</a></div>
+                                    <div><span class="icon-check"></span> <span>{{ offre.experience }}</span></div>
+                                </div>
+                            </div>
+
+                            <div class="one-forth ml-auto d-flex align-items-center mt-4 md-md-0">
+                                <div>
+                                    <a href="#" class="icon text-center d-flex justify-content-center align-items-center icon mr-2">
+                                        <span class="icon-heart"></span>
+                                    </a>
+                                </div>
+                                <a href="{{ path('show', {'id': offre.id}) }}" class="btn btn-primary py-2">Postuler</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                    {% else %}
+                    <h4>Aucun offre</h4>
+                {% endfor %}
+
+            <div class="navigation text-center  st-color-blue">
+            {{ knp_pagination_render(offres) }}
+          </div>
+
+
+        </div>
+            <div class="col-lg-3 sidebar">
+                <div class="sidebar-box bg-white p-4 ftco-animate">
+                    <h3 class="heading-sidebar">Rechercher une offre</h3>
+                    <form action="" method="get" id="formsearch" class="search-form mb-3">
+                        <div class="form-group">
+                            <button type="submit" class="icon icon-search" ></button>
+                            <input type="text" name="o" class="form-control" placeholder="Search..." id="search">
+                        </div>
+
+
+                    <h3 class="heading-sidebar">Type offre</h3>
+
+                        <label for="option-job-type-1"><input type="radio" id="option-job-type-1" name="tes" value="1" > Emploi</label><br>
+                        <label for="option-job-type-2"><input type="radio" id="option-job-type-2" name="tes" value="2"> Stage</label><br>
+                        <button type="submit" >Recherche</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+</section>
+
+{% endblock %}

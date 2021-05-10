@@ -1,0 +1,344 @@
+{% extends 'basefront.html.twig' %}
+
+{% block title %}blog{% endblock %}
+
+{% block body %}
+  <section class="hero-wrap hero-wrap-2" style="background-image: url('{{ asset('themefront/assets/images/bg_1.jpg')}}');">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row no-gutters slider-text align-items-center justify-content-center">
+        <div class="col-md-9 ftco-animate text-center">
+          <h1 class="mb-2 bread">Blog</h1>
+          <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Acceuil <i class="ion-ios-arrow-forward"></i></a></span> <span>Blog <i class="ion-ios-arrow-forward"></i></span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="ftco-section bg-light">
+    <div class="container" style="padding-left:0px;padding-right: 0px ">
+
+
+      <div class="row" >
+
+        <div class="col col-lg-3">
+
+          <div class="col col-lg-12 ftco-animate" >
+
+            <div class="sidebar-box">
+              <form action="#" class="search-form">
+                <div class="form-group">
+                  <span class="icon icon-search"></span>
+                  <input type="text" class="form-control" placeholder="entre un mot clé">
+                </div>
+              </form>
+            </div>
+          <div class="sidebar-box ftco-animate">
+              <h3> Chercher par categories</h3>
+              <ul id="myUL">
+                <li><span class="box">categorie1</span>
+                  <ul class="nested active">
+                    <li> <span class="box">Water</span>
+                      <ul class="nested">
+                        <li><span class="box">Black Tea</span>
+                          <ul class="nested">
+                          </ul>
+                        </li>
+                        <li><span class="box">White Tea</span>
+                          <ul class="nested">
+                          </ul>
+                        </li>
+                        <li><span class="box">Green Tea</span>
+                          <ul class="nested">
+                            <li><span class="box">Sench</span>
+                              <ul class="nested">
+
+                              </ul>
+                            </li>
+
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                    <li><span class="box">Coffee</span>
+                      <ul class="nested">
+                        <li><span class="box">Black Tea</span>
+                          <ul class="nested">
+
+                          </ul></li>
+                        <li><span class="box">White Tea</span>
+                          <ul class="nested">
+
+                          </ul></li>
+                        <li><span class="box">Green Tea</span>
+                          <ul class="nested">
+
+                          </ul>
+                        </li>
+                      </ul></li>
+                    <li><span class="box">Tea</span>
+                      <ul class="nested">
+                        <li><span class="box">Black Tea</span>
+                          <ul class="nested">
+                            <li><span class="box">Sencha</span>
+                              <ul class="nested">
+                              </ul>
+                            </li>
+                            <li><span class="box">Sencha</span>
+                              <ul class="nested">
+                              </ul>
+                            </li>
+                            <li><span class="box">Sencha</span>
+                              <ul class="nested">
+                              </ul>
+                            </li>
+                          </ul></li>
+                        <li><span class="box">White Tea</span>
+                          <ul class="nested">
+
+                          </ul></li>
+                        <li><span class="box">Green Tea</span>
+                          <ul class="nested">
+
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li><span class="box">categorie2</span>
+                  <ul class="nested">
+                    <li> <span class="box">Water</span>
+                      <ul class="nested">
+                        <li><span class="box">Black Tea</span>
+                          <ul class="nested">
+                          </ul>
+                        </li>
+                        <li><span class="box">White Tea</span>
+                          <ul class="nested">
+                          </ul>
+                        </li>
+                        <li><span class="box">Green Tea</span>
+                          <ul class="nested">
+                            <li><span class="box">Sench</span>
+                              <ul class="nested">
+
+                              </ul>
+                            </li>
+
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                    <li><span class="box">Coffee</span>
+                      <ul class="nested">
+                        <li><span class="box">Black Tea</span>
+                          <ul class="nested">
+
+                          </ul></li>
+                        <li><span class="box">White Tea</span>
+                          <ul class="nested">
+
+                          </ul></li>
+                        <li><span class="box">Green Tea</span>
+                          <ul class="nested">
+
+                          </ul>
+                        </li>
+                      </ul></li>
+                    <li><span class="box">Tea</span>
+                      <ul class="nested">
+                        <li><span class="box">Black Tea</span>
+                          <ul class="nested">
+                            <li><span class="box">Sencha</span>
+                              <ul class="nested">
+                              </ul>
+                            </li>
+                            <li><span class="box">Sencha</span>
+                              <ul class="nested">
+                              </ul>
+                            </li>
+                            <li><span class="box">Sencha</span>
+                              <ul class="nested">
+                              </ul>
+                            </li>
+                          </ul></li>
+                        <li><span class="box">White Tea</span>
+                          <ul class="nested">
+
+                          </ul></li>
+                        <li><span class="box">Green Tea</span>
+                          <ul class="nested">
+
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li><span class="box">categorie3</span>
+                  <ul class="nested">
+                    <li> <span class="box">Water</span>
+                      <ul class="nested">
+                        <li><span class="box">Black Tea</span>
+                          <ul class="nested">
+                          </ul>
+                        </li>
+                        <li><span class="box">White Tea</span>
+                          <ul class="nested">
+                          </ul>
+                        </li>
+                        <li><span class="box">Green Tea</span>
+                          <ul class="nested">
+                            <li><span class="box">Sench</span>
+                              <ul class="nested">
+
+                              </ul>
+                            </li>
+
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                    <li><span class="box">Coffee</span>
+                      <ul class="nested">
+                        <li><span class="box">Black Tea</span>
+                          <ul class="nested">
+
+                          </ul></li>
+                        <li><span class="box">White Tea</span>
+                          <ul class="nested">
+
+                          </ul></li>
+                        <li><span class="box">Green Tea</span>
+                          <ul class="nested">
+
+                          </ul>
+                        </li>
+                      </ul></li>
+                    <li><span class="box">Tea</span>
+                      <ul class="nested">
+                        <li><span class="box">Black Tea</span>
+                          <ul class="nested">
+                            <li><span class="box">Sencha</span>
+                              <ul class="nested">
+                              </ul>
+                            </li>
+                            <li><span class="box">Sencha</span>
+                              <ul class="nested">
+                              </ul>
+                            </li>
+                            <li><span class="box">Sencha</span>
+                              <ul class="nested">
+                              </ul>
+                            </li>
+                          </ul></li>
+                        <li><span class="box">White Tea</span>
+                          <ul class="nested">
+
+                          </ul></li>
+                        <li><span class="box">Green Tea</span>
+                          <ul class="nested">
+
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+
+              <form action="#" class="search-form">
+                <div class="form-group">
+                  <button type="submit" placeholder="" class="form-control search">
+                    <span >chercher</span></button>
+                </div>
+              </form>
+            </div>
+
+          </div>
+          <div class="col col-lg-12 ftco-animate p-1 h-25">
+            <div class="sidebar-box ftco-animate">
+              <h3> Articles Populaires</h3>
+              <div class="block-21 mb-4 d-flex">
+                <a class="blog-img mr-4" style="background-image: url('{{ asset('themefront/assets/images/image_1.jpg')}}');"></a>
+                <div class="text">
+                  <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+                  <div class="meta">
+                    <div><a href="#"><span class="icon-calendar"></span> June 27, 2019</a></div>
+                    <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
+                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                  </div>
+                </div>
+              </div>
+              <div class="block-21 mb-4 d-flex">
+                <a class="blog-img mr-4" style="background-image: url('{{ asset('themefront/assets/images/image_2.jpg')}}');"></a>
+                <div class="text">
+                  <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+                  <div class="meta">
+                    <div><a href="#"><span class="icon-calendar"></span> June 27, 2019</a></div>
+                    <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
+                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      <div class="col col-lg-9">
+        <div class="row" >
+            {% for article in articles %}
+        <div class="col col-lg-4 ftco-animate h-25 d-inline-block" >
+          <div class="blog-entry-1 " >
+            <a href="blog-single.html" class="block-20 d-flex align-items-end" style="background-image: url('{{ asset('themefront/assets/images/image_2.jpg')}}');">
+              <div class="meta-date text-center p-2">
+                <span class="day">{{ article.dateAjout ? article.dateAjout|date('d') : '' }}</span>
+                <span class="mos">{{ article.dateAjout ? article.dateAjout|date('m') : '' }}</span>
+                <span class="yr">{{ article.dateAjout ? article.dateAjout|date('Y') : '' }}</span>
+              </div>
+            </a>
+            <div class="text bg-white p-2 h-25 d-inline-block">
+              <h3 class="heading ">
+                <a href="blog-single.html">{{ article.titre }}</a></h3>
+              <div class="d-flex align-items-center mt-4 ">
+                <p class="mb-0"><a href="{{ path('show', {'id': article.id}) }}" class="btn btn-primary">Read More <span class="ion-ios-arrow-round-forward"></span></a></p>
+                <p class="ml-auto mb-0">
+                  <a href="#" class="mr-2">Admin</a>
+                  <a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+          {% endfor %}
+
+
+
+      </div></div>
+      </div>
+
+    </div>
+  </section>
+{% endblock %}
+{% block javascripts %}
+<script src="{{ asset('themeBack/assets/js/logger.js') }}"></script>
+<script src="{{ asset('themeBack/assets/js/treeview.js') }}"></script>
+<script src="{{ asset('themeBack/assets/js/hummingbird-treeview.js') }}"></script>
+
+<script>
+
+
+    $("#treeview").hummingbird();
+
+    $('#treeview-checkbox-demo').treeview({
+        debug : true,
+        data : []
+    });
+    $('#show-values').on('click', function(){
+        $('#values').text(
+            $('#treeview-checkbox-demo').treeview('selectedValues')
+        );
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,223 @@
+<?php
+
+namespace App\Entity;
+
+use App\Repository\ArticleRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity(repositoryClass=ArticleRepository::class)
+ */
+class Article
+{
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $titre;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $auteur;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $introduction;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $date_ajout;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $contenu;
+
+
+    /**
+     * @ORM\OneToMany(targetEntity="Commantaire", mappedBy="Article" , orphanRemoval=true)
+     */
+    private $Commantaire;
+
+   
+    /**
+     * @ORM\OneToMany(targetEntity="ArticleCategorie", mappedBy="Article")
+     */
+    private $ArticleCategorie;
+
+    /**
+     * @ORM\Column(type="string", length=255 ,nullable=true )
+     */
+    private $image;
+    /**
+     * @ORM\OneToMany(targetEntity="Valpub", mappedBy="article")
+     * @ORM\OrderBy({"date" = "ASC"})
+     */
+    private $valpub;
+
+
+
+
+    public function __construct()
+    {
+        $this->ArticleCategorie = new ArrayCollection();
+        $this->Commantaire = new ArrayCollection();
+        $this->valpub = new ArrayCollection();
+    }
+    
+
+
+    
+
+    
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getTitre(): ?string
+    {
+        return $this->titre;
+    }
+
+    public function setTitre(?string $titre): self
+    {
+        $this->titre = $titre;
+
+        return $this;
+    }
+
+    public function getAuteur(): ?string
+    {
+        return $this->auteur;
+    }
+
+    public function setAuteur(?string $auteur): self
+    {
+        $this->auteur = $auteur;
+
+        return $this;
+    }
+
+    public function getIntroduction(): ?string
+    {
+        return $this->introduction;
+    }
+
+    public function setIntroduction(?string $introduction): self
+    {
+        $this->introduction = $introduction;
+
+        return $this;
+    }
+
+    public function getDateAjout(): ?\DateTimeInterface
+    {
+        return $this->date_ajout;
+    }
+
+    public function setDateAjout(?\DateTimeInterface $date_ajout): self
+    {
+        $this->date_ajout = $date_ajout;
+
+        return $this;
+    }
+
+    public function getContenu(): ?string
+    {
+        return $this->contenu;
+    }
+
+    public function setContenu(?string $contenu): self
+    {
+        $this->contenu = $contenu;
+
+        return $this;
+    }
+    /**
+     * @return Collection|Commantaire[]
+     */
+    public function getCommantaire():  Collection
+    {
+        return $this->Commantaire;
+    }
+
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getArticleCategorie(): ArrayCollection
+    {
+        return $this->ArticleCategorie;
+    }
+
+
+    /**
+     * @param mixed $Commantaire
+     * @return Article
+     */
+    public function setCommantaire($Commantaire)
+    {
+        $this->Commantaire = $Commantaire;
+        return $this;
+    }
+
+    /**
+     * @param mixed $ArticleCategorie
+     * @return Article
+     */
+    public function setArticleCategorie($ArticleCategorie)
+    {
+        $this->ArticleCategorie = $ArticleCategorie;
+        return $this;
+    }
+
+
+
+   
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getValpub()
+    {
+        return $this->valpub;
+    }
+
+    /**
+     * @param mixed $valpub
+     * @return Article
+     */
+    public function setValpub($valpub)
+    {
+        $this->valpub = $valpub;
+        return $this;
+    }
+
+
+    
+}

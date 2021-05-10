@@ -1,0 +1,12 @@
+{% extends "@FOSUser/layoutProfil.html.twig" %}
+{% block head %}
+
+{% endblock %}
+{% block fos_user_content %}
+{% include "@FOSUser/Profile/show_content.html.twig" %}
+{% endblock fos_user_content %}
+{% block javascripts %}
+
+    <script src="{{asset('themeBack/assets/js/pages/widgets.js')}}"></script>
+    <script src="{{asset('themeBack/assets/js/pages/custom/profile/profile.js')}}"></script>
+{% endblock %}

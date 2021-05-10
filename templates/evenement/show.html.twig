@@ -1,0 +1,61 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Evenement{% endblock %}
+
+{% block body %}
+    <h1>Evenement</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ evenement.id }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ evenement.description }}</td>
+            </tr>
+            <tr>
+                <th>Delais</th>
+                <td>{{ evenement.delais }}</td>
+            </tr>
+            <tr>
+                <th>Date_debut</th>
+                <td>{{ evenement.dateDebut ? evenement.dateDebut|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Date_fin</th>
+                <td>{{ evenement.dateFin ? evenement.dateFin|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Theme</th>
+                <td>{{ evenement.theme }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ evenement.titre }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ evenement.type }}</td>
+            </tr>
+            <tr>
+                <th>Localisation</th>
+                <td>{{ evenement.localisation }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="card-footer">
+        <a href="{{ path('evenement_index') }}" class="btn btn-light-primary font-weight-bold mr-2">back to list</a>
+        <a href="{{ path('evenement_edit', {'id': evenement.id}) }}" class="btn btn-light-success font-weight-bold mr-2">edit</a>
+        <a href="#" onclick="$('#delF').submit()" class="btn btn-light-danger font-weight-bold mr-2">Supprimer</a>
+        <form id="delF" method="post" action="{{ path('evenement_delete', {'id':evenement.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ evenement.id) }}">
+
+        </form>
+    </div>
+
+    
+{% endblock %}

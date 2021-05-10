@@ -1,0 +1,118 @@
+{% extends 'basefront.html.twig' %}
+
+{% block title %}Contact{% endblock %}
+
+{% block body %}
+    <section class="hero-wrap hero-wrap-2" style="background-image: url('/themefront/assets/images/bg_1.jpg');">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row no-gutters slider-text align-items-center justify-content-center">
+                <div class="col-md-9 ftco-animate text-center">
+                    <h1 class="mb-2 bread">Contactez-Nous</h1>
+                    <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Acceuil <i class="ion-ios-arrow-forward"></i></a></span> <span>Contact <i class="ion-ios-arrow-forward"></i></span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container" data-aos="fade-up" >
+
+            <div class="row mt-5" >
+
+                <div class="col-lg-4"  >
+                    <div class="info">
+                        <div class="address">
+                            <i class="icofont-google-map"></i>
+                            <h4>Addresse:</h4>
+                            <p>73 ter Avenue Habib
+                                Bourguiba, Manouba 2010 APPAR 2.1</p>
+                        </div>
+
+                        <div class="email">
+                            <i class="icofont-envelope"></i>
+                            <h4>Email:</h4>
+                            <p>contact@premiere-consulting.tn</p>
+                        </div>
+
+                        <div class="phone">
+                            <i class="icofont-phone"></i>
+                            <h4>Téléphone</h4>
+                            <p>+216 71 601
+                                561</p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-lg-8 mt-5 mt-lg-0" >
+                    <form method="POST" role="form" class="php-email-form">
+                        <div class="form-row">
+                            {{ form_start(contactForm) }}
+                            <div class="col-md-6 form-group">
+                                {{ form_widget(contactForm.nom, {'attr': {'class': "form-control",'name':"contact[nom]" ,'id':"contact_nom" ,'placeholder':"Votre nom"}}) }}
+                                <div class="validate"></div>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                {{ form_widget(contactForm.email, {'attr': {'class': 'form-control','name':'contact[email]' ,'id':'contact_email' ,'placeholder':'Votre Email'}}) }}
+                                <div class="validate"></div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-6 form-group">
+                                {{ form_widget(contactForm.telephone, {'attr': {'type':"tel" ,'name':"telephone", 'class':"form-control" ,'id':"telephone", 'placeholder':"telephone"}}) }}
+                                <div class="validate"></div>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                {{ form_widget(contactForm.entreprise, {'attr': {'class': 'form-control','name':'contact[entreprise]' ,'id':'contact_entreprise' ,'placeholder':'Votre entreprise'}}) }}
+                                <div class="validate"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{ form_widget(contactForm.objet, {'attr': {'class': 'form-control','name':'contact[objet]' ,'id':'contact_objet' ,'placeholder':'objet'}}) }}
+                            <div class="validate"></div>
+                        </div>
+                        <div class="form-group">
+                            {{ form_widget(contactForm.description, {'attr': {'class': 'form-control','name':'contact[description]' ,'id':'contact_description' ,'placeholder':'Message','rows':"5"}}) }}
+                            <div class="validate"></div>
+                        </div>
+                        <div class="text-center"><button type="submit" name="submit" id="submit" class="form-submit">Envoyer message</button></div>
+                        {{ form_end(contactForm) }}
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <div id="map-container-google-1" class="z-depth-1-half map-container" style="padding-bottom: 400px">
+        <iframe src="https://maps.google.com/maps?q=manhatan&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" style="border:0 ; height: 1000px" allowfullscreen ></iframe>
+    </div>
+
+    <div id="footer" style="margin-bottom: 100px">
+        <div class="footer-newsletter">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                        <h4>Inscrivez-vous</h4>
+                        <p>Inscrivez-vous pour recevoir les notifications des nouveautés des domaines l'environnement, l'hygiène et la santé sécurité au travail</p>
+                        <form action="" method="post">
+                            <input type="email" name="email"><input type="submit" value="S'abonner">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+{% endblock %}

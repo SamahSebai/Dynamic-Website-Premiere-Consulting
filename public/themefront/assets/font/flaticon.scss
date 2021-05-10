@@ -1,0 +1,61 @@
+$flaticon-font: "flaticon";
+
+@font-face {
+    font-family: $flaticon-font;
+    src: url("./flaticon.ttf?dd25f96197b2899a4aee96f8997ca194") format("truetype"),
+url("./flaticon.woff?dd25f96197b2899a4aee96f8997ca194") format("woff"),
+url("./flaticon.woff2?dd25f96197b2899a4aee96f8997ca194") format("woff2"),
+url("./flaticon.eot?dd25f96197b2899a4aee96f8997ca194#iefix") format("embedded-opentype"),
+url("./flaticon.svg?dd25f96197b2899a4aee96f8997ca194#flaticon") format("svg");
+}
+
+i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
+    font-family: flaticon !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+$flaticon-map: (
+    "career": "\f101",
+    "coach": "\f102",
+    "coaching": "\f103",
+    "cogwheel": "\f104",
+    "handshake": "\f105",
+    "training": "\f106",
+    "transferring": "\f107",
+    "website": "\f108",
+    "work": "\f109",
+);
+
+.flaticon-career:before {
+    content: map-get($flaticon-map, "career");
+}
+.flaticon-coach:before {
+    content: map-get($flaticon-map, "coach");
+}
+.flaticon-coaching:before {
+    content: map-get($flaticon-map, "coaching");
+}
+.flaticon-cogwheel:before {
+    content: map-get($flaticon-map, "cogwheel");
+}
+.flaticon-handshake:before {
+    content: map-get($flaticon-map, "handshake");
+}
+.flaticon-training:before {
+    content: map-get($flaticon-map, "training");
+}
+.flaticon-transferring:before {
+    content: map-get($flaticon-map, "transferring");
+}
+.flaticon-website:before {
+    content: map-get($flaticon-map, "website");
+}
+.flaticon-work:before {
+    content: map-get($flaticon-map, "work");
+}

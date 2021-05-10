@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SEO{% endblock %}
+
+{% block body %}
+    <h1>SEO</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ s_e_o.id }}</td>
+            </tr>
+            <tr>
+                <th>Mot_cle</th>
+                <td>{{ s_e_o.motCle }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ s_e_o.description }}</td>
+            </tr>
+            <tr>
+                <th>Lien_canonical</th>
+                <td>{{ s_e_o.lienCanonical }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('s_e_o_index') }}">back to list</a>
+
+    <a href="{{ path('s_e_o_edit', {'id': s_e_o.id}) }}">edit</a>
+
+    {{ include('s_e_o/_delete_form.html.twig') }}
+{% endblock %}
