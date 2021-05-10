@@ -37,9 +37,12 @@ class UserType extends AbstractType {
                 'multiple'=>false,
                 'expanded'=>true,
                 'choices' => [
+
                     'Admin'=>'ROLE_ADMIN',
                     'Redacteur'=>'ROLE_REDACTE',
                     'Validateur'=>'ROLE_VALID',
+                    'Utilisateur' => 'ROLE_USER',
+
                 ],
                 'mapped'=>false,
             ]);

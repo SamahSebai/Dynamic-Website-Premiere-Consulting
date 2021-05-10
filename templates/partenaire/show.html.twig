@@ -1,0 +1,64 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Partenaire{% endblock %}
+
+{% block body %}
+    <h1>Partenaire</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ partenaire.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ partenaire.nom }}</td>
+            </tr>
+            <tr>
+                <th>Adress</th>
+                <td>{{ partenaire.adress }}</td>
+            </tr>
+            <tr>
+                <th>Localisation</th>
+                <td>{{ partenaire.localisation }}</td>
+            </tr>
+            <tr>
+                <th>Telephone</th>
+                <td>{{ partenaire.telephone }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ partenaire.email }}</td>
+            </tr>
+            <tr>
+                <th>Responsable</th>
+                <td>{{ partenaire.responsable }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ partenaire.type }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ partenaire.description }}</td>
+            </tr>
+            <tr>
+                <th>Secteur_activite</th>
+                <td>{{ partenaire.secteurActivite }}</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+
+    <div class="card-footer">
+        <a href="{{ path('partenaire_index')  }}" class="btn btn-light-primary font-weight-bold mr-2">retourner à la list</a>
+        <a href="{{ path('partenaire_edit', {'id': partenaire.id})  }}" class="btn btn-light-success font-weight-bold mr-2">Modifier</a>
+        <a href="#" onclick="$('#delF').submit()" class="btn btn-light-danger font-weight-bold mr-2">Supprimer</a>
+        <form id="delF" method="post" action="{{ path('partenaire_delete', {'id': partenaire.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ partenaire.id) }}">
+        </form>
+    </div>
+{% endblock %}

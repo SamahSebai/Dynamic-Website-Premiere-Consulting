@@ -52,7 +52,7 @@ class DefaultController extends AbstractController
         ]);
     }
     /**
-     * @Route("/new", name="user_new", methods={"GET","POST"})
+     * @Route("/user/new", name="user_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -95,6 +95,7 @@ class DefaultController extends AbstractController
 
             $form = $this->createForm(UserType::class, $user);
             $form->remove("current_password");
+            $form->remove("plainPassword");
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
@@ -103,7 +104,7 @@ class DefaultController extends AbstractController
                 $em->persist($user);
 
                 $em->flush();
-
+                return $this->redirectToRoute('user');
             }
             return $this->render('utilisateur/editUser.html.twig', [
                 'user' => $user,
@@ -111,15 +112,38 @@ class DefaultController extends AbstractController
         }
         return $this->redirectToRoute('fos_user_security_login');
 
-      /*  $this->render('editUser.html.twig', array('form' => $form->createView()));*/
+//        $this->render('utilisateur/editUser.html.twig', array('form' => $form->createView()));
     }
 
 
 
+    /**
+     * @route("/supprimerutilisateur/{id}",name="supprimer")
+     */
+    public function supprimer (String $id): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $user=$this->getDoctrine()->getRepository(User::class)->findBy(array('id'=>$id));
+        if(!$user) {
+            throw $this->createNotFoundException('pas utilisateur avec la id'.$id);
+        }
+        $entityManager->remove($user[0]);
+
+        $entityManager->flush();
+        return $this->redirectToRoute('user');
+    }
 
 
 
-
+    /**
+     * @Route("usershow/{id}", name="user_show", methods={"GET"})
+     */
+    public function show(User $user): Response
+    {
+        return $this->render('utilisateur/show.html.twig', [
+            'user' => $user,
+        ]);
+    }
 
 
 

@@ -3,7 +3,9 @@
 namespace App\Entity;
 
 use App\Repository\PartenaireRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+
 
 /**
  * @ORM\Entity(repositoryClass=PartenaireRepository::class)
@@ -61,9 +63,29 @@ class Partenaire
      * @ORM\Column(type="string", length=255)
      */
     private $secteur_activite;
-    
-    
+    /**
+     * @ORM\Column(type="string", length=255)
 
+    private $Image;
+
+     */
+    /**
+     * @ORM\OneToMany(targetEntity="Media", mappedBy="Partenaire")
+     */
+
+    private $medias;
+
+
+    public function __construct()
+    {
+
+        $this->medias = new ArrayCollection();
+
+    }
+
+    /**
+     * @return int
+     */
     public function getId(): ?int
     {
         return $this->id;
@@ -175,5 +197,41 @@ class Partenaire
         $this->secteur_activite = $secteur_activite;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+
+    public function getImage(): ?string
+    {
+        return $this->Image;
+    }
+    public function setImage(string $Image): self
+    {
+        $this->Image = $Image;
+
+        return $this;
+    }*/
+
+    /**
+     * @return mixed
+     */
+    public function getMedias()
+    {
+        return $this->medias;
+    }
+
+    /**
+     * @param mixed $medias
+     * @return Partenaire
+     */
+    public function setMedias(ArrayCollection $medias):Partenaire
+    {
+        $this->medias = $medias;
+        return $this;
+    }
+    public function __toString(): string
+    {
+        return 'bla bla';
     }
 }

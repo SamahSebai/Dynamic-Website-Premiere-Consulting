@@ -12,3 +12,8 @@ fos_ck_editor:
                 - { name: "styles", items: ['Bold', 'Italic', 'Underline', 'Strike', 'Blockquote', '-', 'Link', '-', 'RemoveFormat', '-', 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'Image', 'Table', '-', 'Styles', 'Format','Font','FontSize', '-', 'TextColor', 'BGColor', 'Source'] }
             filebrowserBrowseRoute: elfinder
             filebrowserBrowseRouteParameters: []
+#    styles:
+#        my_styles:
+#            - { name: "Blue Title", element: "h2", styles: { color: "Blue" }}
+#            - { name: "CSS Style", element: "span", attributes: { class: "my_style" }}
+#            - { name: "Widget Style", type: widget, widget: "my_widget", attributes: { class: "my_widget_style" }}

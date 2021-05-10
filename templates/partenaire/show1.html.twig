@@ -1,0 +1,99 @@
+{% extends 'basefront.html.twig' %}
+
+{% block title %}Partenaires index{% endblock %}
+
+{% block body %}
+
+    <section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_1.jpg');">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row no-gutters slider-text align-items-center justify-content-center">
+                <div class="col-md-9 ftco-animate text-center">
+                    <h1 class="mb-2 bread"> Nos Partenaires</h1>
+                    <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Acceuil <i
+                                        class="ion-ios-arrow-forward"></i></a></span> <span class="mr-2"><a
+                                    href="equipe.html">  Nos Partenaires</a>
+                </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="portfolio" id="portfolio">
+        <div class="container">
+            <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
+                <p></p>
+                <h2>Nos Partenaires</h2>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <ul id="portfolio-filter">
+                        <li data-filter="*" class="filter-active">Tous</li>
+                        <li data-filter=".filter-1">Commerce</li>
+                        <li data-filter=".filter-2">Securité</li>
+                        <li data-filter=".filter-3">Industrie</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row portfolio-container">
+                <div class="col-lg-4 col-md-6 col-sm-12 portfolio-item filter-1 wow fadeInUp" data-wow-delay="0.0s">
+
+                        <div class="portfolio-wrap">
+                            {% for media in partenaire.medias %}
+
+                            <div class="portfolio-img">
+                                <img src="{{ asset('upload/'~media.URL) }}"class="img-fluid">
+                            </div>
+                            {% endfor %}
+                        </div>
+
+                </div>
+
+               {# <div class="row portfolio-container">
+                    <div class="col-lg-4 col-md-6 col-sm-12 portfolio-item filter-1 wow fadeInUp" data-wow-delay="0.0s">
+                        <div class="portfolio-wrap">
+                            <div class="portfolio-img">
+                                <img src="images/04/patenaires/c7.png" alt="Image">
+                            </div>
+
+                        </div>
+                    </div>
+                    </div>
+                <div class="row portfolio-container">
+                    <div class="col-lg-4 col-md-6 col-sm-12 portfolio-item filter-1 wow fadeInUp" data-wow-delay="0.0s">
+                        <div class="portfolio-wrap">
+                            <div class="portfolio-img">
+                                <img src="images/04/patenaires/c13.png" alt="Image">
+                            </div>
+
+                        </div>
+                    </div>
+                      </div>
+                <div class="row portfolio-container">
+                    <div class="col-lg-4 col-md-6 col-sm-12 portfolio-item filter-1 wow fadeInUp" data-wow-delay="0.0s">
+                        <div class="portfolio-wrap">
+                            <div class="portfolio-img">
+                                <img src="images/04/patenaires/c19.png" alt="Image">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row portfolio-container">
+                        <div class="col-lg-4 col-md-6 col-sm-12 portfolio-item filter-1 wow fadeInUp" data-wow-delay="0.0s">
+                            <div class="portfolio-wrap">
+                                <div class="portfolio-img">
+                                    <img src="images/04/patenaires/c25-300x75.png" alt="Image">
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>#}
+
+            </div>
+        </div>
+    </div>
+        <!-- Portfolio End -->
+
+{% endblock %}
