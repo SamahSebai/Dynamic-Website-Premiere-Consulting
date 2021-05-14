@@ -47,4 +47,17 @@ class FormationRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function search($term)
+    {
+        $query=$this->createQueryBuilder('formations')->select('formations');
+        $query ->Where('formations.id LIKE :searchTerm 
+        or formations.intitule_mission  LIKE :searchTerm or formations.nb_de_jour   LIKE :searchTerm
+         or formations.date_debut   LIKE :searchTerm or formations.date_fin  LIKE :searchTerm or 
+         formations.localisation_mission   LIKE :searchTerm or formations.cout_provisoire    LIKE :searchTerm 
+         or formations.description    LIKE :searchTerm or formations.theme    LIKE :searchTerm ')
+            ->setParameter('searchTerm','%' .$term.'%');
+        $query ->getQuery()
+            ->getResult();
+        return $query;
+    }
 }

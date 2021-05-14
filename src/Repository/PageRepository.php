@@ -47,4 +47,14 @@ class PageRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function search($term)
+    {
+        $query=$this->createQueryBuilder('pages')->select('pages');
+        $query ->Where('pages.URL LIKE :searchTerm or pages.id LIKE :searchTerm  or pages.titre LIKE :searchTerm 
+         or pages.slug  LIKE :searchTerm')
+            ->setParameter('searchTerm','%' .$term.'%');
+        $query ->getQuery()
+            ->getResult();
+        return $query;
+    }
 }

@@ -13,6 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @Route("/calendar")
@@ -21,12 +22,39 @@ class CalendarController extends AbstractController
 {
     /**
      * @Route("/", name="calendar_index", methods={"GET"})
+     * @param CalendarRepository $calendarRepository
+     * @param Request $request
+     * @param PaginatorInterface $paginator
+     * @return Response
      */
-    public function index(CalendarRepository $calendarRepository): Response
+    public function index(CalendarRepository $calendarRepository, Request $request,PaginatorInterface $paginator)
     {
+        $em = $this->getDoctrine()->getManager();
+
+        $search = $request->query->get('e');
+        if ($search) {
+            $calendars = $calendarRepository->search($search);
+        } else {
+            $calendars = $calendarRepository->findAll();
+        }
+        $calendar = $paginator->paginate(
+            $calendars,
+            $request->query->getInt('page', 1),
+            5
+        );
+
         return $this->render('calendar/index.html.twig', [
-            'calendars' => $calendarRepository->findAll(),
+            'calendars' => $calendar
         ]);
+    }
+    public function searchBack(CalendarRepository $calendarRepository, Request $request)
+    {
+        $search = $request->query->get('e');
+        if ($search) {
+            $calendars = $calendarRepository->search($search);
+        } else {
+            $calendars = $calendarRepository->findAllOrdered();
+        }
     }
 
 

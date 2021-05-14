@@ -22,6 +22,8 @@ class RegistrationController extends AbstractController{
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
         // 1) build the form
+        if( ! $this->getUser())
+        {
         $user = new User();
         $form = $this->createForm(RegistrationType::class, $user);
 
@@ -45,6 +47,8 @@ class RegistrationController extends AbstractController{
             'registration/register.html.twig',
             array('form' => $form->createView())
         );
+        }
+        dd("connecte");
     }
 
 }

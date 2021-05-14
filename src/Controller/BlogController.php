@@ -20,14 +20,30 @@ class BlogController extends AbstractController
     /**
      * @Route("/blog", name="blog")
      */
-    public function index(): Response
+    public function index(ArticleRepository $artRepo): Response
     {
-            $em=$this->getDoctrine()->getManager();
-            $articles = $em->getRepository(Article::class)->findAll();
+        $articlepop = $artRepo->findBestArticles();
+        $em=$this->getDoctrine()->getManager();
+        $articles = $em->getRepository(Article::class)->findAll();
+
                 return $this->render('blog/index.html.twig', [
-            'articles' => $articles,
+            'articles' => $articles,'articlepop' => $articlepop
         ]);
     }
+//    /**
+//     * @Route("/blog", name="blog")
+//     */
+//    public function index(ArticleRepository $artRepo): Response
+//
+//    {
+//
+//        $articles = $artRepo->findBestArticles();
+//
+//        return $this->render('blog/index.html.twig', [
+//            'articles' => $articles,
+//        ]);
+//    }
+
     /**
      * @Route("/blog/show/{id}", name="show")
      */

@@ -3,7 +3,7 @@
     {% block title %}Offres index{% endblock %}
 
     {% block body %}
-  <section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_1.jpg');">
+  <section class="hero-wrap hero-wrap-2" style="background-image: url('{{ asset('themefront/assets/images/bg_1.jpg')}}');">
     <div class="overlay"></div>
     <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
@@ -48,7 +48,7 @@
                                         <span class="icon-heart"></span>
                                     </a>
                                 </div>
-                                <a href="{{ path('show', {'id': offre.id}) }}" class="btn btn-primary py-2">Postuler</a>
+                                {#<a href="{{ path('page_show2', {'id': offre.id}) }}" class="btn btn-primary py-2">Postuler</a>#}
                             </div>
                         </div>
                     </div>

@@ -52,7 +52,12 @@ class Media
     private $article;
 
 
-
+    /**
+     * var patenaire
+     * @ORM\ManyToOne(targetEntity="Partenaire")
+     * @ORM\JoinColumn(name="partenaire",referencedColumnName="id" ,nullable=true)
+     */
+    private $partenaire;
 
     public function __construct()
     {
@@ -165,6 +170,22 @@ class Media
     {
         $this->article = $article;
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPartenaire()
+    {
+        return $this->partenaire;
+    }
+
+    /**
+     * @param mixed $partenaire
+     */
+    public function setPartenaire($partenaire): void
+    {
+        $this->partenaire = $partenaire;
     }
 
 

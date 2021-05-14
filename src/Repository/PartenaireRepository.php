@@ -47,4 +47,18 @@ class PartenaireRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function search($term)
+    {
+        $query=$this->createQueryBuilder('partenaires')->select('partenaires');
+        $query ->Where('partenaires.nom LIKE :searchTerm or partenaires.id LIKE :searchTerm 
+         or partenaires.adress LIKE :searchTerm or partenaires.localisation  LIKE :searchTerm or 
+         partenaires.email  LIKE :searchTerm or partenaires.responsable LIKE :searchTerm
+        or partenaires.type LIKE :searchTerm or  partenaires.description LIKE :searchTerm
+         or partenaires.secteur_activite  LIKE :searchTerm')
+            ->setParameter('searchTerm','%' .$term.'%');
+        $query ->getQuery()
+            ->getResult();
+        return $query;
+    }
+
 }

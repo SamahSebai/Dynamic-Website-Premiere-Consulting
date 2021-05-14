@@ -47,4 +47,14 @@ class TemoingageRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function search($term)
+    {
+        $query=$this->createQueryBuilder('temoingages')->select('temoingages');
+        $query ->Where('temoingages.id LIKE :searchTerm  
+        or temoingages.auteur LIKE :searchTerm or temoingages.description LIKE :searchTerm')
+            ->setParameter('searchTerm','%' .$term.'%');
+        $query ->getQuery()
+            ->getResult();
+        return $query;
+    }
 }

@@ -47,4 +47,15 @@ class ServicesRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function search($term)
+    {
+        $query=$this->createQueryBuilder('services')->select('services');
+        $query ->Where('services.nom LIKE :searchTerm or  services.description LIKE :searchTerm  or 
+          services.etat LIKE :searchTerm or services.date  LIKE :searchTerm or services.referance  LIKE :searchTerm  or services.prix  LIKE :searchTerm ')
+            ->setParameter('searchTerm','%' .$term.'%');
+        $query ->getQuery()
+            ->getResult();
+        return $query;
+    }
+
 }

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Partenaire;
 use App\Entity\Temoingage;
 use App\Form\TemoingageType;
+use Knp\Component\Pager\PaginatorInterface;
 use App\Repository\TemoingageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -20,10 +21,24 @@ class TemoingageController extends AbstractController
     /**
      * @Route("/", name="temoingage_index", methods={"GET"})
      */
-    public function index(TemoingageRepository $temoingageRepository): Response
+    public function index(TemoingageRepository $temoingageRepository, Request $request,PaginatorInterface $paginator)
     {
+
+        $em=$this->getDoctrine()->getManager();
+        $search = $request->query->get('t');
+        if ($search) {
+            $temoingages = $temoingageRepository->search($search);
+        } else {
+            $temoingages = $temoingageRepository->findAll();
+        }
+        $temoingage = $paginator->paginate(
+            $temoingages,
+            $request->query->getInt('page', 1),
+            5
+        );
+
         return $this->render('temoingage/index.html.twig', [
-            'temoingages' => $temoingageRepository->findAll(),
+            'temoingages' => $temoingage,
         ]);
     }
 

@@ -1,11 +1,13 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
+{#
 {{ form_start(form, { 'action': path('fos_user_resetting_reset', {'token': token}), 'attr': { 'class': 'fos_user_resetting_reset' } }) }}
     {{ form_widget(form) }}
     <div>
         <input type="submit" value="{{ 'resetting.reset.submit'|trans }}" />
     </div>
 {{ form_end(form) }}
+#}
 
 
 
@@ -41,3 +43,35 @@
         </div>
     </div>
 </div>#}
+<div class="limiter">
+
+    <div class="container-login100" style="background-image: url('/login/images/signup-bg.jpg');">
+
+        <div class="wrap-login100 p-t-30 p-b-50">
+				<span class="login100-form-title p-b-41">
+					Récupérez votre mot de passe
+				</span>
+            <form class="login100-form validate-form p-b-33 p-t-5" action="{{ path("fos_user_resetting_reset" , {'token': token}) }}"  >
+
+
+
+                <div class="wrap-input100 validate-input" data-validate = "Enter username">
+                    <input  id="fos_user_resetting_form_plainPassword_first" class="input100" type="password" name="fos_user_resetting_form[plainPassword][first]" placeholder="nouveau mot de passe"  required="required" autocomplete="username">
+                   <span class="focus-input100" data-placeholder="&#xe80f;"></span>
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate="Enter password">
+                    <input   id="fos_user_resetting_form_plainPassword_second" class="input100" type="password" name="fos_user_resetting_form[plainPassword][second]" placeholder="confirmation de mot de passe" required="required" autocomplete="current-password">
+                    <span class="focus-input100" data-placeholder="&#xe80f;"></span>
+                </div>
+
+                <div class="container-login100-form-btn m-t-32">
+                    <button class="login100-form-btn" value="{{ 'resetting.reset.submit'|trans }}">
+                        Changer Mot de Passe
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

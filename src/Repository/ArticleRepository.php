@@ -35,6 +35,19 @@ class ArticleRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function findBestArticles()
+    {
+        return $this->createQueryBuilder('a')
+            ->select('a as article ')
+            ->join('a.Commantaire', 'c')
+            ->groupBy('a')
+            ->orderBy('COUNT(c)', 'DESC')
+            ->setMaxResults(2)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
 
     /*
     public function findOneBySomeField($value): ?Article

@@ -9,6 +9,7 @@ use App\Entity\ValidationEtPublication;
 use App\Entity\Valpub;
 use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -24,10 +25,24 @@ class ArticleController extends AbstractController
     /**
      * @Route("/", name="article", methods={"GET"})
      */
-    public function index(ArticleRepository $articleRepository): Response
+    public function index(ArticleRepository $articleRepository,Request $request,PaginatorInterface $paginator)
     {
+        $em=$this->getDoctrine()->getManager();
+        $search = $request->query->get('aa');
+        if ($search) {
+            $articles = $articleRepository->search($search);
+        } else {
+            $articles = $articleRepository->findAll();
+        }
+        $article = $paginator->paginate(
+            $articles,
+            $request->query->getInt('page', 1),
+            5
+        );
+
+
         return $this->render('article/index.html.twig', [
-            'articles' => $articleRepository->findAll(),
+            'articles' => $article,
         ]);
     }
 

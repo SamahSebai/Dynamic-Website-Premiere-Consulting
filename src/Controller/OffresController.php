@@ -32,7 +32,7 @@ class OffresController extends AbstractController
         $em=$this->getDoctrine()->getManager();
         $search = $request->query->get('o');
         if ($search) {
-            $offres = $offresRepository->search($search);
+            $offres = $offresRepository->searchBack($search);
         } else {
             $offres = $offresRepository->findAll();
         }
@@ -40,14 +40,22 @@ class OffresController extends AbstractController
         $offre = $paginator->paginate(
             $offres,
             $request->query->getInt('page', 1),
-            3
+            6
         );
 
         return $this->render('offres/index.html.twig', [
             'offres' => $offre,
         ]);
     }
-  /**
+    public function search(OffresRepository  $offresRepository, Request $request)
+    { $search = $request->query->get('o');
+        if ($search) {
+            $offres = $offresRepository->searchBack($search);
+        } else {
+            $offres = $offresRepository->findAllOrdered();
+        }
+    }
+    /**
      * @Route("/liste", name="offresF_index", methods={"GET"})
      */
     public function liste(OffresRepository $offresRepository,Request $request,PaginatorInterface $paginator)
@@ -69,7 +77,7 @@ class OffresController extends AbstractController
         $offre = $paginator->paginate(
             $offres,
             $request->query->getInt('page', 1),
-            3
+            6
         );
 
         return $this->render('offres/show.html.twig', [
@@ -145,6 +153,7 @@ class OffresController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
+
             return $this->redirectToRoute('offres_index');
         }
 
@@ -170,32 +179,25 @@ class OffresController extends AbstractController
     }
 
 
-   public function search(OffresRepository  $offresRepository, Request $request)
-    { $search = $request->query->get('o');
-        if ($search) {
-            $offres = $offresRepository->search($search);
-        } else {
-            $offres = $offresRepository->findAllOrdered();
-        }
-    }
-     /*    $em = $this->getDoctrine()->getManager();
-        $requestString = $request->get('o');
-        $offres =  $em->getRepository('Offres:offre')->findEntitiesByString($requestString);
-        if(!$offres) {
-            $result['offre']['error'] = "article Not found :( ";
-        } else {
-            $result['offres'] = $this->getRealEntities($offres);
-        }
-        return new Response(json_encode($result));
-    }
-    public function getRealEntities($offres): array
-    {
-        foreach ($offres as $offres){
-            $realEntities[$offres->getId()] = [$offres->getPhoto(),$offres->getTitle()];
 
-        }
-        return $realEntities;
-    }*/
+    /*    $em = $this->getDoctrine()->getManager();
+       $requestString = $request->get('o');
+       $offres =  $em->getRepository('Offres:offre')->findEntitiesByString($requestString);
+       if(!$offres) {
+           $result['offre']['error'] = "article Not found :( ";
+       } else {
+           $result['offres'] = $this->getRealEntities($offres);
+       }
+       return new Response(json_encode($result));
+   }
+   public function getRealEntities($offres): array
+   {
+       foreach ($offres as $offres){
+           $realEntities[$offres->getId()] = [$offres->getPhoto(),$offres->getTitle()];
+
+       }
+       return $realEntities;
+   }*/
 
 
     /**

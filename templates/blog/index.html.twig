@@ -259,28 +259,20 @@
           <div class="col col-lg-12 ftco-animate p-1 h-25">
             <div class="sidebar-box ftco-animate">
               <h3> Articles Populaires</h3>
+                {% for article in articlepop %}
               <div class="block-21 mb-4 d-flex">
                 <a class="blog-img mr-4" style="background-image: url('{{ asset('themefront/assets/images/image_1.jpg')}}');"></a>
                 <div class="text">
-                  <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+                  <h3 class="heading"><a href="#">{{ article['article'].titre }}</a></h3>
                   <div class="meta">
-                    <div><a href="#"><span class="icon-calendar"></span> June 27, 2019</a></div>
-                    <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
-                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                    <div><a href="#"><span class="icon-calendar"></span> {{ article['article'].dateAjout ? article['article'].dateAjout|date('Y-m-d') : '' }}</a></div>
+                    <div><a href="#"><span class="icon-person"></span> {{ article['article'].auteur }}</a></div>
+                    <div></div>
+                    <div><a href="#"><span class="icon-chat"></span> </a></div>
                   </div>
                 </div>
               </div>
-              <div class="block-21 mb-4 d-flex">
-                <a class="blog-img mr-4" style="background-image: url('{{ asset('themefront/assets/images/image_2.jpg')}}');"></a>
-                <div class="text">
-                  <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                  <div class="meta">
-                    <div><a href="#"><span class="icon-calendar"></span> June 27, 2019</a></div>
-                    <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
-                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                  </div>
-                </div>
-              </div>
+          {% endfor %}
 
             </div>
           </div>
@@ -300,12 +292,12 @@
             </a>
             <div class="text bg-white p-2 h-25 d-inline-block">
               <h3 class="heading ">
-                <a href="blog-single.html">{{ article.titre }}</a></h3>
+                <a href="{{ path('show', {'id': article.id}) }}">{{ article.titre }}</a></h3>
               <div class="d-flex align-items-center mt-4 ">
                 <p class="mb-0"><a href="{{ path('show', {'id': article.id}) }}" class="btn btn-primary">Read More <span class="ion-ios-arrow-round-forward"></span></a></p>
                 <p class="ml-auto mb-0">
                   <a href="#" class="mr-2">Admin</a>
-                  <a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a>
+                  <a href="#" class="meta-chat"><span class="icon-chat"></span> </a>
                 </p>
               </div>
             </div>

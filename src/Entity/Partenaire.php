@@ -204,13 +204,13 @@ class Partenaire
 
     public function getImage(): ?string
     {
-        return $this->Image;
+    return $this->Image;
     }
     public function setImage(string $Image): self
     {
-        $this->Image = $Image;
+    $this->Image = $Image;
 
-        return $this;
+    return $this;
     }*/
 
     /**

@@ -6,6 +6,7 @@ use App\Form\ResetPassType;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use FOS\UserBundle\Model\UserInterface;
+use Knp\Component\Pager\PaginatorInterface;
 
 use FOS\UserBundle\Util\TokenGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -26,7 +27,7 @@ class DefaultController extends AbstractController
         if(!is_object($user)||!$user instanceof UserInterface){
             return $this->redirectToRoute('fos_user_security_login');
         }
-        
+
         return $this->render('FOSUserBundle:Profile:show.html.twig',['user'=>$user]);
     }
     /**
@@ -45,10 +46,23 @@ class DefaultController extends AbstractController
     /**
      * @Route("/user", name="user", methods={"GET"})
      */
-    public function index(UserRepository $userRepository): Response
+    public function index(UserRepository $userRepository,Request $request,PaginatorInterface $paginator): Response
     {
+        $em=$this->getDoctrine()->getManager();
+        $search = $request->query->get('u');
+        if ($search) {
+            $user = $userRepository->search($search);
+        } else {
+            $user = $userRepository->findAll();
+        }
+        $user = $paginator->paginate(
+            $user,
+            $request->query->getInt('page', 1),
+            1000
+        );
+
         return $this->render('utilisateur/index.html.twig', [
-            'users' => $userRepository->findAll(),
+            'users'=>$user
         ]);
     }
     /**

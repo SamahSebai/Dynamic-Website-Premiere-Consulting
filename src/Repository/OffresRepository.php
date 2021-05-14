@@ -58,39 +58,48 @@ class OffresRepository extends ServiceEntityRepository
             ->setParameter('str', '%'.$str.'%')
             ->getResult();
     }*/
+    public function searchBack($term)
+    {
+        $query=$this->createQueryBuilder('offre')->select('offre');
 
-
-
+        $query ->Where('offre.type LIKE :searchTerm or offre.date LIKE :searchTerm or offre.id LIKE :searchTerm  
+            or offre.qualification LIKE :searchTerm or offre.description 
+             LIKE :searchTerm or offre.experience   LIKE :searchTerm')
+            ->setParameter('searchTerm','%' .$term.'%');
+        $query ->getQuery()
+            ->getResult();
+        return $query;
+    }
     public function search($term,$tes)
     {
-       $query=$this->createQueryBuilder('offre')->select('offre');
-    if($term!=""){
+        $query=$this->createQueryBuilder('offre')->select('offre');
+        if($term!=""){
 
 
-        $query ->Where('offre.type LIKE :searchTerm  or offre.qualification LIKE :searchTerm or offre.description  LIKE :searchTerm or offre.experience   LIKE :searchTerm')
-        ->setParameter('searchTerm','%' .$term.'%');
-        if ($tes==1){
+            $query ->Where('offre.type LIKE :searchTerm  or offre.qualification LIKE :searchTerm or offre.description  LIKE :searchTerm or offre.experience   LIKE :searchTerm')
+                ->setParameter('searchTerm','%' .$term.'%');
+            if ($tes==1){
                 $query ->andWhere('offre.type LIKE :emp ')
                     ->setParameter('emp','%emploi%');
             }
-        if ($tes==2){
-            $query ->andWhere('offre.type LIKE :emp ')
-                ->setParameter('emp','%stage%');
-        }
-    }else{
-        if ($tes==1){
-            $query ->Where('offre.type LIKE :emp ')
-                ->setParameter('emp','%emploi%');
-        }
-        if ($tes==2){
-            $query ->Where('offre.type LIKE :emp ')
-                ->setParameter('emp','%stage%');
-        }
+            if ($tes==2){
+                $query ->andWhere('offre.type LIKE :emp ')
+                    ->setParameter('emp','%stage%');
+            }
+        }else{
+            if ($tes==1){
+                $query ->Where('offre.type LIKE :emp ')
+                    ->setParameter('emp','%emploi%');
+            }
+            if ($tes==2){
+                $query ->Where('offre.type LIKE :emp ')
+                    ->setParameter('emp','%stage%');
+            }
 
-    }
+        }
         $query ->getQuery()
             ->getResult();
-            return $query;
+        return $query;
     }
 
 

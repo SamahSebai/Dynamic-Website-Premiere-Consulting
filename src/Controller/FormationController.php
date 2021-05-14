@@ -16,6 +16,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Knp\Component\Pager\PaginatorInterface;
+
 
 /**
  * @Route("/formation")
@@ -24,12 +26,37 @@ class FormationController extends AbstractController
 {
     /**
      * @Route("/", name="formation_index", methods={"GET"})
+     * @param FormationRepository $formationRepository
+     * @param Request $request
+     * @param PaginatorInterface $paginator
+     * @return Response
      */
-    public function index(FormationRepository $formationRepository): Response
+    public function index(FormationRepository $formationRepository, Request $request,PaginatorInterface $paginator)
     {
+        $em=$this->getDoctrine()->getManager();
+        $search = $request->query->get('f');
+        if ($search) {
+            $formations = $formationRepository->search($search);
+        } else {
+            $formations = $formationRepository->findAll();
+        }
+        $formation = $paginator->paginate(
+            $formations,
+            $request->query->getInt('page', 1),
+            5
+        );
         return $this->render('formation/index.html.twig', [
-            'formations' => $formationRepository->findAll(),
+            'formations' => $formation,
         ]);
+    }
+    public function search(FormationRepository $formationRepository, Request $request)
+    {
+        $search = $request->query->get('f');
+        if ($search) {
+            $formations = $formationRepository->search($search);
+        } else {
+            $formations = $formationRepository->findAllOrdered();
+        }
     }
 
     /**

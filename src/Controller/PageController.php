@@ -10,6 +10,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
+
 
 /**
  * @Route("/page")
@@ -19,10 +21,23 @@ class PageController extends AbstractController
     /**
      * @Route("/", name="page", methods={"GET"})
      */
-    public function index(PageRepository $pageRepository): Response
+    public function index(PageRepository $pageRepository,Request $request,PaginatorInterface $paginator)
     {
+        $em=$this->getDoctrine()->getManager();
+        $search = $request->query->get('pa');
+        if ($search) {
+            $pages = $pageRepository->search($search);
+        } else {
+            $pages = $pageRepository->findAll();
+        }
+        $page = $paginator->paginate(
+            $pages,
+            $request->query->getInt('page', 1),
+            3
+        );
+
         return $this->render('page/index.html.twig', [
-            'pages' => $pageRepository->findAll(),
+            'pages' => $page,
         ]);
     }
 
@@ -163,6 +178,19 @@ class PageController extends AbstractController
         return $this->render('page/edit.html.twig', [
             'page' => $page,
             'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/show/{slug}-{id}",name="menu.show",requirements={"slug":"[a-z0-9\-]*"})
+     */
+    public function showfront($id,PageRepository $repo):Response
+    {
+        $pagesrep=$repo->findAll();
+        $pages=$this->$repo->find($id);
+        return $this->render('basefront.html.twig', [
+            'page'=>$pages, 'pagerep'=>$pagesrep
+
         ]);
     }
 }

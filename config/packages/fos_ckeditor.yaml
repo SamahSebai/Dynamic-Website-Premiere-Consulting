@@ -8,12 +8,10 @@ fos_ck_editor:
         main_config:
             allowedContent: true #dont remove our custom css
             language: "fr"
-            toolbar:
-                - { name: "styles", items: ['Bold', 'Italic', 'Underline', 'Strike', 'Blockquote', '-', 'Link', '-', 'RemoveFormat', '-', 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'Image', 'Table', '-', 'Styles', 'Format','Font','FontSize', '-', 'TextColor', 'BGColor', 'Source'] }
+            toolbar: "full"
+            extraPlugins : 'codesnippet'
             filebrowserBrowseRoute: elfinder
             filebrowserBrowseRouteParameters: []
-#    styles:
-#        my_styles:
-#            - { name: "Blue Title", element: "h2", styles: { color: "Blue" }}
-#            - { name: "CSS Style", element: "span", attributes: { class: "my_style" }}
-#            - { name: "Widget Style", type: widget, widget: "my_widget", attributes: { class: "my_widget_style" }}
+            config.allowedContent : true;
+            full.insert:  "CodeSnippet"
+

@@ -28,6 +28,19 @@ class CalendarRepository extends ServiceEntityRepository
                   ->getQuery()
                   ->getResul();
     }
+    public function search($term)
+    {
+        $query=$this->createQueryBuilder('calendars')->select('calendars');
+        $query ->Where('calendars.title LIKE :searchTerm or calendars.start LIKE :searchTerm
+         or calendars.end LIKE :searchTerm  
+         or calendars.all_day LIKE :searchTerm or calendars.description LIKE :searchTerm  
+         or calendars.theme LIKE :searchTerm or calendars.type LIKE :searchTerm
+      ')
+            ->setParameter('searchTerm','%' .$term.'%');
+        $query ->getQuery()
+            ->getResult();
+        return $query;
+    }
 
     // /**
     //  * @return Calendar[] Returns an array of Calendar objects

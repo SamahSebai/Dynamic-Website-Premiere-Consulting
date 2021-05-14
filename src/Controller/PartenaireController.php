@@ -15,6 +15,8 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
+
 
 /**
  * @Route("/partenaire")
@@ -24,12 +26,26 @@ class PartenaireController extends AbstractController
     /**
      * @Route("/", name="partenaire_index", methods={"GET"})
      */
-    public function index(PartenaireRepository $partenaireRepository): Response
+    public function index(PartenaireRepository $partenaireRepository, Request $request,PaginatorInterface $paginator)
     {
+        $em=$this->getDoctrine()->getManager();
+        $search = $request->query->get('p');
+        if ($search) {
+            $partenaires = $partenaireRepository->search($search);
+        } else {
+            $partenaires = $partenaireRepository->findAll();
+        }
+        $partenaire = $paginator->paginate(
+            $partenaires,
+            $request->query->getInt('page', 1),
+            2
+        );
+
         return $this->render('partenaire/index.html.twig', [
-            'partenaires' => $partenaireRepository->findAll(),
+            'partenaires' => $partenaire,
         ]);
     }
+
 
     /**
      * @Route("/new", name="partenaire_new", methods={"GET","POST"})
@@ -92,10 +108,10 @@ class PartenaireController extends AbstractController
     public function showList(): Response
     {
         $em=$this->getDoctrine()->getManager();
-        $partenaire = $em->getRepository(Partenaire::class)->findAll();
-       
+        $partenaires = $em->getRepository(Partenaire::class)->findAll();
+
         return $this->render('partenaire/show1.html.twig', [
-            'partenaire' => $partenaire,
+            'partenaires' => $partenaires,
         ]);
     }
 

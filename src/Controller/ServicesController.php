@@ -9,6 +9,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
+
 
 /**
  * @Route("/services")
@@ -17,12 +19,37 @@ class ServicesController extends AbstractController
 {
     /**
      * @Route("/", name="services", methods={"GET"})
+     * @param ServicesRepository $servicesRepository
+     * @param Request $request
+     * @param $paginator
+     * @return Response
      */
-    public function index(ServicesRepository $servicesRepository): Response
+    public function index(ServicesRepository $servicesRepository, Request $request,PaginatorInterface $paginator)
     {
+        $em=$this->getDoctrine()->getManager();
+        $search = $request->query->get('s');
+        if ($search) {
+            $services = $servicesRepository->search($search);
+        } else {
+            $services = $servicesRepository->findAll();
+        }
+        $service = $paginator->paginate(
+            $services,
+            $request->query->getInt('page', 1),
+            5
+        );
         return $this->render('services/index.html.twig', [
-            'services' => $servicesRepository->findAll(),
+            'services' => $service,
         ]);
+    }
+    public function search(ServicesRepository $servicesRepository, Request $request)
+    {
+        $search = $request->query->get('s');
+        if ($search) {
+            $services = $servicesRepository->search($search);
+        } else {
+            $services = $servicesRepository->findAllOrdered();
+        }
     }
 
     /**
