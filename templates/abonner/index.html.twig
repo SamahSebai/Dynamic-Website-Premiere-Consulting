@@ -1,8 +1,40 @@
-{% extends 'basefront.html.twig' %}
+{%extends "base.html.twig"%}
 
-{% block title %}abonner a une newslettre{% endblock %}
+{% block head%}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% block title %}{% endblock %}
 
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="{{asset('asset/css/material-design-iconic-font.min.css')}}">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="{{asset('asset/css/app.css')}}">
+{%endblock%}
 {% block body %}
+    <div id="footer" style="margin-bottom: 100px">
+        <div class="footer-newsletter">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                        <h4>Inscrivez-vous</h4>
+                        <p>Inscrivez-vous pour recevoir les notifications des nouveautés des domaines l'environnement, l'hygiène et la santé sécurité au travail</p>
+                        <form action="" method="post">
+                            {{ form_start(abonnerForm) }}
+                            {{ form_widget(abonnerForm.nom, {'attr': {'class': 'form-input'}}) }}
+                            {{ form_widget(abonnerForm.email, {'attr': {'class': 'form-input' }}) }}
+                            <div class="text-center"><button type="submit" name="submit" id="submit" class="form-submit">Abonner</button></div>
+                            {{ form_end(abonnerForm) }}
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+{% endblock %}
+{% block javascripts %}
 
+    <script src="{{asset('asset/js/jquery.min.js')}}"></script>
+    <script src="{{asset('asset/js/main.js')}}"></script>
 {% endblock %}

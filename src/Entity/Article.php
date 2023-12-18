@@ -47,10 +47,11 @@ class Article
 
     /**
      * @ORM\OneToMany(targetEntity="Commantaire", mappedBy="Article" , orphanRemoval=true)
+     * @ORM\JoinColumn(name="Commantaire",referencedColumnName="id")
      */
     private $Commantaire;
 
-   
+
     /**
      * @ORM\OneToMany(targetEntity="ArticleCategorie", mappedBy="Article")
      */
@@ -66,14 +67,42 @@ class Article
      */
     private $valpub;
 
+    /**
+     *  * @var SEO
+     * @ORM\OneToOne(targetEntity="SEO", mappedBy="article")
+     */
+    private $seo;
 
-
+    /**
+     * @var User
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="user",referencedColumnName="id")
+     */
+    private $User;
 
     public function __construct()
     {
         $this->ArticleCategorie = new ArrayCollection();
         $this->Commantaire = new ArrayCollection();
         $this->valpub = new ArrayCollection();
+    }
+
+    /**
+     * @return SEO
+     */
+    public function getSeo(): ?SEO
+    {
+        return $this->seo;
+    }
+
+    /**
+     * @param SEO $seo
+     * @return Article
+     */
+    public function setSeo(SEO $seo): self
+    {
+        $this->seo = $seo;
+        return $this;
     }
     
 
@@ -164,6 +193,7 @@ class Article
     }
 
 
+
     /**
      * @param mixed $Commantaire
      * @return Article
@@ -185,8 +215,6 @@ class Article
     }
 
 
-
-   
 
     public function getImage(): ?string
     {
@@ -215,6 +243,24 @@ class Article
     public function setValpub($valpub)
     {
         $this->valpub = $valpub;
+        return $this;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser(): User
+    {
+        return $this->User;
+    }
+
+    /**
+     * @param User $User
+     * @return Article
+     */
+    public function setUser(User $User): Article
+    {
+        $this->User = $User;
         return $this;
     }
 

@@ -47,4 +47,13 @@ class ContactRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function search($term)
+    {
+        $query=$this->createQueryBuilder('contact')->select('contact');
+        $query ->Where('contact.nom LIKE :searchTerm  or contact.entreprise  LIKE :searchTerm or contact.email  LIKE :searchTerm or contact.objet  LIKE :searchTerm or contact.objet  LIKE :searchTerm or contact.telephone  LIKE :searchTerm or contact.id  LIKE :searchTerm')
+            ->setParameter('searchTerm','%' .$term.'%');
+        $query ->getQuery()
+            ->getResult();
+        return $query;
+    }
 }

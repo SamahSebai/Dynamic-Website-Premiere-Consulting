@@ -1,24 +1,24 @@
 <?php return array (
   'root' => 
   array (
-    'pretty_version' => 'dev-main',
-    'version' => 'dev-main',
+    'pretty_version' => 'dev-master',
+    'version' => 'dev-master',
     'aliases' => 
     array (
     ),
-    'reference' => 'f0597b277e97603f22d4c75bd0f06251de718e78',
+    'reference' => '97602dd2d5650b637dedf55b80791a5197bdf0fa',
     'name' => '__root__',
   ),
   'versions' => 
   array (
     '__root__' => 
     array (
-      'pretty_version' => 'dev-main',
-      'version' => 'dev-main',
+      'pretty_version' => 'dev-master',
+      'version' => 'dev-master',
       'aliases' => 
       array (
       ),
-      'reference' => 'f0597b277e97603f22d4c75bd0f06251de718e78',
+      'reference' => '97602dd2d5650b637dedf55b80791a5197bdf0fa',
     ),
     'behat/transliterator' => 
     array (
@@ -396,6 +396,15 @@
       array (
       ),
       'reference' => '6a467b8989322d92aa1c8bf2bebcc6e5c2ba55c0',
+    ),
+    'phpmailer/phpmailer' => 
+    array (
+      'pretty_version' => 'v6.4.1',
+      'version' => '6.4.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '9256f12d8fb0cd0500f93b19e18c356906cbed3d',
     ),
     'psr/cache' => 
     array (

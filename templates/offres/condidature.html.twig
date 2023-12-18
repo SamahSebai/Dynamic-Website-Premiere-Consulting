@@ -27,47 +27,36 @@
     <div class="col-md-6 offset-md-3 mt-5" style="border: 2px solid #d91a5b;border-radius: 30px " >
 
         <form accept-charset="UTF-8" action="#" method="POST" enctype="multipart/form-data" target="_blank">
+            {{ form_start(form) }}
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="exampleInputName">Nom </label>
-                    <input type="text" name="fullname" class="form-control" id="exampleInputName" placeholder="Entrer yvotre nom" required="required">
+                    {{ form_widget(form.nom, {'attr': {'class': "form-control",'name':"condidature[nom]" ,'id':"condidature_nom" ,'placeholder':"Votre nom",'required':"required"}}) }}
+
+{#                    <input type="text" name="fullname" class="form-control" id="exampleInputName" placeholder="Entrer yvotre nom" required="required">#}
                 </div>
                 <div class="form-group col-md-6">
                     <label for="exampleInputName">Prenom </label>
-                    <input type="text" name="fullname" class="form-control" id="exampleInputName1" placeholder="Entrer votre prenom" required="required">
+                    {{ form_widget(form.prenom, {'attr': {'class': "form-control",'name':"condidature[prenom]" ,'id':"condidature_prenom" ,'placeholder':"Votre prenom",'required':"required"}}) }}
+
+{#                    <input type="text" name="fullname" class="form-control" id="exampleInputName1" placeholder="Entrer votre prenom" required="required">#}
                 </div></div>
             <div class="form-group">
                 <label for="exampleInputEmail1" required="required">Email </label>
-                <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Entrer un address">
-            </div>
-            <div class="form-group ">
-                <label for="inputAddress">Address</label>
-                <input type="text" name="address" class="form-control" id="inputAddress" placeholder="1234 Main St">
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-8">
-                    <label for="inputCity">Ville</label>
-                    <input type="text" name="ville" class="form-control" id="inputCity" placeholder="Istanbul">
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="inputZip">Zip</label>
-                    <input type="text" name="zip" class="form-control" id="inputZip" placeholder="34000">
-                </div>
+                {{ form_widget(form.email, {'attr': {'class': "form-control",'name':"condidature[email]" ,'id':"condidature_email" ,'placeholder':"Votre email",'required':"required"}}) }}
+
+{#                <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Entrer un address">#}
             </div>
             <div class="form-group">
-                <label for="example-tel-input" class="col-2 col-form-label">Télephone</label>
-                <div class="col-md-12">
-                    <input class="form-control" name="tel" type="tel" value="1-(555)-555-5555" id="example-tel-input">
-                </div>
+                <label for="exampleInputEmail1" required="required">Lettre de motivation</label>
+                {{ form_widget(form.lm, {'attr': {'class': "form-control",'name':"condidature[lm]" ,'id':"condidature_lm" ,'placeholder':"lettre de motivation",'required':"required"}}) }}
+
             </div>
-            <div class="form-group">
-                <label for="example-date-input" class="col-3 col-form-label">date disponibilité</label>
-                <div class="col-md-12">
-                    <input class="form-control" name="date " type="date" value="" id="example-date-input">
-                </div>
-            </div>
+
+
             <div class="form-group mt-5">
-                <label class="mr-4"> importer votre CV et LM:</label>
+                <label class="mr-4"> importer votre CV </label>
+                {{ form_widget(form.cv, {'attr': {'type': "file",'name':"condidature[lm]" ,'id':"condidature_lm" ,'required':"required"}}) }}
 
                 <input type="file" name="file">
             </div>
@@ -76,7 +65,7 @@
                 <button type="submit" class="btn btn-primary btn-lg btn-block">Envoyer</button>
 
             </div>
-
+            {{ form_end(form) }}
         </form>
     </div>
 

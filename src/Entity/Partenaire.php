@@ -65,21 +65,22 @@ class Partenaire
     private $secteur_activite;
     /**
      * @ORM\Column(type="string", length=255)
-
+     */
     private $Image;
 
-     */
     /**
-     * @ORM\OneToMany(targetEntity="Media", mappedBy="Partenaire")
+     * @var User
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="user",referencedColumnName="id")
      */
+    private $User;
 
-    private $medias;
 
 
     public function __construct()
     {
 
-        $this->medias = new ArrayCollection();
+
 
     }
 
@@ -201,7 +202,7 @@ class Partenaire
 
     /**
      * @return mixed
-
+     */
     public function getImage(): ?string
     {
     return $this->Image;
@@ -211,27 +212,27 @@ class Partenaire
     $this->Image = $Image;
 
     return $this;
-    }*/
-
-    /**
-     * @return mixed
-     */
-    public function getMedias()
-    {
-        return $this->medias;
     }
 
     /**
-     * @param mixed $medias
+     * @return User
+     */
+    public function getUser(): User
+    {
+        return $this->User;
+    }
+
+    /**
+     * @param User $User
      * @return Partenaire
      */
-    public function setMedias(ArrayCollection $medias):Partenaire
+    public function setUser(User $User): Partenaire
     {
-        $this->medias = $medias;
+        $this->User = $User;
         return $this;
     }
-    public function __toString(): string
-    {
-        return 'bla bla';
-    }
+
+
+
+
 }

@@ -18,6 +18,7 @@ use FOS\UserBundle\Form\Factory\FactoryInterface;
 use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -98,11 +99,12 @@ class ProfileController extends Controller
             $this->eventDispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
 
             return $response;
-        }
+         }
 
         return $this->render('@FOSUser/Profile/edit.html.twig', array(
             'form' => $form->createView(),'user' => $user,
         ));
-    }
 
+
+}
 }

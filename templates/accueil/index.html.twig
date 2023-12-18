@@ -4,25 +4,28 @@
 
 {% block body %}
 
-    <section class="home-slider owl-carousel">
-        <div class="slider-item" style="background-image:url('{{ asset('themefront/assets/images/04/img-slider-01.jpg')}}');">
+    <section class="home-slider owl-carousel" style="margin-top: -60px">
+        <div class="slider-item"
+             style="background-image:url('{{ asset('themefront/assets/images/04/img-slider-01.jpg') }}');">
             <div class="overlay"></div>
             <div class="container">
                 <div class="row no-gutters slider-text align-items-center justify-content-start"
                      data-scrollax-parent="true">
                     <div class="col-md-7 ftco-animate">
 
-                        <h1 class="mb-4 animate__animated  animate__lightSpeedInRight animate__delay-2s">RegWatch 360</h1>
+                        <h1 class="mb-4 animate__animated  animate__lightSpeedInRight animate__delay-2s">RegWatch
+                            360</h1>
                         <span class="subheading">Application web pour la planification et la gestion de la mise en
                             conformité législative & réglementaire</span>
-                        <p><a href="#"
+                        <p><a href="{{ path('page_show2' , {'slug' : 'regwtch-360'}) }}"
                               class="btn btn-primary px-4 py-3 mt-3 animate__animated  animate__lightSpeedInRight animate__delay-1s">Nos
                                 Services</a></p>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="slider-item" style="background-image:url('{{ asset('themefront/assets/images/04/img-slider-02.jpg')}}');">
+        <div class="slider-item"
+             style="background-image:url('{{ asset('themefront/assets/images/04/img-slider-02.jpg') }}');">
 
             <div class="container">
                 <div class="row no-gutters slider-text align-items-center justify-content-center totheright"
@@ -39,7 +42,8 @@
 
         </div>
 
-        <div class="slider-item" style="background-image:url('{{ asset('themefront/assets/images/04/img-slider-03.jpg')}}');">
+        <div class="slider-item"
+             style="background-image:url('{{ asset('themefront/assets/images/04/img-slider-03.jpg') }}');">
 
             <div class="overlay"></div>
             <div class="container">
@@ -49,7 +53,8 @@
                         <h1 class="mb-4 ftco-animate">SÉCURITÉ INDUSTRIELLE ET ENVIRONNEMENT</h1>
                         <span class="subheading ftco-animate">Environnement, Sécurité, Établissements
                             dangereux,...</span>
-                        <p><a href="#" class="btn btn-primary px-4 py-3 mt-3" ftco-animate>Nos Services</a></p>
+                        <p><a href="{{ path('page_show2' , {'slug' : 'securite-industrielle-et-environnement'}) }}"
+                              class="btn btn-primary px-4 py-3 mt-3" ftco-animate>Nos Services</a></p>
                     </div>
                 </div>
             </div>
@@ -63,7 +68,9 @@
                 <div class="row no-gutters">
                     <div class="card-deck">
                         <div class="card">
-                            <img class="card-img-top" src="{{ asset('themefront/assets/images/04/img-people-03-1.jpg') }}" alt="Card image cap">
+                            <img class="card-img-top"
+                                 src="{{ asset('themefront/assets/images/04/img-people-03-1.jpg') }}"
+                                 alt="Card image cap">
 
                             <div class="card-body">
                                 <h3 class="card-title">Amélioration continue</h3>
@@ -71,21 +78,24 @@
                             </div>
                         </div>
                         <div class="card">
-                            <img class="card-img-top" src="{{ asset('themefront/assets/images/04/bgn-boxes-01.jpg') }}" alt="Card image cap">
+                            <img class="card-img-top" src="{{ asset('themefront/assets/images/04/bgn-boxes-01.jpg') }}"
+                                 alt="Card image cap">
                             <div class="card-body">
                                 <h3 class="card-title">Savoir-faire et innovationt</h3>
                                 <p class="card-text"><a href="#" class="btn btn-primary">Voir Plus</a></p>
                             </div>
                         </div>
                         <div class="card">
-                            <img class="card-img-top" src="{{ asset('themefront/assets/images/04/bgn-boxes-03.jpg') }}" alt="Card image cap">
+                            <img class="card-img-top" src="{{ asset('themefront/assets/images/04/bgn-boxes-03.jpg') }}"
+                                 alt="Card image cap">
                             <div class="card-body">
                                 <h3 class="card-title">Une approche orientée résultat</h3>
                                 <p class="card-text"><a href="#" class="btn btn-primary">Voir Plus</a></p>
                             </div>
                         </div>
                         <div class="card">
-                            <img class="card-img-top" src="{{ asset('themefront/assets/images/04/bgn-boxes-02.jpg') }}" alt="Card image cap">
+                            <img class="card-img-top" src="{{ asset('themefront/assets/images/04/bgn-boxes-02.jpg') }}"
+                                 alt="Card image cap">
                             <div class="card-body">
                                 <h3 class="card-title">Des experts en sécutité</h3>
                                 <p class="card-text"><a href="#" class="btn btn-primary">Voir Plus</a></p>
@@ -99,7 +109,8 @@
 
     <!--introduction-->
 
-    <section class="ftco-section" style="background-image: url('{{ asset('themefront/assets/images/04/bgn-industries.png')}}')">
+    <section class="ftco-section"
+             style="background-image: url('{{ asset('themefront/assets/images/04/bgn-industries.png') }}')">
         <div class="container px-4">
             <div class="row gx-5">
                 <div class="col">
@@ -114,12 +125,13 @@
                         <p>Première consulting regroupe des collaborateurs hommes et femmes ingénieurs, architectes
                             et technicien formés et impliqués désireux d’entreprendre et de créer des solutions pour
                             les clients quels que soient les projets qui leur sont confiés.</p>
-                        <p><a href="#" class="btn btn-primary py-3 px-4">Contact us</a></p>
+                        <p><a href="{{ path('contact') }}" class="btn btn-primary py-3 px-4">Contactez nous</a></p>
                     </div>
                 </div>
                 <div class="col">
-                    <div class="p-3  bg-light ftco-animate"><img src="{{ asset('themefront/assets/images/04/img-callback.png') }}"
-                                                                 style="width: 650px;height: 700px;@media (min-width: 576px) { max-width: 540px;
+                    <div class="p-3  bg-light ftco-animate"><img
+                                src="{{ asset('themefront/assets/images/04/img-callback.png') }}"
+                                style="width: 650px;height: 700px;@media (min-width: 576px) { max-width: 540px;
                             width: 50px;
                             height: 60px;
                             };@media  {
@@ -133,7 +145,8 @@
     </section>
 
 
-    <section class="ftco-intro ftco-no-pb img" style="background-image: url('{{ asset('themefront/assets/images/04/img-slider-03.jpg')}}'); ">
+    <section class="ftco-intro ftco-no-pb img"
+             style="background-image: url('{{ asset('themefront/assets/images/04/img-slider-03.jpg') }}'); ">
         <div class="container">
             <div class="row justify-content-center mb-5 ">
                 <div class="col-md-10 text-center heading-section heading-section-white ftco-animate">
@@ -154,7 +167,7 @@
                             <div class="block-18">
                                 <div class="icon"><span class="flaticon-doctor"></span></div>
                                 <div class="text">
-                                    <strong class="number" data-number="705">0</strong>
+                                    <strong class="number" data-number="20">0</strong>
                                     <span>Employés</span>
                                 </div>
                             </div>
@@ -163,7 +176,7 @@
                             <div class="block-18">
                                 <div class="icon"><span class="flaticon-doctor"></span></div>
                                 <div class="text">
-                                    <strong class="number" data-number="809">0</strong>
+                                    <strong class="number" data-number="2950">0</strong>
                                     <span>Projets</span>
                                 </div>
                             </div>
@@ -172,7 +185,7 @@
                             <div class="block-18">
                                 <div class="icon"><span class="flaticon-doctor"></span></div>
                                 <div class="text">
-                                    <strong class="number" data-number="335">0</strong>
+                                    <strong class="number" data-number="300">0</strong>
                                     <span>Clients</span>
                                 </div>
                             </div>
@@ -181,7 +194,7 @@
                             <div class="block-18">
                                 <div class="icon"><span class="flaticon-doctor"></span></div>
                                 <div class="text">
-                                    <strong class="number" data-number="35">0</strong>
+                                    <strong class="number" data-number="8000">0</strong>
                                     <span>Heures de Formations</span>
                                 </div>
                             </div>
@@ -197,7 +210,8 @@
     <!--services area-->
 
 
-    <section class="ftco-section" style="background-image: url('{{ asset('themefront/assets/images/04/bgn-industries.png')}}')">
+    <section class="ftco-section"
+             style="background-image: url('{{ asset('themefront/assets/images/04/bgn-industries.png') }}')">
         <div class="container">
             <div class="row justify-content-center mb-5 pb-2">
                 <div class="col-md-8 text-center heading-section ftco-animate">
@@ -216,8 +230,8 @@
                             <span class="flaticon-handshake"></span>
                         </div>
                         <div class="text media-body">
-                            <a href="AssistanceCoaching.html">
-                                <h3>Assistance et coaching</h3>
+                            <a href="{{ path('page_show2' , {'slug' : 'assistance-et-coaching'}) }}">
+                                <h3 style="color:#d91a5b">Assistance et coaching</h3>
                             </a>
                         </div>
                     </div>
@@ -227,8 +241,8 @@
                         <div class="icon mt-2 d-flex justify-content-center align-items-center"><span
                                     class="flaticon-coach"></span></div>
                         <div class="text media-body">
-                            <a href="Formation.html">
-                                <h3>Formation</h3>
+                            <a href=href="{{ path('formation_list') }}">
+                                <h3 style="color:#d91a5b">Formation</h3>
                             </a>
                             <p></p>
                         </div>
@@ -239,8 +253,8 @@
                         <div class="icon mt-2 d-flex justify-content-center align-items-center"><span
                                     class="flaticon-cogwheel"></span></div>
                         <div class="text media-body">
-                            <a href="SecuritéIndustrielle.html">
-                                <h3>Sécurité industrielle et environnement</h3>
+                            <a href="{{ path('page_show2' , {'slug' : 'securite-industrielle-et-environnement'}) }}">
+                                <h3 style="color:#d91a5b">Sécurité industrielle et environnement</h3>
                             </a>
                             <p></p>
                         </div>
@@ -251,8 +265,8 @@
                         <div class="icon mt-2 d-flex justify-content-center align-items-center"><span
                                     class="flaticon-website"></span></div>
                         <div class="text media-body">
-                            <a href="applicationQHSE.html">
-                                <h3>Application QHSE</h3>
+                            <a href="{{ path('page_show2' , {'slug' : 'logicielle-et-application-qhse'}) }}">
+                                <h3 style="color:#d91a5b">Application QHSE</h3>
                             </a>
                             <p></p>
                         </div>
@@ -268,7 +282,8 @@
 
     <!--blog-->
 
-    <section class="ftco-section bg-light" style="background-image: url('{{ asset('themefront/assets/images/04/bgn-industries.png')}}');">
+    <section class="ftco-section bg-light"
+             style="background-image: url('{{ asset('themefront/assets/images/04/bgn-industries.png') }}');">
         <div class="container">
             <div class="row justify-content-center mb-5 pb-2">
                 <div class="col-md-8 text-center heading-section ftco-animate">
@@ -277,86 +292,34 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-6 col-lg-4 ftco-animate">
-                    <div class="blog-entry">
-                        <a href="blog-single.html" class="block-20 d-flex align-items-end"
-                           style="background-image: url('{{ asset('themefront/assets/images/image_1.jpg')}}')">
-                            <div class="meta-date text-center p-2">
-                                <span class="day">26</span>
-                                <span class="mos">June</span>
-                                <span class="yr">2019</span>
-                            </div>
-                        </a>
-                        <div class="text bg-white p-4">
-                            <h3 class="heading"><a href="#">Finance And Legal Working Streams Occur Throughout</a></h3>
-                            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
-                                there live the blind texts.</p>
-                            <div class="d-flex align-items-center mt-4">
-                                <p class="mb-0"><a href="#" class="btn btn-primary">Read More <span
-                                                class="ion-ios-arrow-round-forward"></span></a></p>
-                                <p class="ml-auto mb-0">
-                                    <a href="#" class="mr-2">Admin</a>
-                                    <a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a>
-                                </p>
+                {% for article in articlelast %}
+                    <div class="col-md-6 col-lg-4 ftco-animate">
+                        <div class="blog-entry h-75">
+                            <a href="blog-single.html" class="block-20 d-flex align-items-end"
+                               style="background-image: url('{{ asset('upload/'~article['article'].image) }}');">
+                                <div class="meta-date text-center p-2">
+                                    <span class="day"> {{ article['article'].dateAjout ? article['article'].dateAjout|date('d') : '' }}</span>
+                                    <span class="mos"> {{ article['article'].dateAjout ? article['article'].dateAjout|date('m') : '' }}</span>
+                                    <span class="yr"> {{ article['article'].dateAjout ? article['article'].dateAjout|date('Y') : '' }}</span>
+                                </div>
+                            </a>
+                            <div class="text bg-white p-4">
+                                <h3>{{ article['article'].titre }}</h3>
+                                <div class="d-flex align-items-center mt-4">
+                                    <p class="mb-0"><a href="{{ path('show', {'id': article['article'].id}) }}"
+                                                       class="btn btn-primary">Lire plus <span
+                                                    class="ion-ios-arrow-round-forward"></span></a></p>
+
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4 ftco-animate">
-                    <div class="blog-entry">
-                        <a href="blog-single.html" class="block-20 d-flex align-items-end"
-                           style="background-image: url('{{ asset('themefront/assets/images/image_2.jpg')}}');">
-                            <div class="meta-date text-center p-2">
-                                <span class="day">26</span>
-                                <span class="mos">June</span>
-                                <span class="yr">2019</span>
-                            </div>
-                        </a>
-                        <div class="text bg-white p-4">
-                            <h3 class="heading"><a href="#">Finance And Legal Working Streams Occur Throughout</a></h3>
-                            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
-                                there live the blind texts.</p>
-                            <div class="d-flex align-items-center mt-4">
-                                <p class="mb-0"><a href="#" class="btn btn-primary">Read More <span
-                                                class="ion-ios-arrow-round-forward"></span></a></p>
-                                <p class="ml-auto mb-0">
-                                    <a href="#" class="mr-2">Admin</a>
-                                    <a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4 ftco-animate">
-                    <div class="blog-entry">
-                        <a href="blog-single.html" class="block-20 d-flex align-items-end"
-                           style="background-image: url('{{ asset('themefront/assets/images/image_3.jpg')}}');">
-                            <div class="meta-date text-center p-2">
-                                <span class="day">26</span>
-                                <span class="mos">June</span>
-                                <span class="yr">2019</span>
-                            </div>
-                        </a>
-                        <div class="text bg-white p-4">
-                            <h3 class="heading"><a href="#">Finance And Legal Working Streams Occur Throughout</a></h3>
-                            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
-                                there live the blind texts.</p>
-                            <div class="d-flex align-items-center mt-4">
-                                <p class="mb-0"><a href="#" class="btn btn-primary">Read More <span
-                                                class="ion-ios-arrow-round-forward"></span></a></p>
-                                <p class="ml-auto mb-0">
-                                    <a href="#" class="mr-2">Admin</a>
-                                    <a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    </div> {% endfor %}
             </div>
         </div>
     </section>
     <!--Temoingages-->
-    <section class="ftco-section testimony-section" style="background-image: url('{{ asset('themefront/assets/images/04/bgn-quotes.jpg')}}');">
+    <section class="ftco-section testimony-section"
+             style="background-image: url('{{ asset('themefront/assets/images/04/bgn-quotes.jpg') }}');">
         <div class="container">
             <div class="row justify-content-center mb-5">
                 <div class="col-md-8 text-center heading-section ftco-animate">
@@ -366,82 +329,23 @@
             <div class="row ftco-animate justify-content-center">
                 <div class="col-md-12">
                     <div class="carousel-testimony owl-carousel">
-                        <div class="item">
-                            <div class="testimony-wrap d-flex">
-                                <div class="testimony-wrap d-flex">
-                                    <div class="user-img" style="background-image: url('{{ asset('themefront/assets/images/person_4.jpg')}}')">
+                        {% for temoingage in temoingages %}
+                            <div class="item">
+                                <div class="testimony-wrap d-flex" style="border: 6px solid #1f4e6840">
+                                    <div class="user-img"
+                                         style="background-image: url('{{ asset('upload/'~ temoingage.image) }}');">
                                     </div>
                                     <div class="text pl-4">
-                                    <span class="quote d-flex align-items-center justify-content-center">
-                                        <i class="icon-quote-left"></i>
-                                    </span>
-                                        <p style="color:white;">Far far away, behind the word mountains, far from the
-                                            countries Vokalia and
-                                            Consonantia, there live the blind texts.</p>
-                                        <p class="name">Rodel Golez</p>
-                                        <span class="position">Businesswoman</span>
+                  	              <span class="quote d-flex align-items-center justify-content-center">
+                                       <i class="icon-quote-left" style="color:white;"></i>
+                                   </span>
+                                        <p style="color:white">{{ temoingage.description }}</p>
+                                        <p class="name">{{ temoingage.auteur }}</p>
+
                                     </div>
                                 </div>
                             </div>
-
-                        </div>
-                        <div class="item">
-                            <div class="testimony-wrap d-flex">
-                                <div class="testimony-wrap d-flex">
-                                    <div class="user-img" style="background-image: url('{{ asset('themefront/assets/images/person_4.jpg')}}')">
-                                    </div>
-                                    <div class="text pl-4">
-                                    <span class="quote d-flex align-items-center justify-content-center">
-                                        <i class="icon-quote-left"></i>
-                                    </span>
-                                        <p style="color:white;">Far far away, behind the word mountains, far from the
-                                            countries Vokalia and
-                                            Consonantia, there live the blind texts.</p>
-                                        <p class="name">Rodel Golez</p>
-                                        <span class="position">Businesswoman</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="item">
-                            <div class="testimony-wrap d-flex">
-                                <div class="testimony-wrap d-flex">
-                                    <div class="user-img" style="background-image: url('{{ asset('themefront/assets/images/person_4.jpg')}}')">
-                                    </div>
-                                    <div class="text pl-4">
-                                    <span class="quote d-flex align-items-center justify-content-center">
-                                        <i class="icon-quote-left"></i>
-                                    </span>
-                                        <p style="color:white;">Far far away, behind the word mountains, far from the
-                                            countries Vokalia and
-                                            Consonantia, there live the blind texts.</p>
-                                        <p class="name">Rodel Golez</p>
-                                        <span class="position">Businesswoman</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="item">
-                            <div class="testimony-wrap d-flex">
-                                <div class="testimony-wrap d-flex">
-                                    <div class="user-img" style="background-image: url('{{ asset('themefront/assets/images/person_4.jpg')}}')">
-                                    </div>
-                                    <div class="text pl-4">
-                                    <span class="quote d-flex align-items-center justify-content-center">
-                                        <i class="icon-quote-left"></i>
-                                    </span>
-                                        <p style="color:white;">Far far away, behind the word mountains, far from the
-                                            countries Vokalia and
-                                            Consonantia, there live the blind texts.</p>
-                                        <p class="name">Rodel Golez</p>
-                                        <span class="position">Businesswoman</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
@@ -451,64 +355,87 @@
 
     <!--contact-->
 
-    <section class="ftco-section ftco-consult ftco-no-pt ftco-no-pb"  data-stellar-background-ratio="0.5" >
-        <div class="overlay" ><iframe src="https://maps.google.com/maps?q=manhatan&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
-                                      style="border:0;height: 720px; width:100%;padding-top: 50px" allowfullscreen ></iframe></div>
+    <section class="ftco-section ftco-consult ftco-no-pt ftco-no-pb" data-stellar-background-ratio="0.5">
+        <div class="overlay">
+            <iframe src="https://maps.google.com/maps?q=manhatan&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
+                    style="border:0;height:800px; width:100%" allowfullscreen></iframe>
+        </div>
         <div class="container" style="padding-top: 90px">
             <div class="row justify-content-end">
-                <div class="col-md-6 py-5 px-md-5"style="background-color: #dee2e6ba;border-radius: 30px">
-                    <div class="py-md-5" >
+                <div class="col-md-6 py-5 px-md-5" style="background-color: #dee2e6ba;border-radius: 30px">
+                    <div class="py-md-5">
 
-                        <form action="#" class="appointment-form ftco-animate">
-                            <div class="d-md-flex">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="nom">
-                                </div>
-                                <div class="form-group ml-md-4">
-                                    <input type="text" class="form-control" placeholder="prenom">
-                                </div>
-                            </div>
-                            <div class="d-md-flex">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="entreprise ">
-                                </div>
-                                <div class="form-group ml-md-4">
-                                    <input type="text" class="form-control" placeholder="telephone">
-                                </div>
-                            </div>
-                            <div class="d-md-flex">
-                                <div class="form-group">
-                                    <input type="email" class="form-control" placeholder="email">
-                                </div>
-                                <div class="form-group ml-md-4">
-                                    <input type="text" class="form-control" placeholder="sujet">
-                                </div>
-                            </div>
+                        <form method="POST" role="form" class="appointment-form ftco-animate php-email-form">
+                            {{ form_start(contactForm) }}
 
                             <div class="d-md-flex">
                                 <div class="form-group">
-                                    <textarea name="" id="" cols="30" rows="2" class="form-control" placeholder="Message"></textarea>
+                                    {{ form_widget(contactForm.nom, {'attr': {'class': "form-control",'name':"contact[nom]" ,'id':"contact_nom" ,'placeholder':"Votre nom"}}) }}
+
+                                </div>
+                                <div class="form-group ml-md-4">
+                                    {{ form_widget(contactForm.email, {'attr': {'class': 'form-control','name':'contact[email]' ,'id':'contact_email' ,'placeholder':'Votre Email'}}) }}
+
+                                </div>
+                            </div>
+                            <div class="d-md-flex">
+                                <div class="form-group">
+                                    {{ form_widget(contactForm.entreprise, {'attr': {'class': 'form-control','name':'contact[entreprise]' ,'id':'contact_entreprise' ,'placeholder':'Votre entreprise'}}) }}
+                                </div>
+                                <div class="form-group ml-md-4">
+                                    {{ form_widget(contactForm.telephone, {'attr': {'type':"tel" ,'name':"telephone", 'class':"form-control" ,'id':"telephone", 'placeholder':"telephone"}}) }}
+                                </div>
+                            </div>
+                            <div class="d-md-flex">
+
+                                <div class="form-group ">
+                                    {{ form_widget(contactForm.objet, {'attr': {'class': 'form-control','name':'contact[objet]' ,'id':'contact_objet' ,'placeholder':'objet'}}) }}
+                                </div>
+                            </div>
+                            <div class="d-md-flex">
+                                <div class="form-group">
+                                    {{ form_widget(contactForm.description, {'attr': {'class': 'form-control','name':'contact[description]' ,'id':'contact_description' ,'placeholder':'Message','rows':"5"}}) }}
                                 </div>
                             </div>
                             <div class="form-group ml-md-4">
-                                <input type="submit" value="contacter" class="btn btn-white py-3 px-4">
+                                <input type="submit" name="submit" id="submit" value="contacter"
+                                       class="btn btn-white py-3 px-4 form-submit">
                             </div>
+                            {{ form_end(contactForm) }}
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
-    <div id="footer" style="padding-top:10px" >
+    <div id="footer" style="margin-bottom: 100px">
         <div class="footer-newsletter">
             <div class="container">
                 <div class="row justify-content-center">
-                    <div class="col-lg-6">
+                    <div class="col">
                         <h4>Inscrivez-vous</h4>
-                        <p>Inscrivez-vous pour recevoir les notifications des nouveautés des domaines l'environnement, l'hygiène et la santé sécurité au travail</p>
-                        <form action="" method="post">
-                            <input type="email" name="email"><input type="submit" value="S'abonner">
+                        <p>Inscrivez-vous pour recevoir les notifications des nouveautés des domaines l'environnement,
+                            l'hygiène et la santé sécurité au travail</p>
+                        <form action="" method="post" class="appointment-form ">
+                            <div style="background-color:#ffffff;border-radius: 50%">
+                                {{ form_start(abonnerForm) }}
+                                <div class="d-md-flex">
+                                    <div class="form-group col-2">
+                                        {{ form_widget(abonnerForm.nom, {'attr': {'class': "form-control",'name':"contact[nom]" ,'id':"contact_nom" ,'placeholder':"Votre nom"}}) }}
+
+                                    </div>
+
+                                    <div class="form-group col-8">
+                                        {{ form_widget(abonnerForm.email, {'attr': {'class': 'form-control','name':'contact[email]' ,'id':'contact_email' ,'placeholder':'Votre Email'}}) }}
+
+                                    </div>
+
+                                    <div class="form-group col-2 " style="margin-top:30px">
+                                        <button type="submit" name="submit" id="submit" class="form-submit btn btn-primary">Abonner</button>
+                                    </div>
+                                </div>
+                                {{ form_end(abonnerForm) }}
+                            </div>
                         </form>
                     </div>
                 </div>

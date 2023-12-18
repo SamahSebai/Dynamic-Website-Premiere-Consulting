@@ -24,6 +24,11 @@ class Offres
     private $type;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $titre;
+
+    /**
      * @ORM\Column(type="integer")
      */
     private $nombre;
@@ -57,11 +62,16 @@ class Offres
      */
     private $OffresPage;
     /**
-     * @ORM\OneToMany(targetEntity="Valpub", mappedBy="Offres")
+     * @ORM\OneToMany(targetEntity="Valpub", mappedBy="offres")
      * @ORM\OrderBy({"date" = "ASC"})
      */
     private $valpub;
-
+    /**
+     * @var User
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="user",referencedColumnName="id")
+     */
+    private $User;
 
     public function __construct()
     {
@@ -148,6 +158,25 @@ class Offres
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getTitre()
+    {
+        return $this->titre;
+    }
+
+    /**
+     * @param mixed $titre
+     * @return Offres
+     */
+    public function setTitre($titre)
+    {
+        $this->titre = $titre;
+        return $this;
+    }
+
     /**
      * @return Collection|Condidature[]
      */
@@ -223,6 +252,22 @@ class Offres
     {
         $this->valpub = $valpub;
         return $this;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser(): User
+    {
+        return $this->User;
+    }
+
+    /**
+     * @param User $User
+     */
+    public function setUser(User $User)
+    {
+        $this->User = $User;
     }
 
 }

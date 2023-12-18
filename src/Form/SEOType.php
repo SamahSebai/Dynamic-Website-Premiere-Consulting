@@ -4,6 +4,8 @@ namespace App\Form;
 
 use App\Entity\SEO;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,9 +15,10 @@ class SEOType extends AbstractType
     {
         $builder
             ->add('mot_cle')
-            ->add('description')
-            ->add('lien_canonical')
-            ->add('Page')
+            ->add('description',TextareaType::class)
+            ->add('lien_canonical',TextType::class,[
+                'required'=>false
+            ])
         ;
     }
 

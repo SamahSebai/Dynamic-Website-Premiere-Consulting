@@ -1,0 +1,157 @@
+{% extends 'basefront.html.twig' %}
+
+{% block title %}New Devis{% endblock %}
+
+{% block body %}
+    <section class="ftco-intro ftco-no-pb img " >
+        <div class="container" style="border-radius: 30px">
+            <div class="row mb-5">
+                <div class="col-12 text-center">
+                    <h2 class="section-title mb-3">Demander devis</h2>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 mb-5">
+
+                    <form action="" method="post" class="p-5 bg-white">
+                        {{ form_start(form) }}
+                        <div class="row form-group">
+                            <div class="col-md-6 mb-3 mb-md-0">
+                                <label class="text-black" for="fname">Nom</label>
+                                {{ form_widget(form.nom, {'attr': {'class': "form-control",'name':"devis[nom]" ,'id':"devis_nom" ,'placeholder':"Votre nom"}}) }}
+
+{#                                <input type="text" id="fname" class="form-control">#}
+                            </div>
+                            <div class="col-md-6">
+                                <label class="text-black" for="lname">Prénom</label>
+                                {{ form_widget(form.prenom, {'attr': {'class': 'form-control','name':'devis[prenom]' ,'id':'devis_prenom' ,'placeholder':'Votre prenom'}}) }}
+
+{#                                <input type="text" id="lname" class="form-control">#}
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-md-6">
+                                <label class="text-black" for="lname">Entreprise</label>
+                                {{ form_widget(form.entreprise, {'attr': {'class': "form-control",'name':"devis[entreprise]" ,'id':"devis_entreprise" ,'placeholder':"Entreprise"}}) }}
+
+{#                                <input type="text" id="lname" class="form-control">#}
+                            </div>
+                            <div class="col-md-6">
+                                <label class="text-black" for="email">Email</label>
+                                {{ form_widget(form.email, {'attr': {'class': 'form-control','name':'devis[email]' ,'id':'devis_email' ,'placeholder':'Votre Email'}}) }}
+
+{#                                <input type="email" id="email" class="form-control">#}
+                            </div>
+                        </div>
+                        <div id="divser">
+                            <div class="row form-group" id="rowserv1">
+                                <div class="col-md-6">
+                                    <label class="text-black" for="lname">Services</label>
+                                    <div class="select-wrap">
+
+                                        <select name="service1" id="service1" class="form-control">
+                                            <option value="">Selectionner service</option>
+                                            {% for service in services %}
+                                                <option value="{{ service.id }}">{{ service.nom}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="text-black" for="lname">Quantité</label>
+                                    <input data-min="1" data-max="0" id="quantity1" class="form-control" type="number" name="quantity1" value="1">
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="text-black" for="lname"></label>
+                                    <a class="btn btn-primary btn-md text-white" onclick="delt(1)">supprimer</a>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                        <input type="hidden" id="lser" name="lser" value="|1|">
+                        <div class="row form-group">
+                        <div class="col-md-3 ">
+                            <label class="text-black" for="lname"></label>
+                            <a class="btn btn-primary btn-md text-white" onclick="ajouter()">Ajouter un service</a>
+                        </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-12">
+                                <input type="submit" value="Demander" class="btn btn-primary">
+                            </div>
+                        </div>
+                        {{ form_end(form) }}
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+   {# <div id="footer" style="padding-top:10px" >
+        <div class="footer-newsletter">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                        <h4>Inscrivez-vous</h4>
+                        <p>Inscrivez-vous pour recevoir les notifications des nouveautés des domaines l'environnement, l'hygiène et la santé sécurité au travail</p>
+                        <form action="" method="post">
+                            <input type="email" name="email"><input type="submit" value="S'abonner">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>#}
+    </section>
+
+    <a href="{{ path('devis_index') }}">back to list</a>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        var num=1;
+        function ajouter(){
+            num=num+1;
+            var html="<div class='row form-group' id='rowserv"+num+"'>"+
+                "<div class='col-md-6'>"+
+                " <label class='text-black' for='lname'>Services</label>"+
+                " <div class='select-wrap'>"+
+                "<select name='service"+num+"' id='service"+num+"' class='form-control'>"+
+                "<option value=''>Selectionner service</option>";
+            {% for service in services %}
+            html+="<option value='{{ service.id }}'>{{ service.nom}}</option>" ;
+            {% endfor %}
+            html+="</select>"+
+                " </div>"+
+                "</div>"+
+                "<div class='col-md-4'>"+
+                "<label class='text-black' for='lname'>Quantité</label>"+
+                "<input data-min='1' data-max='0' id='quantity"+num+"' class='form-control' type='number' name='quantity"+num+"' value='1'>"+
+                "</div>"+
+                "<div class='col-md-2'>"+
+                "<label class='text-black' for='lname'></label>"+
+               "<a class='btn btn-primary btn-md text-white' onclick='delt("+num+")'>supprimer</a>"+
+       " </div>"+
+                "</div>";
+            var ch ="|"+num+"|";
+            var l=document.getElementById('lser').value;
+            if (l!=""){
+                l+=',';
+            }
+            l+=ch;
+            document.getElementById('lser').value=l;
+            document.getElementById('divser').insertAdjacentHTML('beforeend',html);
+        }
+        function delt(id){
+            document.getElementById("rowserv"+id).innerHTML="";
+            var ch ="|"+id+"|";
+            var l=document.getElementById('lser').value;
+            var nl= l.replace(ch,"");
+            document.getElementById('lser').value=nl;
+        }
+    </script>
+{% endblock %}

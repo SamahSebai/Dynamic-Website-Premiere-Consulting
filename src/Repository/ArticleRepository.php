@@ -35,6 +35,7 @@ class ArticleRepository extends ServiceEntityRepository
         ;
     }
     */
+
     public function findBestArticles()
     {
         return $this->createQueryBuilder('a')
@@ -42,6 +43,29 @@ class ArticleRepository extends ServiceEntityRepository
             ->join('a.Commantaire', 'c')
             ->groupBy('a')
             ->orderBy('COUNT(c)', 'DESC')
+            ->setMaxResults(2)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function findLastArticles()
+    {
+        return $this->createQueryBuilder('a')
+            ->select('a as article ')
+            ->groupBy('a')
+            ->orderBy('a.date_ajout', 'DESC')
+            ->setMaxResults(3)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+    public function findLastArticles2()
+    {
+        return $this->createQueryBuilder('a')
+            ->select('a as article ')
+            ->groupBy('a')
+            ->orderBy('a.date_ajout', 'DESC')
             ->setMaxResults(2)
             ->getQuery()
             ->getResult()
@@ -67,7 +91,7 @@ class ArticleRepository extends ServiceEntityRepository
          LIKE :searchTerm or article.date_ajout  LIKE :searchTerm or article.auteur  LIKE :searchTerm or article.introduction LIKE :searchTerm')
             ->setParameter('searchTerm','%' .$term.'%');
         $query ->getQuery()
-            ->getResult();
+            ;
         return $query;
     }
 

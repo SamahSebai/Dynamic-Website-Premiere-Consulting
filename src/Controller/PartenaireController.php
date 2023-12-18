@@ -6,6 +6,7 @@ namespace App\Controller;
 use App\Entity\Media;
 use App\Entity\Partenaire;
 use App\Form\PartenaireType;
+use App\Repository\ArticleRepository;
 use App\Repository\PartenaireRepository;
 use Doctrine\ORM\Mapping\Id;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -38,7 +39,7 @@ class PartenaireController extends AbstractController
         $partenaire = $paginator->paginate(
             $partenaires,
             $request->query->getInt('page', 1),
-            2
+            5
         );
 
         return $this->render('partenaire/index.html.twig', [
@@ -52,6 +53,7 @@ class PartenaireController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        $user = $this->getUser();
         $partenaire = new Partenaire();
         $form = $this->createForm(PartenaireType::class, $partenaire);
 
@@ -63,7 +65,7 @@ class PartenaireController extends AbstractController
             /**
              * @var image $image
              */
-            $image= $form->get('media')->getData();
+            $image= $form->get('image')->getData();
             $em = $this->getDoctrine()->getManager();
 
             $em->persist($partenaire);
@@ -84,15 +86,21 @@ class PartenaireController extends AbstractController
 
                 }
 
-
-                $media = new Media();
-                $media->setURL($newFilename);
-                $media->setPartenaire($partenaire);
-                $em->persist($media);
-                $em->flush();
-
+                $partenaire->setImage($newFilename);
+                /* $media = new Media();
+                 $media->setURL($newFilename);
+                 $media->setPartenaire($partenaire);
+                 $em->persist($media);
+                 $em->flush();*/
             }
-            return $this->redirectToRoute('partenaire_index');
+
+                $partenaire->setUser($user);
+                $em->persist($partenaire);
+                $em->flush();
+                $this->addFlash('success', 'partenaire Creé! ');
+                return $this->redirectToRoute('partenaire_index');
+
+
         }
 
         return $this->render('partenaire/new.html.twig', [
@@ -105,13 +113,14 @@ class PartenaireController extends AbstractController
     /**
      * @Route("/List/", name="partenaire_list", methods={"GET"})
      */
-    public function showList(): Response
+    public function showList(ArticleRepository $articlerepo): Response
     {
+        $articlelast1 = $articlerepo->findLastArticles2();
         $em=$this->getDoctrine()->getManager();
         $partenaires = $em->getRepository(Partenaire::class)->findAll();
 
         return $this->render('partenaire/show1.html.twig', [
-            'partenaires' => $partenaires,
+            'partenaires' => $partenaires,'articlelast1' => $articlelast1
         ]);
     }
 
@@ -133,12 +142,15 @@ class PartenaireController extends AbstractController
      */
     public function edit(Request $request, Partenaire $partenaire): Response
     {
+        $user = $this->getUser();
         $form = $this->createForm(PartenaireType::class, $partenaire);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $partenaire->setUser($user);
             $this->getDoctrine()->getManager()->flush();
 
+            $this->addFlash('info', 'partenaire modifié!');
             return $this->redirectToRoute('partenaire_index');
         }
 
@@ -158,7 +170,7 @@ class PartenaireController extends AbstractController
             $entityManager->remove($partenaire);
             $entityManager->flush();
         }
-
+        $this->addFlash('danger', 'partenaire supprimé!');
         return $this->redirectToRoute('partenaire_index');
     }
 }

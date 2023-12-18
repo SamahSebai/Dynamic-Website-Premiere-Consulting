@@ -8,7 +8,15 @@
 
 
 {% block title %}{{ page.titre }}{% endblock %}
-
+    {% block blockseo %}
+        {% if page.seo %}
+        <meta name="description" content="{{ page.seo.description }}"/>
+        <meta name="keywords" content="{{ page.seo.getMotCle()}}"/>
+            {% if page.seo.getLienCanonical() %}
+        <link rel=”canonical” href=”{{ page.seo.getLienCanonical()}}” />
+            {% endif %}
+        {% endif %}
+    {% endblock %}
 {% block body %}
     {{ include(template_from_string(page.contenu)) }}
 {% endblock %}

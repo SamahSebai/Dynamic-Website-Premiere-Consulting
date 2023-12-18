@@ -16,6 +16,7 @@
         "helios-ag/fm-elfinder-bundle": "^10.1",
         "knplabs/knp-paginator-bundle": "^5.4",
         "phpdocumentor/reflection-docblock": "^4.3",
+        "phpmailer/phpmailer": "^6.4",
         "sensio/framework-extra-bundle": "^6.1",
         "stof/doctrine-extensions-bundle": "^1.6",
         "symfony/asset": "4.4.*",

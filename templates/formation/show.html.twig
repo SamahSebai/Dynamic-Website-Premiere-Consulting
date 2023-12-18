@@ -1,438 +1,291 @@
-{% extends 'basefront.html.twig' %}
+{% extends 'baseBack.html.twig' %}
 
-{% block title %}Formation{% endblock %}
+{% block title %}Formations{% endblock %}
 
 {% block body %}
 
 
-    <section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_1.jpg');">
-        <div class="overlay"></div>
-        <div class="container">
-            <div class="row no-gutters slider-text align-items-center justify-content-center">
-                <div class="col-md-9 ftco-animate text-center">
-                    <h1 class="mb-2 bread">Formation</h1>
-                    <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Acceuil <i
-                                        class="ion-ios-arrow-forward"></i></a></span> <span>Formation<i
-                                    class="ion-ios-arrow-forward"></i></span></p>
+    <div class="col-xl-12">
+        <!--begin::Base Table Widget 8-->
+        <div class="card card-custom card-stretch gutter-b">
+            <!--begin::Header-->
+            <div class="card-header border-0 pt-5">
+                <h3 class="card-title align-items-start flex-column">
+                    <span class="card-label font-weight-bolder text-dark">Formation</span>
+                </h3>
+                <div >
+                    <a href="{{ path('formation_index')  }}" class="btn btn-primary">retourner à la list</a>
+                    {% if app.user  %}
+                    {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_REDACTE') %}
+                    <a href="{{ path('formation_edit', {'id': formation.id})  }}" class="btn btn-success">Modifier</a>
+                    {% else %}{% endif %}{% endif %}
+                    {% if app.user  %}
+                    {% if is_granted('ROLE_ADMIN')  %}
+                    <a href="#" onclick="$('#delF').submit()" class="btn btn-danger">Supprimer</a>
+                    {% else %}{% endif %}{% endif %}
+                    <form id="delF" method="post" action="{{ path('formation_delete', {'id': formation.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ formation.id) }}">
+                    </form>
                 </div>
             </div>
-        </div>
-    </section>
+            <!--end::Header-->
+            <!--begin::Body-->
+            <div class="card-body pt-2 pb-0 mt-n3">
 
-
-    <section class="ftco-section" style="background-image: url(images/04/bgn-industries.png);padding-top:80px;">
-        <div class="container px-4 ">
-            <div class="row gx-5">
-                <div class="col">
-
-                    <div class="text" style="width:100%;padding-right:50px ">
-                        <div class="section-tittle ">
-                            <h2>Nos Formations</h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <div class="modal fade" id="exampleModalSM1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabelSM">{{ formation.IntituleMission }}</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-
-
-                    <div class="container mt-5 mb-5">
-                        <div class="row d-flex justify-content-center">
-                            <div class="col-md-10">
-                                <div class="card">
-                                    <div class="row">
-
-                                        <div class="col-md-8">
-                                            <div class="product p-4">
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <div class="d-flex align-items-center">
-                                                    </div>
-                                                </div>
-                                                <div class="mt-4 mb-3"> <span
-                                                            class="text-uppercase text-muted brand">{{ formation.LocalisationMission }}</span>
-                                                    <h5 class="text-uppercase">{{ formation.IntituleMission }}</h5>
-                                                    <div class="price d-flex flex-row align-items-center"> <span
-                                                                class="act-price">{{ formation.DateDebut|date("m/d/Y") }}</span>
-                                                        <span
-                                                                class="act-price">{{ formation.DateFin|date("m/d/Y") }}</span>
-                                                        <div class="ml-2"> <small class="dis-price">{{ formation.NbDeJour }}</small>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <p class="about">{{ formation.Description }}</p>
-                                                <div class="sizes mt-5">
-
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
+                <!--begin::Tap pane-->
+                <!--begin::Table-->
+                <div class="table-responsive">
+                    <table class="table table-borderless table-vertical-center">
+                        <thead>
+                        <tr>
+                            <th class="p-0 w-40px"></th>
+                            <th class="p-0 min-w-200px"></th>
+                            <th class="p-0 min-w-150px"></th>
+                            <th class="p-0 min-w-100px"></th>
+                            <th class="p-0 min-w-150px"></th>
+                            <th class="p-0 min-w-100px"></th>
+                            <th class="p-0 min-w-150px"></th>
+                            <th class="p-0 min-w-100px"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td class="pl-0">
+                                <div class="symbol symbol-35 symbol-circle symbol-light-success mr-2 mt-1">
+																				<span class="symbol-label">
+																					<span class="svg-icon svg-icon-2x svg-icon-success">
+																						<!--begin::Svg Icon | path:assets/media/svg/icons/Media/Play.svg-->
+																						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+																							<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+																								<rect x="0" y="0" width="24" height="24" />
+																								<path d="M9.82866499,18.2771971 L16.5693679,12.3976203 C16.7774696,12.2161036 16.7990211,11.9002555 16.6175044,11.6921539 C16.6029128,11.6754252 16.5872233,11.6596867 16.5705402,11.6450431 L9.82983723,5.72838979 C9.62230202,5.54622572 9.30638833,5.56679309 9.12422426,5.7743283 C9.04415337,5.86555116 9,5.98278612 9,6.10416552 L9,17.9003957 C9,18.1765381 9.22385763,18.4003957 9.5,18.4003957 C9.62084305,18.4003957 9.73759731,18.3566309 9.82866499,18.2771971 Z" fill="#000000" />
+																							</g>
+																						</svg>
+                                                                                        <!--end::Svg Icon-->
+																					</span>
+																				</span>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
+                            </td>
+                            <td class="pl-0">
+                                <div class="text-dark font-weight-bolder text-hover-primary d-block my-1 font-size-lg">ID</div>
 
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">fermer</button>
-                    <button type="button" class="btn btn-primary">Demander</button>
-                </div>
-          </div>
-        </div>
-    </div>
+                            </td>
+                            <td class="text-left">
+                                <div class="text-info-75 font-weight-bold">{{ formation.id }}</div>
+                            </td>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class="service" id="service">
-        <div class="container">
-            <div class="section-header text-center wow zoomIn"   data-wow-delay="0.1s" style="padding-bottom:30px">
-
-                <p>Depuis sa création en 2008, Première Consulting SARL a fait le choix essentiel d’investir dans la compétence humaine et la technologie afin d’aider ses clients et ses partenaires à atteindre leurs objectifs et à gagner en efficacité.
-
-                    De ce fait on vous propose diverses formules de formations adaptées à vos besoins :</p>
-
-            </div>
-
-        </div>
-    </div>
-    <!-- ======= Features Section ======= -->
-    <section id="features" class="features">
-        <div class="container" data-aos="fade-up">
-
-            <div class="row" data-aos="zoom-in" data-aos-delay="100">
-                <div class="col-lg-4 col-md-4">
-                    <div class="icon-box">
-                        <i class="icon-check" style="color:#5578ff;"></i>
-                        <h3> Standard Inter -entreprises.</h3>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 mt-4 mt-md-0">
-                    <div class="icon-box">
-                        <i class="icon-check" style="color: #e80368;"></i>
-                        <h3>Standard Intra-entreprise.</h3>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 mt-4 mt-md-0">
-                    <div class="icon-box">
-                        <i class="icon-check" style="color:#5578ff ;"></i>
-                        <h3>Personnalisées- Coaching et conduite du changement.</h3>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </section><!-- End Features Section -->
-
-
-    {# <div class="card-footer">
-        <a href="{{ path('formation_index') }}" class="btn btn-light-primary font-weight-bold mr-2">back to list</a>
-        <a href="{{ path('formation_edit', {'id': formation.id}) }}" class="btn btn-light-success font-weight-bold mr-2">edit</a>
-        <a href="#" onclick="$('#delF').submit()" class="btn btn-light-danger font-weight-bold mr-2">Supprimer</a>
-        <form id="delF" method="post" action="{{ path('formation_delete', {'id':formation.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
-            <input type="hidden" name="_method" value="DELETE">
-            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ formation.id) }}">
-
-        </form>
-    </div>
-    #}
-
-
-    <section class="ftco-section ftco-about" id="section-counter">
-        <div class="container consult-wrap">
-            <div class="row d-flex align-items-stretch">
-
-                <div class="col wrap-about ftco-animate py-md-5 pl-md-5">
-                    <div class="tabulation-2 mt-4">
-
-                        {{ formation.theme }}
-
-                        <div class="tab-content bg-light rounded mt-2">
-
-                            <div class="tab-pane container p-0 active" id="home1">
-                                <section class="services">
-                                    <div class="container">
-
-                                        <div class="row">
-
-                                            <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
-                                                <div class="icon-box icon-box-blue">
-                                                    <div class="icon"><i class="bx bx-world"></i></div>
-                                                    <h4 class="title"><a href="">{{ formation.IntituleMission}}</a></h4>
-                                                    <p class="description">{{ formation.Description }} </p>
-                                                    <button class="btnA card_btn" data-toggle="modal" data-target="#val{{ formation.id }}">voir plus</button> </div>
-
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                </section>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-
-
-    <div class="modal fade" id="val{{ formation.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabelSM">{{ formation.theme }}</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-
-
-                    <div class="container mt-5 mb-5">
-                        <div class="row d-flex justify-content-center">
-                            <div class="col">
-
-                                <div class="card">
-                                    <div class="row">
-                                        <div class="col-md-8">
-
-                                                {% for media in formation.getMedias() %}
-
-                                                    <div class="images p-3">
-
-                                                        <img src="{{ asset('upload/'~media.URL) }}"class="img-fluid">
-
-                                                    </div>
-
-                                                {% endfor %}
-
-                                        </div>
-                                        <div class="col-md-8">
-                                            <div class="product p-4">
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <div class="d-flex align-items-center">
-                                                    </div>
-                                                </div>
-                                                <div class="mt-4 mb-3"> <span
-                                                            class="text-uppercase text-muted brand">{{ formation.LocalisationMission }}</span>
-                                                    <h5 class="text-uppercase">{{ formation.getIntituleMission }}</h5>
-                                                    <div class="price d-flex flex-row align-items-center"> <span
-                                                                class="act-price">{{ formation.DateDebut|date("m/d/Y") }}</span>
-                                                        <span
-                                                                class="act-price">{{ formation.DateFin|date("m/d/Y") }}</span>
-                                                        <div class="ml-2"> <small class="dis-price">{{ formation.NbDeJour }}</small>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <p class="about">{{ formation.Description }}</p>
-                                                <div class="sizes mt-5">
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                        </tr>
+                        <tr>
+                            <td class="pl-0">
+                                <div class="symbol symbol-35 symbol-circle symbol-light-success mr-2 mt-1">
+																				<span class="symbol-label">
+																					<span class="svg-icon svg-icon-2x svg-icon-success">
+																						<!--begin::Svg Icon | path:assets/media/svg/icons/Media/Play.svg-->
+																						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+																							<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+																								<rect x="0" y="0" width="24" height="24" />
+																								<path d="M9.82866499,18.2771971 L16.5693679,12.3976203 C16.7774696,12.2161036 16.7990211,11.9002555 16.6175044,11.6921539 C16.6029128,11.6754252 16.5872233,11.6596867 16.5705402,11.6450431 L9.82983723,5.72838979 C9.62230202,5.54622572 9.30638833,5.56679309 9.12422426,5.7743283 C9.04415337,5.86555116 9,5.98278612 9,6.10416552 L9,17.9003957 C9,18.1765381 9.22385763,18.4003957 9.5,18.4003957 C9.62084305,18.4003957 9.73759731,18.3566309 9.82866499,18.2771971 Z" fill="#000000" />
+																							</g>
+																						</svg>
+                                                                                        <!--end::Svg Icon-->
+																					</span>
+																				</span>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
+                            </td>
+                            <td class="pl-0">
+                                <div class="text-dark font-weight-bolder text-hover-primary d-block my-1 font-size-lg">Intitulé mission</div>
 
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">fermer</button>
-                    <button type="button" class="btn btn-primary">Demander</button>
+                            </td>
+                            <td class="text-left">
+                                <div class="text-info-75 font-weight-bold">{{ formation.IntituleMission }}</div>
+                            </td>
+
+
+                        </tr>
+                        <tr>
+                            <td class="pl-0">
+                                <div class="symbol symbol-35 symbol-circle symbol-light-success mr-2 mt-1">
+																				<span class="symbol-label">
+																					<span class="svg-icon svg-icon-2x svg-icon-success">
+																						<!--begin::Svg Icon | path:assets/media/svg/icons/Media/Play.svg-->
+																						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+																							<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+																								<rect x="0" y="0" width="24" height="24" />
+																								<path d="M9.82866499,18.2771971 L16.5693679,12.3976203 C16.7774696,12.2161036 16.7990211,11.9002555 16.6175044,11.6921539 C16.6029128,11.6754252 16.5872233,11.6596867 16.5705402,11.6450431 L9.82983723,5.72838979 C9.62230202,5.54622572 9.30638833,5.56679309 9.12422426,5.7743283 C9.04415337,5.86555116 9,5.98278612 9,6.10416552 L9,17.9003957 C9,18.1765381 9.22385763,18.4003957 9.5,18.4003957 C9.62084305,18.4003957 9.73759731,18.3566309 9.82866499,18.2771971 Z" fill="#000000" />
+																							</g>
+																						</svg>
+                                                                                        <!--end::Svg Icon-->
+																					</span>
+																				</span>
+                                </div>
+                            </td>
+                            <td class="pl-0">
+                                <div class="text-dark font-weight-bolder text-hover-primary d-block my-1 font-size-lg">Description</div>
+
+                            </td>
+                            <td class="text-left">
+                                <div class="text-info-75 font-weight-bold">{{ formation.Description }}</div>
+                            </td>
+
+
+                        </tr>
+                        <tr>
+                            <td class="pl-0">
+                                <div class="symbol symbol-35 symbol-circle symbol-light-success mr-2 mt-1">
+																				<span class="symbol-label">
+																					<span class="svg-icon svg-icon-2x svg-icon-success">
+																						<!--begin::Svg Icon | path:assets/media/svg/icons/Media/Play.svg-->
+																						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+																							<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+																								<rect x="0" y="0" width="24" height="24" />
+																								<path d="M9.82866499,18.2771971 L16.5693679,12.3976203 C16.7774696,12.2161036 16.7990211,11.9002555 16.6175044,11.6921539 C16.6029128,11.6754252 16.5872233,11.6596867 16.5705402,11.6450431 L9.82983723,5.72838979 C9.62230202,5.54622572 9.30638833,5.56679309 9.12422426,5.7743283 C9.04415337,5.86555116 9,5.98278612 9,6.10416552 L9,17.9003957 C9,18.1765381 9.22385763,18.4003957 9.5,18.4003957 C9.62084305,18.4003957 9.73759731,18.3566309 9.82866499,18.2771971 Z" fill="#000000" />
+																							</g>
+																						</svg>
+                                                                                        <!--end::Svg Icon-->
+																					</span>
+																				</span>
+                                </div>
+                            </td>
+                            <td class="pl-0">
+                                <div class="text-dark font-weight-bolder text-hover-primary d-block my-1 font-size-lg">Nombre de jours</div>
+
+                            </td>
+                            <td class="text-left">
+                                <div class="text-info-75 font-weight-bold">{{ formation.NbDeJour }}</div>
+                            </td>
+
+
+                        </tr>
+
+                        <tr>
+                            <td class="pl-0">
+                                <div class="symbol symbol-35 symbol-circle symbol-light-success mr-2 mt-1">
+																				<span class="symbol-label">
+																					<span class="svg-icon svg-icon-2x svg-icon-success">
+																						<!--begin::Svg Icon | path:assets/media/svg/icons/Media/Play.svg-->
+																						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+																							<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+																								<rect x="0" y="0" width="24" height="24" />
+																								<path d="M9.82866499,18.2771971 L16.5693679,12.3976203 C16.7774696,12.2161036 16.7990211,11.9002555 16.6175044,11.6921539 C16.6029128,11.6754252 16.5872233,11.6596867 16.5705402,11.6450431 L9.82983723,5.72838979 C9.62230202,5.54622572 9.30638833,5.56679309 9.12422426,5.7743283 C9.04415337,5.86555116 9,5.98278612 9,6.10416552 L9,17.9003957 C9,18.1765381 9.22385763,18.4003957 9.5,18.4003957 C9.62084305,18.4003957 9.73759731,18.3566309 9.82866499,18.2771971 Z" fill="#000000" />
+																							</g>
+																						</svg>
+                                                                                        <!--end::Svg Icon-->
+																					</span>
+																				</span>
+                                </div>
+                            </td>
+                            <td class="pl-0">
+                                <div class="text-dark font-weight-bolder text-hover-primary d-block my-1 font-size-lg">Nombre de jours</div>
+
+                            </td>
+                            <td class="text-left">
+                                <div class="text-info-75 font-weight-bold">{{ formation.NbDeJour }}</div>
+                            </td>
+
+
+                        </tr>
+
+                        <tr>
+                            <td class="pl-0">
+                                <div class="symbol symbol-35 symbol-circle symbol-light-success mr-2 mt-1">
+																				<span class="symbol-label">
+																					<span class="svg-icon svg-icon-2x svg-icon-success">
+																						<!--begin::Svg Icon | path:assets/media/svg/icons/Media/Play.svg-->
+																						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+																							<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+																								<rect x="0" y="0" width="24" height="24" />
+																								<path d="M9.82866499,18.2771971 L16.5693679,12.3976203 C16.7774696,12.2161036 16.7990211,11.9002555 16.6175044,11.6921539 C16.6029128,11.6754252 16.5872233,11.6596867 16.5705402,11.6450431 L9.82983723,5.72838979 C9.62230202,5.54622572 9.30638833,5.56679309 9.12422426,5.7743283 C9.04415337,5.86555116 9,5.98278612 9,6.10416552 L9,17.9003957 C9,18.1765381 9.22385763,18.4003957 9.5,18.4003957 C9.62084305,18.4003957 9.73759731,18.3566309 9.82866499,18.2771971 Z" fill="#000000" />
+																							</g>
+																						</svg>
+                                                                                        <!--end::Svg Icon-->
+																					</span>
+																				</span>
+                                </div>
+                            </td>
+                            <td class="pl-0">
+                                <div class="text-dark font-weight-bolder text-hover-primary d-block my-1 font-size-lg">date debut</div>
+
+                            </td>
+                            <td class="text-left">
+                                <div class="text-info-75 font-weight-bold">{{ formation.DateDebut|date("m/d/Y") }}</div>
+                            </td>
+
+
+                        </tr>
+
+                        <tr>
+                            <td class="pl-0">
+                                <div class="symbol symbol-35 symbol-circle symbol-light-success mr-2 mt-1">
+																				<span class="symbol-label">
+																					<span class="svg-icon svg-icon-2x svg-icon-success">
+																						<!--begin::Svg Icon | path:assets/media/svg/icons/Media/Play.svg-->
+																						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+																							<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+																								<rect x="0" y="0" width="24" height="24" />
+																								<path d="M9.82866499,18.2771971 L16.5693679,12.3976203 C16.7774696,12.2161036 16.7990211,11.9002555 16.6175044,11.6921539 C16.6029128,11.6754252 16.5872233,11.6596867 16.5705402,11.6450431 L9.82983723,5.72838979 C9.62230202,5.54622572 9.30638833,5.56679309 9.12422426,5.7743283 C9.04415337,5.86555116 9,5.98278612 9,6.10416552 L9,17.9003957 C9,18.1765381 9.22385763,18.4003957 9.5,18.4003957 C9.62084305,18.4003957 9.73759731,18.3566309 9.82866499,18.2771971 Z" fill="#000000" />
+																							</g>
+																						</svg>
+                                                                                        <!--end::Svg Icon-->
+																					</span>
+																				</span>
+                                </div>
+                            </td>
+                            <td class="pl-0">
+                                <div class="text-dark font-weight-bolder text-hover-primary d-block my-1 font-size-lg">date de fin</div>
+
+                            </td>
+                            <td class="text-left">
+                                <div class="text-info-75 font-weight-bold">{{ formation.DateFin|date("m/d/Y") }}</div>
+                            </td>
+
+
+                        </tr>
+                        <tr>
+                            <td class="pl-0">
+                                <div class="symbol symbol-35 symbol-circle symbol-light-success mr-2 mt-1">
+																				<span class="symbol-label">
+																					<span class="svg-icon svg-icon-2x svg-icon-success">
+																						<!--begin::Svg Icon | path:assets/media/svg/icons/Media/Play.svg-->
+																						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+																							<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+																								<rect x="0" y="0" width="24" height="24" />
+																								<path d="M9.82866499,18.2771971 L16.5693679,12.3976203 C16.7774696,12.2161036 16.7990211,11.9002555 16.6175044,11.6921539 C16.6029128,11.6754252 16.5872233,11.6596867 16.5705402,11.6450431 L9.82983723,5.72838979 C9.62230202,5.54622572 9.30638833,5.56679309 9.12422426,5.7743283 C9.04415337,5.86555116 9,5.98278612 9,6.10416552 L9,17.9003957 C9,18.1765381 9.22385763,18.4003957 9.5,18.4003957 C9.62084305,18.4003957 9.73759731,18.3566309 9.82866499,18.2771971 Z" fill="#000000" />
+																							</g>
+																						</svg>
+                                                                                        <!--end::Svg Icon-->
+																					</span>
+																				</span>
+                                </div>
+                            </td>
+                            <td class="pl-0">
+                                <div class="text-dark font-weight-bolder text-hover-primary d-block my-1 font-size-lg">localisation</div>
+
+                            </td>
+                            <td class="text-left">
+                                <div class="text-info-75 font-weight-bold">{{ formation.LocalisationMission }}</div>
+                            </td>
+
+
+                        </tr>
+
+
+                        </tbody>
+                    </table>
+
+                    <!--end::Tap pane-->
+
                 </div>
             </div>
+            <!--end::Body-->
+
+
+
+
         </div>
+        <!--end::Base Table Widget 8-->
+
     </div>
 
-
-
-
-
-
-
-
-
-
-
-    <div id="footer" style="margin-bottom: 100px">
-        <div class="footer-newsletter">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-6">
-                        <h4>Inscrivez-vous</h4>
-                        <p>Inscrivez-vous pour recevoir les notifications des nouveautés des domaines l'environnement, l'hygiène et la santé sécurité au travail</p>
-                        <form action="" method="post">
-                            <input type="email" name="email"><input type="submit" value="S'abonner">
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-
-
-
-    <script type="text/javascript">
-        /// some script
-
-        // jquery ready start
-        $(document).ready(function () {
-            // jQuery code
-
-            //////////////////////// Prevent closing from click inside dropdown
-
-            $(document).on('click', '.dropdown-menu', function (e) {
-                e.stopPropagation();
-            });
-
-            // make it as accordion for smaller screens
-            if ($(window).width() < 992) {
-                $('.dropdown-menu a').click(function (e) {
-                    e.preventDefault();
-                    if ($(this).next('.submenu').length) {
-                        $(this).next('.submenu').toggle();
-                    }
-                    $('.dropdown').on('hide.bs.dropdown', function () {
-                        $(this).find('.submenu').hide();
-                    })
-                });
-            }
-
-        });
-
-        ///////////////// fixed menu on scroll for desktop
-        if ($(window).width() > 992) {
-            $(window).scroll(function () {
-                if ($(this).scrollTop() > 40) {
-                    $('#navbar_top').addClass("fixed-top");
-                    // add padding top to show content behind navbar
-                    $('body').css('padding-top', $('.navbar').outerHeight() + 'px');
-                } else {
-                    $('#navbar_top').removeClass("fixed-top");
-                    // remove padding top from body
-                    $('body').css('padding-top', '0');
-                }
-            });
-        } // end if
-
-        // Brand Active
-        $('.brand-active').slick({
-            dots: false,
-            infinite: true,
-            autoplay: true,
-            speed: 400,
-            arrows: false,
-            slidesToShow: 5,
-            slidesToScroll: 1,
-            responsive: [
-                {
-                    breakpoint: 1200,
-                    settings: {
-                        slidesToShow: 4,
-                        slidesToScroll: 3,
-                        infinite: true,
-                        dots: false,
-                    }
-                },
-                {
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 3,
-                        slidesToScroll: 3,
-                        infinite: true,
-                        dots: false,
-                    }
-                },
-                {
-                    breakpoint: 991,
-                    settings: {
-                        slidesToShow: 3,
-                        slidesToScroll: 1,
-                        infinite: true,
-                        dots: false,
-                    }
-                },
-                {
-                    breakpoint: 768,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 1
-                    }
-                },
-                {
-                    breakpoint: 480,
-                    settings: {
-                        slidesToShow: 1,
-                        slidesToScroll: 1
-                    }
-                },
-
-                // You can unslick at a given breakpoint now by adding:
-                // settings: "unslick"
-                // instead of a settings object
-            ]
-        });
-        // Clients carousel (uses the Owl Carousel library)
-        $(".clients-carousel").owlCarousel({
-            autoplay: true,
-            dots: true,
-            loop: true,
-            responsive: {
-                0: {
-                    items: 2
-                },
-                768: {
-                    items: 4
-                },
-                900: {
-                    items: 6
-                }
-            }
-        });
-        $('#myModal').on('shown.bs.modal', function () {
-            $('#myInput').trigger('focus')
-        })
-        // jquery end
-
-
-    </script>
-
-
-  
 {% endblock %}

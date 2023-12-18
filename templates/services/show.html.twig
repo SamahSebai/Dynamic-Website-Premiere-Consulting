@@ -235,8 +235,15 @@
 
             <div class="card-footer">
                 <a href="{{ path('services')  }}" class="btn btn-light-primary font-weight-bold mr-2">back to list</a>
+                {% if app.user  %}
+                {% if is_granted('ROLE_ADMIN')  or is_granted('ROLE_REDACTE') %}
                 <a href="{{ path('services_edit', {'id': service.id})  }}" class="btn btn-light-success font-weight-bold mr-2">edit</a>
+                {% else %}{% endif %}{% endif %}
+
+                {% if app.user  %}
+                {% if is_granted('ROLE_ADMIN')  %}
                 <a href="#" onclick="$('#delF').submit()" class="btn btn-light-danger font-weight-bold mr-2">Supprimer</a>
+                {% else %}{% endif %}{% endif %}
                 <form id="delF" method="post" action="{{ path('services_delete', {'id': service.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
                     <input type="hidden" name="_method" value="DELETE">
                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ service.id) }}">

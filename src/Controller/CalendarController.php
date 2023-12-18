@@ -8,6 +8,7 @@ use App\Entity\Calendar;
 use App\Entity\Formation;
 use App\Entity\Valpub;
 use App\Form\CalendarType;
+use App\Repository\ArticleRepository;
 use App\Repository\CalendarRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -63,15 +64,17 @@ class CalendarController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        $user = $this->getUser();
         $calendar = new Calendar();
         $form = $this->createForm(CalendarType::class, $calendar);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $calendar->setUser($user);
             $entityManager->persist($calendar);
             $entityManager->flush();
-
+            $this->addFlash('success', 'Evénement ajoutée avec succées!');
             return $this->redirectToRoute('calendar_index');
         }
 
@@ -84,9 +87,10 @@ class CalendarController extends AbstractController
     /**
      * @Route("/list/", name="calendar_show", methods={"GET"})
      */
-    public function show(): Response
+    public function show(ArticleRepository $artRepo): Response
     {
         $em=$this->getDoctrine()->getManager();
+        $articlelast1 = $artRepo->findLastArticles2();
        /* $em=$this->getDoctrine()->getRepository(Calendar::class);*/
         $date=date('Y-m');
         $d1=$date."-01";
@@ -119,17 +123,18 @@ class CalendarController extends AbstractController
             ->getQuery()->getResult();
 
         return $this->render('calendar/show.html.twig', [
-            'l1'=>$l1,'l2'=>$l2,'l3'=>$l3,'l4'=>$l4,
+            'l1'=>$l1,'l2'=>$l2,'l3'=>$l3,'l4'=>$l4,'articlelast1' => $articlelast1
         ]);
     }
 
     /**
      * @Route("/{id}", name="evenement_exemple", methods={"GET"})
      */
-    public function show1(Calendar $calendar): Response
+    public function show1(Calendar $calendar , ArticleRepository $artRepo): Response
     {
+        $articlelast1 = $artRepo->findLastArticles2();
         return $this->render('calendar/show1.html.twig', [
-            'calendar' => $calendar,
+            'calendar' => $calendar,'articlelast1' => $articlelast1
         ]);
     }
     /**
@@ -137,12 +142,14 @@ class CalendarController extends AbstractController
      */
     public function edit(Request $request, Calendar $calendar): Response
     {
+        $user = $this->getUser();
         $form = $this->createForm(CalendarType::class, $calendar);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $calendar->setUser($user);
             $this->getDoctrine()->getManager()->flush();
-
+            $this->addFlash('info', 'Evènement modifié!');
             return $this->redirectToRoute('calendar_index');
         }
 
@@ -161,65 +168,66 @@ class CalendarController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($calendar);
             $entityManager->flush();
+            $this->addFlash('danger', 'Evènement supprimé!');
         }
 
         return $this->redirectToRoute('calendar_index');
     }
-    /**
-     * @Route("/{id}/valider", name="evenement_valider", methods={"GET","POST"})
-     */
-    public function valider(Request $request, Calendar $calendar): Response
-    {
-        $form = $this->createForm(Calendar::class, $calendar);
-        $form->handleRequest($request);
-
-        if ($request->isMethod('post')){
-            $val=new Valpub();
-            $val->setValider(false);
-            if ($request->request->get("checkbox")){
-                $val->setValider(true);
-            }
-            $Req=$request->request->get("remarque");
-            $d= new \DateTime("Now");
-
-            $val->setRemarque($Req);
-            $val->setDate($d);
-            $val->setCalendar($calendar);
-
-            $em= $this->getDoctrine()->getManager();
-            $em->persist($val);
-            $em->flush();
-
-            return $this->redirectToRoute('calendar');
-        }
-
-
-    }
-    /**
-     * @Route("/{id}/publier", name="evenement_publier", methods={"GET","POST"})
-     */
-    public function publier(Request $request, Calendar $calendar): Response
-    {
-        $form = $this->createForm(Calendar::class, $calendar);
-        $form->handleRequest($request);
-
-        if ($request->isMethod('post')){
-            $val=new Valpub();
-            $d= new \DateTime("Now");
-            $val->setPublier(true);
-            $val->setDate($d);
-            $val->setCalendar($calendar);
-
-            $em= $this->getDoctrine()->getManager();
-            $em->persist($val);
-            $em->flush();
-
-            return $this->redirectToRoute('calendar');
-        }
-
-
-    }
-
+//    /**
+//     * @Route("/{id}/valider", name="evenement_valider", methods={"GET","POST"})
+//     */
+//    public function valider(Request $request, Calendar $calendar): Response
+//    {
+//        $form = $this->createForm(Calendar::class, $calendar);
+//        $form->handleRequest($request);
+//
+//        if ($request->isMethod('post')){
+//            $val=new Valpub();
+//            $val->setValider(false);
+//            if ($request->request->get("checkbox")){
+//                $val->setValider(true);
+//            }
+//            $Req=$request->request->get("remarque");
+//            $d= new \DateTime("Now");
+//
+//            $val->setRemarque($Req);
+//            $val->setDate($d);
+//            $val->setCalendar($calendar);
+//
+//            $em= $this->getDoctrine()->getManager();
+//            $em->persist($val);
+//            $em->flush();
+//
+//            return $this->redirectToRoute('calendar');
+//        }
+//
+//
+//    }
+//    /**
+//     * @Route("/{id}/publier", name="evenement_publier", methods={"GET","POST"})
+//     */
+//    public function publier(Request $request, Calendar $calendar): Response
+//    {
+//        $form = $this->createForm(Calendar::class, $calendar);
+//        $form->handleRequest($request);
+//
+//        if ($request->isMethod('post')){
+//            $val=new Valpub();
+//            $d= new \DateTime("Now");
+//            $val->setPublier(true);
+//            $val->setDate($d);
+//            $val->setCalendar($calendar);
+//
+//            $em= $this->getDoctrine()->getManager();
+//            $em->persist($val);
+//            $em->flush();
+//
+//            return $this->redirectToRoute('calendar');
+//        }
+//
+//
+//    }
+//
 
 
 

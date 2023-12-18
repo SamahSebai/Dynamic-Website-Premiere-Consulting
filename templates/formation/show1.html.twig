@@ -22,21 +22,6 @@
     </section>
 
 
-    <section class="ftco-section" style="background-image: url(images/04/bgn-industries.png);padding-top:80px;">
-        <div class="container px-4 ">
-            <div class="row gx-5">
-                <div class="col">
-
-                    <div class="text" style="width:100%;padding-right:50px ">
-                        <div class="section-tittle ">
-                            <h2>Nos Formations</h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <div class="service" id="service">
         <div class="container">
             <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s" style="padding-bottom:30px">
@@ -126,13 +111,12 @@
 
                                         <div class="row">
                                             {% for formation in F1 %}
-                                                <div class="col-md-6 col-lg-3 d-flex align-items-stretch"
+                                                <div class="col-md-6 col-lg-3 d-flex align-items-stretch d-flex p-3 flex-column"
                                                      data-aos="fade-up" data-aos-delay="200">
                                                     <div class="icon-box icon-box-blue">
-                                                        <div class="icon"><i class="bx bx-world"></i></div>
+                                                        <div class="icon"><i class="icon-check"></i></div>
                                                         <h4 class="title"><a
                                                                     href="">{{ formation.getIntituleMission }}</a></h4>
-                                                        <p class="description">{{ formation.Description }} </p>
                                                         <button class="btnA card_btn" data-toggle="modal"
                                                                 data-target="#val{{ formation.id }}">voir plus
                                                         </button>
@@ -154,13 +138,12 @@
 
                                         <div class="row">
                                             {% for formation in F2 %}
-                                                <div class="col-md-6 col-lg-3 d-flex align-items-stretch"
+                                                <div class="col-md-6 col-lg-3 d-flex align-items-stretch d-flex p-3 flex-column"
                                                      data-aos="fade-up" data-aos-delay="200">
                                                     <div class="icon-box icon-box-blue">
-                                                        <div class="icon"><i class="bx bx-world"></i></div>
+                                                        <div class="icon"><i class="icon-check"></i></div>
                                                         <h4 class="title"><a href="">{{ formation.IntituleMission }}</a>
                                                         </h4>
-                                                        <p class="description">{{ formation.Description }} </p>
 
                                                         <button class="btnA card_btn" data-toggle="modal"
                                                                 data-target="#val{{ formation.id }}">voir plus
@@ -184,13 +167,13 @@
                                         <div class="row">
                                             {% for formation in F3 %}
 
-                                                <div class="col-md-6 col-lg-3 d-flex align-items-stretch"
+                                                <div class="col-md-6 col-lg-3 d-flex align-items-stretch d-flex p-3 flex-column"
                                                      data-aos="fade-up" data-aos-delay="200">
                                                     <div class="icon-box icon-box-blue">
-                                                        <div class="icon"><i class="bx bx-world"></i></div>
+                                                        <div class="icon"><i class="icon-check"></i></div>
                                                         <h4 class="title"><a href="">{{ formation.IntituleMission }}</a>
                                                         </h4>
-                                                        <p class="description">{{ formation.Description }} </p>
+
                                                         <button class="btnA card_btn" data-toggle="modal"
                                                                 data-target="#val{{ formation.id }}">voir plus
                                                         </button>
@@ -211,14 +194,12 @@
 
                                         <div class="row">
                                             {% for formation in F4 %}
-                                                <div class="col-md-6 col-lg-3 d-flex align-items-stretch"
+                                                <div class="col-md-6 col-lg-3 d-flex align-items-stretch d-flex p-3 flex-column"
                                                      data-aos="fade-up" data-aos-delay="200">
                                                     <div class="icon-box icon-box-blue">
-                                                        <div class="icon"><i class="bx bx-world"></i></div>
+                                                        <div class="icon"><i class="icon-check"></i></div>
                                                         <h4 class="title"><a href="">{{ formation.IntituleMission }}</a>
                                                         </h4>
-                                                        <p class="description">{{ formation.Description }} </p>
-
                                                         <button class="btnA card_btn" data-toggle="modal"
                                                                 data-target="#val{{ formation.id }}">voir plus
                                                         </button>
@@ -238,7 +219,7 @@
 
                                         <div class="row">
                                             {% for formation in F5 %}
-                                                <div class="col-md-6 col-lg-3 d-flex align-items-stretch"
+                                                <div class="col-md-6 col-lg-3 d-flex align-items-stretch d-flex p-3 flex-column"
                                                      data-aos="fade-up" data-aos-delay="200">
                                                     <div class="icon-box icon-box-blue">
                                                         <div class="icon"><i class="bx bx-world"></i></div>
@@ -268,7 +249,7 @@
 
                                         <div class="row">
                                             {% for formation in F6 %}
-                                                <div class="col-md-6 col-lg-3 d-flex align-items-stretch"
+                                                <div class="col-md-6 col-lg-3 d-flex align-items-stretch d-flex p-3 flex-column"
                                                      data-aos="fade-up" data-aos-delay="200">
                                                     <div class="icon-box icon-box-blue">
                                                         <div class="icon"><i class="bx bx-world"></i></div>
@@ -688,7 +669,6 @@
                                                     <div class="images p-5">
 
                                                         <img src="{{ asset('upload/'~media.URL) }}" class="img-fluid">
-
                                                     </div>
                                                 {% endfor %}
                                             </div>
@@ -744,7 +724,7 @@
 
 
 
-    <div id="footer" style="margin-bottom: 100px">
+   {# <div id="footer" style="margin-bottom: 100px">
         <div class="footer-newsletter">
             <div class="container">
                 <div class="row justify-content-center">
@@ -759,6 +739,6 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>#}
 
 {% endblock %}

@@ -178,15 +178,19 @@
 
 
 {% block body %}
-
-    <section class="ftco-section ">
+    <section class="hero-wrap hero-wrap-2" style="background-image: url('{{ asset('themefront/assets/images/bg_1.jpg')}}');">
+        <div class="overlay"></div>
         <div class="container">
-            <div class="row justify-content-center mb-5 pb-3">
-                <div class="col-md-7 text-center heading-section ftco-animate">
-                    <span class="subheading">Agenda</span>
-                    <h2 class="mb-4"><span>Nos évènement</span></h2>
+            <div class="row no-gutters slider-text align-items-center justify-content-center">
+                <div class="col-md-9 ftco-animate text-center">
+                    <h1 class="mb-2 bread"><span>Nos évènement</span></h1>
+                    <p class="breadcrumbs"><span class="mr-2"><a href="{{ path('accueil') }}">Acceuil <i class="ion-ios-arrow-forward"></i></a></span> <span class="mr-2"><a href="{{ path('calendar_show') }}">Agenda<i class="ion-ios-arrow-forward"></i></a></span></p>
                 </div>
             </div>
+        </div>
+    </section>
+    <section class="ftco-section ">
+        <div class="container">
             <div class="ftco-search">
                 <div class="row">
                     <div class="col-md-12 nav-link-wrap">
@@ -301,7 +305,7 @@
 
 
 
-    <div id="footer" style="margin-bottom: 100px">
+   {# <div id="footer" style="margin-bottom: 100px">
         <div class="footer-newsletter">
             <div class="container">
                 <div class="row justify-content-center">
@@ -316,7 +320,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>#}
 
 
 

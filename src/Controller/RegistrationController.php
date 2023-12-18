@@ -32,7 +32,30 @@ class RegistrationController extends AbstractController{
         if ($form->isSubmitted() && $form->isValid()) {
 
             $entityManager = $this->getDoctrine()->getManager();
+            $user->setRoles(array("ROLE_USER"));
             $user->setEnabled(true);
+            $image= $form->get('photo')->getData();
+
+            if ($image) {
+                $originalFilename = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $image->guessExtension();
+
+                // Move the file to the directory where brochures are stored
+                try {
+                    $image->move(
+                        $this->getParameter('images_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+
+                }
+
+                $user->setPhoto($newFilename);
+
+            }
+
             $entityManager->persist($user);
             $entityManager->flush();
             $this->addFlash('success', 'Votre compte à bien été enregistré.');

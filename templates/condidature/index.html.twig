@@ -1,0 +1,126 @@
+{% extends 'basefront.html.twig' %}
+
+{% block title %}Condidature index{% endblock %}
+
+{% block body %}
+    <section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_1.jpg');">
+        <div class="overlay">
+
+        </div>
+        <div class="container">
+            <div class="row no-gutters slider-text align-items-center justify-content-center">
+                <div class="col-md-9 ftco-animate text-center">
+                    <h1 class="mb-2 bread">Postuler une codidature simple</h1>
+                    <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Acceuil <i class="ion-ios-arrow-forward"></i></a></span>
+                        <span class="mr-2"><a href="NousRejoindre.html"> Nous rejoindre<i class="ion-ios-arrow-forward"></i></a></span>
+                        <span>offre</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <div class="row">
+
+        <div class="col-md-6 offset-md-3 mt-5" style="border: 2px solid #d91a5b;border-radius: 30px " >
+
+            <form accept-charset="UTF-8" action="#" method="POST" enctype="multipart/form-data" target="_blank">
+                {{ form_start(condidatureForm) }}
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="exampleInputName">Nom </label>
+                        {{ form_widget(condidatureForm.nom, {'attr': {'class': "form-control",'name':"condidature[nom]" ,'id':"condidature_nom" ,'placeholder':"Votre nom",'required':"required"}}) }}
+
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="exampleInputName">Prenom </label>
+                        {{ form_widget(condidatureForm.prenom, {'attr': {'class': "form-control",'name':"condidature[prenom]" ,'id':"condidature_prenom" ,'placeholder':"Votre prenom",'required':"required"}}) }}
+
+                    </div>
+                </div>
+                <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="exampleInputEmail1" required="required">Email </label>
+                    {{ form_widget(condidatureForm.email, {'attr': {'class': "form-control",'name':"condidature[email]" ,'id':"condidature_email" ,'placeholder':"Votre email",'required':"required"}}) }}
+
+                </div>
+                    <div class="form-group col-md-6">
+                        <label for="exampleInputEmail1" required="required">Telephone</label>
+                        {{ form_widget(condidatureForm.tel, {'attr': {'class': "form-control",'name':"condidature[tel]" ,'id':"condidature_tel" ,'placeholder':"Votre numero",'required':"required"}}) }}
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1" required="required">Lettre de motivation</label>
+                    {{ form_widget(condidatureForm.LM, {'attr': {'class': "form-control",'name':"condidature[lm]" ,'id':"condidature_lm" ,'placeholder':"lettre de motivation",'required':"required"}}) }}
+
+                </div>
+
+
+                <div class="form-group mt-5">
+                    <label class="mr-4"> importer votre CV </label>
+                    {{ form_widget(condidatureForm.CV, {'attr': {'type': "file",'name':"condidature[lm]" ,'id':"condidature_lm" ,'required':"required"}}) }}
+
+                </div>
+                <div class="form-group mt-10 text-center ">
+
+                    <button type="submit" class="btn btn-primary btn-block">Envoyer</button>
+
+                </div>
+                {{ form_end(condidatureForm) }}
+            </form>
+
+{#
+
+            <form class="php-email-form" method="POST"  enctype="multipart/form-data" role="form">
+                <div class="form-row">
+                    {{ form_start(condidatureForm) }}
+                    <div class="form-group col-md-6">
+                        <label for="exampleInputName">Nom </label>
+                        {{ form_widget(condidatureForm.nom, {'attr': {'name':"condidature[nom]" ,'id':"condidature_nom" ,'placeholder':"Votre nom"}}) }}
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="exampleInputName">Prenom </label>
+                        {{ form_widget(condidatureForm.prenom, {'attr': {'name':"condidature[prenom]" ,'id':"condidature_prenom" ,'placeholder':"Votre prenom"}}) }}
+                    </div></div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1" required="required">Email </label>
+                    {{ form_widget(condidatureForm.email, {'attr': {'name':'condidature[email]' ,'id':'condidature_email' ,'placeholder':'Votre Email'}}) }}
+                </div>
+                <div class="form-group ">
+                    <label for="inputAddress">Lettre motivation</label>
+                    <div class="col-md-12">
+                        {{ form_widget(condidatureForm.LM, {'attr': {'name':'contdidature[LM]' ,'id':'condidature_lm' ,'placeholder':'Message','rows':"5"}}) }}
+                    </div>
+                </div>
+
+
+                <div class="form-group mt-10 text-center ">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Envoyer</button>
+
+                </div>
+                {{ form_rest(condidatureForm) }}
+                {{ form_end(condidatureForm) }}
+            </form>
+#}
+
+        </div>
+
+    </div>
+
+
+
+
+<script>
+    jQuery(document).ready(function(){
+
+
+        $('#kt_datetimepicker_6').datetimepicker ({format:'YYYY-MM-DD HH:mm'}); }
+
+    );</script>
+
+    {% endblock %}
+
+    {% block javascripts %}
+
+    {% endblock %}

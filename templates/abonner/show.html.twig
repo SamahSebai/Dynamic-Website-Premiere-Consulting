@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Abonner{% endblock %}
+
+{% block body %}
+    <h1>Abonner</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ abonner.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ abonner.nom }}</td>
+            </tr>
+            <tr>
+                <th>Date_creation_abonnement</th>
+                <td>{{ abonner.dateCreationAbonnement ? abonner.dateCreationAbonnement|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Date_suppression_abonnement</th>
+                <td>{{ abonner.dateSuppressionAbonnement ? abonner.dateSuppressionAbonnement|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Date_fin</th>
+                <td>{{ abonner.dateFin ? abonner.dateFin|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ abonner.email }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('abonner_index') }}">back to list</a>
+
+    <a href="{{ path('abonner_edit', {'id': abonner.id}) }}">edit</a>
+
+    {{ include('abonner/_delete_form.html.twig') }}
+{% endblock %}

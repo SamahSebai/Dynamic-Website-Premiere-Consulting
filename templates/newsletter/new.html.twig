@@ -1,0 +1,171 @@
+{#
+{% extends 'base.html.twig' %}
+
+{% block title %}New Newsletter{% endblock %}
+
+{% block body %}
+    <h1>Create new Newsletter</h1>
+
+    {{ include('newsletter/_form.html.twig') }}
+
+    <a href="{{ path('newsletter') }}">back to list</a>
+{% endblock %}
+#}
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}New Newsletter{% endblock %}
+ {% block head %}
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+ {% endblock %}
+{% block body %}
+    <div class="card card-custom gutter-b example example-compact">
+        <div class="card-header">
+            <h3 class="card-title">Ajouter une nouvelle Newsletter</h3>
+        </div>
+        {{ form_start(form) }}
+
+
+        <div class="card-body">
+            {# <div class="form-group ">
+                 {{ form_widget(form.contenu ,{'attr':{ 'id':'page_contenu', 'name':'page[contenu]'}}) }}
+             </div>#}
+            <div class="form-group">
+                <label>type :</label>
+                {{ form_widget(form.objet ,{'attr':{'class':"form-control form-control-solid",'placeholder':"Entrer le titre"}})}}
+            </div>
+
+            <div class="form-group">
+                <div class="adjoined-bottom">
+                    <div class="grid-container">
+                        <div class="grid-width-100">
+                            {{ form_widget(form.contenu) }}
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary mr-2">Enregistrer</button>
+            <button type="reset" class="btn btn-secondary"><a href="{{ path('newsletter') }}">Retourner au liste </a></button>
+            <button type="submit" name="submit" id="submit" class="form-submit btn btn-primary mr-2">envoyer</button></div>
+
+
+
+        {{ form_rest(form) }}
+        {{ form_end(form) }}
+
+
+        <!--end::Form-->
+    </div>
+
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('themeBack/assets/js/CKEditor/ckeditor.js') }}"></script>
+
+    <script src="{{ asset('themeBack/assets/js/CKEditor/ckeditor.js') }}"></script>
+
+        <script>
+
+
+            if (CKEDITOR.env.ie && CKEDITOR.env.version < 9)
+                CKEDITOR.tools.enableHtml5Elements(document);
+
+            // The trick to keep the editor in the sample quite small
+            // unless user specified own height.
+            CKEDITOR.config.height = 150;
+            CKEDITOR.config.width = 'auto';
+
+            var initSample = (function () {
+                var wysiwygareaAvailable = isWysiwygareaAvailable(),
+                    isBBCodeBuiltIn = !!CKEDITOR.plugins.get('bbcode');
+
+                return function () {
+                    var editorElement = CKEDITOR.document.getById('article_contenu');
+
+                    // :(((
+                    if (isBBCodeBuiltIn) {
+                        editorElement.setHtml(
+                            'Hello world!\n\n' +
+                            'I\'m an instance of [url=https://ckeditor.com]CKEditor[/url].'
+                        );
+                    }
+
+                    // Depending on the wysiwygarea plugin availability initialize classic or inline editor.
+                    if (wysiwygareaAvailable) {
+                        CKEDITOR.replace('article_contenu');
+                    } else {
+                        editorElement.setAttribute('contenteditable', 'true');
+                        CKEDITOR.inline('article_contenu');
+
+                        // TODO we can consider displaying some info box that
+                        // without wysiwygarea the classic editor may not work.
+                    }
+                };
+
+                function isWysiwygareaAvailable() {
+                    // If in development mode, then the wysiwygarea must be available.
+                    // Split REV into two strings so builder does not replace it :D.
+                    if (CKEDITOR.revision == ( '%RE' + 'V%' )) {
+                        return true;
+                    }
+
+                    return !!CKEDITOR.plugins.get('wysiwygarea');
+                }
+            })();
+
+
+            initSample();
+        </script>
+   {# <script>
+        FormValidation.formValidation(
+            document.getElementById('page_URL'),
+            {
+                fields: {
+
+
+                    url: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Website URL is required'
+                            },
+                            uri: {
+                                message: 'The website address is not valid'
+                            }
+                        }
+                    },
+
+
+
+                },
+
+                plugins: {
+                    trigger: new FormValidation.plugins.Trigger(),
+                    // Bootstrap Framework Integration
+                    bootstrap: new FormValidation.plugins.Bootstrap(),
+                    // Validate fields when clicking the Submit button
+                    submitButton: new FormValidation.plugins.SubmitButton(),
+                    // Submit the form when all fields are valid
+                    defaultSubmit: new FormValidation.plugins.DefaultSubmit(),
+                }
+            }
+        );
+    </script>#}
+
+
+{% endblock %}

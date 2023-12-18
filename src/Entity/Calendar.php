@@ -82,24 +82,14 @@ class Calendar
      * @ORM\Column(type="string", length=255)
      */
     private $localisation;
-//
-//    /**
-//     * @var User
-//     * @ORM\ManyToOne(targetEntity="User")
-//     * @ORM\JoinColumn(name="user",referencedColumnName="id")
-//     *
-//     */
-//    private $User;
+
     /**
-     * @ORM\OneToMany(targetEntity="Demande", mappedBy="Calendar")
+     * @var User
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="user",referencedColumnName="id")
      */
-    private $Demande;
-    /**
-     * @var Formation
-     * @ORM\ManyToOne(targetEntity="Formation", inversedBy="Calendar")
-     * @ORM\JoinColumn(name="formation",referencedColumnName="id")
-     */
-    private $Formation;
+    private $User;
+
 
 
 
@@ -255,72 +245,9 @@ class Calendar
 
         return $this;
     }
-    /**
-     * @return ArrayCollection
-     */
-    public function getDemande(): ArrayCollection
-    {
-        return $this->Demande;
-    }
 
-    public function addDemande(Demande $demande): self
-    {
-        if (!$this->Demande->contains($demande)) {
-            $this->Demande[] = $demande;
-            $demande->setEvenement($this);
-        }
 
-        return $this;
-    }
 
-    public function removeDemande(Demande $demande): self
-    {
-        if ($this->Demande->removeElement($demande)) {
-            // set the owning side to null (unless already changed)
-            if ($demande->getEvenement() === $this) {
-                $demande->setEvenement(null);
-            }
-        }
-
-        return $this;
-    }
-
-//    /**
-//     * @return User
-//     */
-//    public function getUser(): ?string
-//    {
-//        return $this->User;
-//    }
-//
-//    /**
-//     * @param User $User
-//     * @return Evenement
-//     */
-//    public function setUser(User $User): self
-//    {
-//        $this->User = $User;
-//        return $this;
-//    }
-
-    /**
-     * @param Formation $Formation
-     * @return Evenement
-     */
-    public function getFormation(): ?Formation
-    {
-        return $this->Formation;
-    }
-
-    /**
-     * @param Formation $Formation
-     * @return Calendar
-     */
-    public function setFormation(Formation $Formation): ?Calendar
-    {
-        $this->Formation = $Formation;
-        return $this;
-    }
 
 
     public function getDelais(): ?string
@@ -332,6 +259,24 @@ class Calendar
     {
         $this->delais = $delais;
 
+        return $this;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser(): User
+    {
+        return $this->User;
+    }
+
+    /**
+     * @param User $User
+     * @return Calendar
+     */
+    public function setUser(User $User): Calendar
+    {
+        $this->User = $User;
         return $this;
     }
 

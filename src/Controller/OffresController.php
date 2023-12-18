@@ -10,6 +10,7 @@ use App\Entity\Offres;
 use App\Entity\Valpub;
 use App\Form\OffresType;
 
+use App\Repository\ArticleRepository;
 use App\Repository\OffresRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,26 +26,28 @@ class OffresController extends AbstractController
     /**
      * @Route("/", name="offres_index", methods={"GET"})
      */
-    public function index(OffresRepository $offresRepository,Request $request,PaginatorInterface $paginator)
+    public function index(OffresRepository $offresRepository,ArticleRepository $articlerepo,Request $request,PaginatorInterface $paginator)
     {
 
 
         $em=$this->getDoctrine()->getManager();
+        $articlelast1 = $articlerepo->findLastArticles2();
+
         $search = $request->query->get('o');
         if ($search) {
             $offres = $offresRepository->searchBack($search);
         } else {
-            $offres = $offresRepository->findAll();
+            $offres = $offresRepository->createQueryBuilder('offre')->select('offre')->getQuery();
         }
 
         $offre = $paginator->paginate(
             $offres,
             $request->query->getInt('page', 1),
-            6
+            5
         );
 
         return $this->render('offres/index.html.twig', [
-            'offres' => $offre,
+            'offres' => $offre,'articlelast1' => $articlelast1
         ]);
     }
     public function search(OffresRepository  $offresRepository, Request $request)
@@ -58,9 +61,10 @@ class OffresController extends AbstractController
     /**
      * @Route("/liste", name="offresF_index", methods={"GET"})
      */
-    public function liste(OffresRepository $offresRepository,Request $request,PaginatorInterface $paginator)
+    public function liste(OffresRepository $offresRepository,Request $request,PaginatorInterface $paginator,ArticleRepository $articlerepo)
     {
 
+        $articlelast1 = $articlerepo->findLastArticles2();
 
         $search = $request->query->get('o');
         $tes=0;
@@ -71,17 +75,17 @@ class OffresController extends AbstractController
         if ($search!="" or $tes!=0) {
             $offres = $offresRepository->search($search,$tes);
         } else {
-            $offres = $offresRepository->findAll();
+            $offres = $offresRepository->createQueryBuilder('offre')->select('offre')->getQuery();
         }
 
         $offre = $paginator->paginate(
             $offres,
             $request->query->getInt('page', 1),
-            6
+            4
         );
 
-        return $this->render('offres/show.html.twig', [
-            'offres' => $offre,
+        return $this->render('offres/index2.html.twig', [
+            'offres' => $offre,'articlelast1' => $articlelast1
         ]);
     }
 
@@ -90,15 +94,17 @@ class OffresController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        $user = $this->getUser();
         $offre = new Offres();
         $form = $this->createForm(OffresType::class, $offre);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $offre->setUser($user);
             $entityManager->persist($offre);
             $entityManager->flush();
-
+            $this->addFlash('success', 'Offre ajoutée avec succées!');
             return $this->redirectToRoute('offres_index');
         }
 
@@ -114,10 +120,11 @@ class OffresController extends AbstractController
     /**
      * @Route("/seulOff/{id}", name="Single-offres_show", methods={"GET"})
      */
-    public function show(Offres $offre): Response
+    public function show(Offres $offre ,ArticleRepository $artRepo): Response
     {
+        $articlelast1 = $artRepo->findLastArticles2();
         return $this->render('offres/single-offre.html.twig', [
-            'offre' => $offre,
+            'offre' => $offre,'articlelast1' => $articlelast1
         ]);
     }
 
@@ -125,20 +132,21 @@ class OffresController extends AbstractController
      * @Route("/show1", name="offres-back", methods={"GET"})
 
      * @return Response
-     **/
+
     public function showFront(Offres $offre): Response
     {
         return $this->render('offres/single-offre-back.html.twig', [
             'offre' => $offre,
         ]);
-    }
+    } **/
     /**
      * @Route("/{id}", name="offres_show-back", methods={"GET"})
      */
-    public function show1(Offres $offre): Response
+    public function show1(Offres $offre , ArticleRepository $articlerepo): Response
     {
-        return $this->render('offres/single-offre-back.html.twig', [
-            'offre' => $offre,
+        $articlelast1 = $articlerepo->findLastArticles2();
+        return $this->render('offres/show.html.twig', [
+            'offre' => $offre,'articlelast1' => $articlelast1
         ]);
     }
 
@@ -147,13 +155,16 @@ class OffresController extends AbstractController
      */
     public function edit(Request $request, Offres $offre): Response
     {
+        $user = $this->getUser();
         $form = $this->createForm(OffresType::class, $offre);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $offre->setUser($user);
             $this->getDoctrine()->getManager()->flush();
 
 
+            $this->addFlash('info', 'Offre modifié!');
             return $this->redirectToRoute('offres_index');
         }
 
@@ -173,6 +184,7 @@ class OffresController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($offre);
             $entityManager->flush();
+            $this->addFlash('danger', 'Offre supprimé!');
         }
 
         return $this->redirectToRoute('offres_index');
@@ -200,60 +212,60 @@ class OffresController extends AbstractController
    }*/
 
 
-    /**
-     * @Route("/{id}/valider", name="offre_valider", methods={"GET","POST"})
-     */
-    public function valider(Request $request, Offres $offre): Response
-    {
-        $form = $this->createForm(Offres::class, $offre);
-        $form->handleRequest($request);
-
-        if ($request->isMethod('post')){
-            $val=new Valpub();
-            $val->setValider(false);
-            if ($request->request->get("checkbox")){
-                $val->setValider(true);
-            }
-            $Req=$request->request->get("remarque");
-            $d= new \DateTime("Now");
-
-            $val->setRemarque($Req);
-            $val->setDate($d);
-            $val->setOffres($offre);
-
-            $em= $this->getDoctrine()->getManager();
-            $em->persist($val);
-            $em->flush();
-
-            return $this->redirectToRoute('offre');
-        }
-
-
-    }
-    /**
-     * @Route("/{id}/publier", name="offre_publier", methods={"GET","POST"})
-     */
-    public function publier(Request $request, Offres $offre): Response
-    {
-        $form = $this->createForm(Offres::class, $offre);
-        $form->handleRequest($request);
-
-        if ($request->isMethod('post')){
-            $val=new Valpub();
-            $d= new \DateTime("Now");
-            $val->setPublier(true);
-            $val->setDate($d);
-            $val->setOffres($offre);
-
-            $em= $this->getDoctrine()->getManager();
-            $em->persist($val);
-            $em->flush();
-
-            return $this->redirectToRoute('offre');
-        }
-
-
-    }
+//    /**
+//     * @Route("/{id}/valider", name="offre_valider", methods={"GET","POST"})
+//     */
+//    public function valider(Request $request, Offres $offre): Response
+//    {
+//        $form = $this->createForm(Offres::class, $offre);
+//        $form->handleRequest($request);
+//
+//        if ($request->isMethod('post')){
+//            $val=new Valpub();
+//            $val->setValider(false);
+//            if ($request->request->get("checkbox")){
+//                $val->setValider(true);
+//            }
+//            $Req=$request->request->get("remarque");
+//            $d= new \DateTime("Now");
+//
+//            $val->setRemarque($Req);
+//            $val->setDate($d);
+//            $val->setOffres($offre);
+//
+//            $em= $this->getDoctrine()->getManager();
+//            $em->persist($val);
+//            $em->flush();
+//
+//            return $this->redirectToRoute('offre');
+//        }
+//
+//
+//    }
+//    /**
+//     * @Route("/{id}/publier", name="offre_publier", methods={"GET","POST"})
+//     */
+//    public function publier(Request $request, Offres $offre): Response
+//    {
+//        $form = $this->createForm(Offres::class, $offre);
+//        $form->handleRequest($request);
+//
+//        if ($request->isMethod('post')){
+//            $val=new Valpub();
+//            $d= new \DateTime("Now");
+//            $val->setPublier(true);
+//            $val->setDate($d);
+//            $val->setOffres($offre);
+//
+//            $em= $this->getDoctrine()->getManager();
+//            $em->persist($val);
+//            $em->flush();
+//
+//            return $this->redirectToRoute('offre');
+//        }
+//
+//
+//    }
 
 
 }

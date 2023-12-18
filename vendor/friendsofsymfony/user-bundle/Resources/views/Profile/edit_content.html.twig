@@ -85,17 +85,19 @@
                         <!--end::Toolbar-->
                         <!--begin::User-->
                         <div class="d-flex align-items-center">
-                            <div class="symbol symbol-60 symbol-xxl-100 mr-5 align-self-start align-self-xxl-center">
-                                <div class="symbol-label" style="background-image:url('{{ asset('themeBack/assets/media/users/A.png') }}')"></div>
-                                <i class="symbol-badge bg-success"></i>
-                            </div>
-                            <div>
-                                <a href="#" class="font-weight-bolder font-size-h5 text-dark-75 text-hover-primary">{{ user.nom }} {{ user.prenom }}</a>
+                            <div> <span class="symbol symbol-lg-80 symbol-25 symbol-light-success">
+											<span class="symbol-label font-size-h1 display-1 font-weight-bold">{{user.nom | first}}{{user.prenom | first}}</span>
+										</span></div>
+                            <div style="padding-left:10px;">
+
+
+                                <a href="#" class="font-weight-bolder font-size-h1 text-dark-75 text-hover-primary">{{ user.nom }} {{ user.prenom }}</a>
                                 <div class="mt-2">
 
                                 </div>
                             </div>
                         </div>
+
                         <!--end::User-->
                         <!--begin::Contact-->
                         <div class="py-15">
@@ -153,7 +155,7 @@
                             </div>
 
                             <div class="navi-item mb-2">
-                                <a href="custom/apps/profile/profile-1/change-password.html" class="navi-link py-4">
+                                <a href="{{ path('fos_user_change_password') }}" class="navi-link py-4">
 															<span class="navi-icon mr-2">
 																<span class="svg-icon">
 																	<!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Shield-user.svg-->
@@ -169,7 +171,9 @@
 																</span>
 															</span>
                                     <span class="navi-text font-size-lg">Change Passwort</span>
-
+                                    <span class="navi-label">
+																<span class="label label-light-danger label-rounded font-weight-bold">5</span>
+															</span>
                                 </a>
                             </div>
 
@@ -189,8 +193,10 @@
 
                     <div class="card-header py-3">
                         <div class="card-title align-items-start flex-column">
-                            <h3 class="card-label font-weight-bolder text-dark">Personal Information</h3>
-                            <span class="text-muted font-weight-bold font-size-sm mt-1">Update your personal informaiton</span>
+                            <h3 class="card-label font-weight-bolder text-dark">Informations Personelles</h3>
+                            <span class="text-muted font-weight-bold font-size-sm mt-1">
+
+Mettre à jour vos renseignements personnels</span>
                         </div>
 
                     </div>
@@ -202,19 +208,19 @@
 
 
                             <div class="form-group row">
-                                <label class="col-xl-3 col-lg-3 col-form-label">First Name</label>
+                                <label class="text-dark font-weight-bolder  d-block my-3 font-size-lg">Nom</label>
                                 <div class="col-lg-9 col-xl-6">
                                     {{ form_widget(form.nom ,{'attr':{'class':"form-control form-control-lg form-control-solid"}})}}
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-xl-3 col-lg-3 col-form-label">Last Name</label>
+                                <label class="text-dark font-weight-bolder  d-block my-3 font-size-lg">Prénom</label>
                                 <div class="col-lg-9 col-xl-6">
                                     {{ form_widget(form.prenom ,{'attr':{'class':"form-control form-control-lg form-control-solid"}})}}
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-xl-3 col-lg-3 col-form-label">Company Name</label>
+                                <label class="text-dark font-weight-bolder  d-block my-3 font-size-lg">Pseudo</label>
                                 <div class="col-lg-9 col-xl-6">
                                     {{ form_widget(form.username ,{'attr':{'class':"form-control form-control-lg form-control-solid"}})}}
 
@@ -227,7 +233,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-xl-3 col-lg-3 col-form-label">Contact Phone</label>
+                                <label class="text-dark font-weight-bolder  d-block my-3 font-size-lg">Telephone</label>
                                 <div class="col-lg-9 col-xl-6">
                                     <div class="input-group input-group-lg input-group-solid">
                                         <div class="input-group-prepend">
@@ -240,7 +246,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-xl-3 col-lg-3 col-form-label">Email Address</label>
+                                <label class="text-dark font-weight-bolder  d-block my-3 font-size-lg">Email </label>
                                 <div class="col-lg-9 col-xl-6">
                                     <div class="input-group input-group-lg input-group-solid">
                                         <div class="input-group-prepend">
@@ -253,7 +259,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-xl-3 col-lg-3 col-form-label">Company Site</label>
+                                <label class="text-dark font-weight-bolder  d-block my-3 font-size-lg">Adresse</label>
                                 <div class="col-lg-9 col-xl-6">
                                     <div class="input-group input-group-lg input-group-solid">
                                         {{ form_widget(form.adress ,{'attr':{'class':"form-control form-control-lg form-control-solid"}})}}
@@ -262,7 +268,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-xl-3 col-lg-3 col-form-label">Votre mot de passe<span class="text-danger">*</span></label>
+                                <label class="text-dark font-weight-bolder  d-block my-3 font-size-lg">Votre mot de passe<span class="text-danger">*</span></label>
                                 <div class="col-lg-9 col-xl-6">
                                     <div class="input-group input-group-lg input-group-solid">
                                         {{ form_widget(form.current_password ,{'attr':{'class':"form-control form-control-lg form-control-solid"}})}}
@@ -273,7 +279,7 @@
                             </div>
                             <div class="card-toolbar">
                                 <button type="submit" class="btn btn-success mr-2">{{ 'profile.edit.submit'|trans }}</button>
-                                <button type="reset" class="btn btn-secondary">Cancel</button>
+                                <button type="reset" class="btn btn-secondary">Annuler</button>
                             </div>
 
                         </div>

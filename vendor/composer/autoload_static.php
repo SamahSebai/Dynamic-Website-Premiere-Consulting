@@ -118,6 +118,7 @@ class ComposerStaticInit13ee40d4372590e316e4cc6727f16c3b
             'ProxyManager\\' => 13,
             'PhpParser\\' => 10,
             'PackageVersions\\' => 16,
+            'PHPMailer\\PHPMailer\\' => 20,
         ),
         'M' => 
         array (
@@ -511,6 +512,10 @@ class ComposerStaticInit13ee40d4372590e316e4cc6727f16c3b
         'PackageVersions\\' => 
         array (
             0 => __DIR__ . '/..' . '/composer/package-versions-deprecated/src/PackageVersions',
+        ),
+        'PHPMailer\\PHPMailer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
         'Monolog\\' => 
         array (

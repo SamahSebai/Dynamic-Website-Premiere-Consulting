@@ -28,19 +28,26 @@ class Page
      */
     private $URL;
     /**
-      * @var User
-     * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumn(name="user",referencedColumnName="id")
-     *
+     * @ORM\Column(type="string", length=255 , nullable=true)
      */
-    private $User;
+    private $description;
+    /**
+     * @ORM\OneToMany(targetEntity="Media", mappedBy="page")
+     * @ORM\JoinColumn(name="Media",referencedColumnName="id")
+     */
+    private $medias;
     /**
      * @Gedmo\Slug(fields={"URL"})
      * @ORM\Column(length=128, unique=true)
      */
     private $slug;
-    
-   
+
+    /**
+     * @var User
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="user",referencedColumnName="id")
+     */
+    private $User;
 
 
     /**
@@ -65,19 +72,22 @@ class Page
     private $ElementMenu;
 
     /**
-     * var \Template
-     * @ORM\ManyToOne(targetEntity=Template::class, inversedBy="pages")
+     * @ORM\OneToMany(targetEntity="Valpub", mappedBy="Page")
+     * @ORM\OrderBy({"date" = "ASC"})
      */
-    private $template;
+    private $valpub;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $titre;
+
+
     /**
-     * @ORM\OneToMany(targetEntity="Valpub", mappedBy="page")
+     *  * @var SEO
+     * @ORM\OneToOne(targetEntity="SEO", mappedBy="Page")
      */
-    private $valpub;
+    private $seo;
 
     public function __construct()
     {
@@ -87,6 +97,24 @@ class Page
         $this->OffresPage = new ArrayCollection();
         $this->ElementMenu = new ArrayCollection();
         $this->valpub = new ArrayCollection();
+    }
+
+    /**
+     * @return SEO
+     */
+    public function getSeo(): ?SEO
+    {
+        return $this->seo;
+    }
+
+    /**
+     * @param SEO $seo
+     * @return Page
+     */
+    public function setSeo(SEO $seo): self
+    {
+        $this->seo = $seo;
+        return $this;
     }
 
 
@@ -123,16 +151,7 @@ class Page
    
 
 
-public function getUser(): ?User
-    {
-        return $this->User;
-    }
-    public function setUser(?User $User): self
-    {
-        $this->User = $User;
 
-        return $this;
-    }
      /**
      * @return ArrayCollection
      */
@@ -304,23 +323,25 @@ public function getUser(): ?User
     }
 
     /**
-     * @return mixed
+     * @return User
      */
-    public function getValpub()
+    public function getUser(): User
     {
-        return $this->valpub;
+        return $this->User;
     }
 
     /**
-     * @param mixed $valpub
+     * @param User $User
      * @return Page
-
-    public function setValpub($valpub)
+     */
+    public function setUser(User $User): Page
     {
-        $this->valpub = $valpub;
+        $this->User = $User;
         return $this;
     }
-*/
+
+
+
     /**
      * @return mixed
      */
@@ -336,6 +357,60 @@ public function getUser(): ?User
     public function setSlug($slug)
     {
         $this->slug = $slug;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param mixed $description
+     * @return Page
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getValpub()
+    {
+        return $this->valpub;
+    }
+
+    /**
+     * @param mixed $valpub
+     * @return Page
+     */
+    public function setValpub($valpub)
+    {
+        $this->valpub = $valpub;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMedias()
+    {
+        return $this->medias;
+    }
+
+    /**
+     * @param mixed $medias
+     * @return Page
+     */
+    public function setMedias($medias)
+    {
+        $this->medias = $medias;
         return $this;
     }
 

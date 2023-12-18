@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\AbonnerRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -29,13 +30,8 @@ class Abonner
 
     /**
      * @ORM\Column(type="date")
-     */
-    private $date_suppression_abonnement;
 
-    /**
-     * @ORM\Column(type="date")
-     */
-    private $date_fin;
+    private $date_suppression_abonnement;*/
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -80,7 +76,7 @@ class Abonner
         return $this;
     }
 
-    public function getDateSuppressionAbonnement(): ?\DateTimeInterface
+   /* public function getDateSuppressionAbonnement(): ?\DateTimeInterface
     {
         return $this->date_suppression_abonnement;
     }
@@ -90,19 +86,9 @@ class Abonner
         $this->date_suppression_abonnement = $date_suppression_abonnement;
 
         return $this;
-    }
+    }*/
 
-    public function getDateFin(): ?\DateTimeInterface
-    {
-        return $this->date_fin;
-    }
 
-    public function setDateFin(\DateTimeInterface $date_fin): self
-    {
-        $this->date_fin = $date_fin;
-
-        return $this;
-    }
 
     public function getEmail(): ?string
     {

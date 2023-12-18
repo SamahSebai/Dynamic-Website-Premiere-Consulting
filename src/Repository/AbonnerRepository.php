@@ -47,4 +47,15 @@ class AbonnerRepository extends ServiceEntityRepository
         ;
     }
     */
+
+
+    public function search($term)
+    {
+        $query=$this->createQueryBuilder('abonner')->select('abonner');
+        $query ->Where('abonner.nom LIKE :searchTerm  or abonner.email  LIKE :searchTerm or abonner.id  LIKE :searchTerm ')
+            ->setParameter('searchTerm','%' .$term.'%');
+        $query ->getQuery()
+            ->getResult();
+        return $query;
+    }
 }

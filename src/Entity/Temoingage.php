@@ -32,6 +32,15 @@ class Temoingage
      */
     private $image;
 
+    /**
+     * @var User
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="user",referencedColumnName="id")
+     */
+    private $User;
+
+    
+
     public function getId(): ?int
     {
         return $this->id;
@@ -72,4 +81,24 @@ class Temoingage
 
         return $this;
     }
+
+    /**
+     * @return User
+     */
+    public function getUser(): User
+    {
+        return $this->User;
+    }
+
+    /**
+     * @param User $User
+     */
+    public function setUser(User $User)
+    {
+        $this->User = $User;
+    }
+
+
+
+
 }

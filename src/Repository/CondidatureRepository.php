@@ -47,4 +47,13 @@ class CondidatureRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function search($term)
+    {
+        $query=$this->createQueryBuilder('condidature')->select('condidature');
+        $query ->Where('condidature.id LIKE :searchTerm  or condidature.nom  LIKE :searchTerm or condidature.prenom  LIKE :searchTerm or condidature.email  LIKE :searchTerm')
+            ->setParameter('searchTerm','%' .$term.'%');
+        $query ->getQuery()
+            ->getResult();
+        return $query;
+    }
 }

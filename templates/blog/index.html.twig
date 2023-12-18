@@ -28,16 +28,16 @@
               <form action="#" class="search-form">
                 <div class="form-group">
                   <span class="icon icon-search"></span>
-                  <input type="text" class="form-control" placeholder="entre un mot clé">
+                  <input type="text" name="a" class="form-control" placeholder="entre un mot clé">
                 </div>
               </form>
             </div>
           <div class="sidebar-box ftco-animate">
-              <h3> Chercher par categories</h3>
+           {#   <h3> Chercher par categories</h3>
               <ul id="myUL">
                 <li><span class="box">categorie1</span>
                   <ul class="nested active">
-                    <li> <span class="box">Water</span>
+                    <li> <span class="box">Sous-categ1</span>
                       <ul class="nested">
                         <li><span class="box">Black Tea</span>
                           <ul class="nested">
@@ -59,7 +59,7 @@
                         </li>
                       </ul>
                     </li>
-                    <li><span class="box">Coffee</span>
+                    <li><span class="box">Sous-categ2</span>
                       <ul class="nested">
                         <li><span class="box">Black Tea</span>
                           <ul class="nested">
@@ -75,7 +75,7 @@
                           </ul>
                         </li>
                       </ul></li>
-                    <li><span class="box">Tea</span>
+                    <li><span class="box">Sous-categ3</span>
                       <ul class="nested">
                         <li><span class="box">Black Tea</span>
                           <ul class="nested">
@@ -246,13 +246,13 @@
                   </ul>
                 </li>
               </ul>
-
-              <form action="#" class="search-form">
+#}
+             {# <form action="#" class="search-form">
                 <div class="form-group">
                   <button type="submit" placeholder="" class="form-control search">
                     <span >chercher</span></button>
                 </div>
-              </form>
+              </form>#}
             </div>
 
           </div>
@@ -268,7 +268,6 @@
                     <div><a href="#"><span class="icon-calendar"></span> {{ article['article'].dateAjout ? article['article'].dateAjout|date('Y-m-d') : '' }}</a></div>
                     <div><a href="#"><span class="icon-person"></span> {{ article['article'].auteur }}</a></div>
                     <div></div>
-                    <div><a href="#"><span class="icon-chat"></span> </a></div>
                   </div>
                 </div>
               </div>
@@ -278,26 +277,25 @@
           </div>
         </div>
 
-      <div class="col col-lg-9">
+      <div class="col col-lg-9 d-flex flex-column d-flex p-3">
         <div class="row" >
             {% for article in articles %}
-        <div class="col col-lg-4 ftco-animate h-25 d-inline-block" >
+        <div class="col col-lg-4 ftco-animate h-25 d-inline-block d-flex flex-column d-flex p-3 d-flex align-content-stretch flex-wrap d-flex p-3 flex-column" >
           <div class="blog-entry-1 " >
-            <a href="blog-single.html" class="block-20 d-flex align-items-end" style="background-image: url('{{ asset('themefront/assets/images/image_2.jpg')}}');">
+            <a href="blog-single.html" class="block-20 d-flex align-items-end " style="background-image: url('{{ asset('upload/'~article.image)}}');">
               <div class="meta-date text-center p-2">
                 <span class="day">{{ article.dateAjout ? article.dateAjout|date('d') : '' }}</span>
                 <span class="mos">{{ article.dateAjout ? article.dateAjout|date('m') : '' }}</span>
                 <span class="yr">{{ article.dateAjout ? article.dateAjout|date('Y') : '' }}</span>
               </div>
             </a>
-            <div class="text bg-white p-2 h-25 d-inline-block">
+            <div class="text bg-white p-2 h-25 d-inline-block d-flex p-3 flex-column">
               <h3 class="heading ">
                 <a href="{{ path('show', {'id': article.id}) }}">{{ article.titre }}</a></h3>
               <div class="d-flex align-items-center mt-4 ">
-                <p class="mb-0"><a href="{{ path('show', {'id': article.id}) }}" class="btn btn-primary">Read More <span class="ion-ios-arrow-round-forward"></span></a></p>
+                <p class="mb-0"><a href="{{ path('show', {'id': article.id}) }}" class="btn btn-primary">Lire encore <span class="ion-ios-arrow-round-forward"></span></a></p>
                 <p class="ml-auto mb-0">
                   <a href="#" class="mr-2">Admin</a>
-                  <a href="#" class="meta-chat"><span class="icon-chat"></span> </a>
                 </p>
               </div>
             </div>
@@ -307,7 +305,11 @@
 
 
 
-      </div></div>
+      </div>
+        <div class="navigation text-center  st-color-blue d-flex justify-content-center "  >
+            {{ knp_pagination_render(articles) }}
+        </div>
+      </div>
       </div>
 
     </div>

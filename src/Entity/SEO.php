@@ -28,15 +28,21 @@ class SEO
     private $description;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255 ,nullable=true)
      */
     private $lien_canonical;
     /**
      *  * @var Page
-     * @ORM\OneToOne(targetEntity="Page", inversedBy="SEO")
-     * @ORM\JoinColumn(name="page",referencedColumnName="id")
+     * @ORM\OneToOne(targetEntity="Page", inversedBy="seo")
+     * @ORM\JoinColumn(name="page",referencedColumnName="id",nullable=true , onDelete="CASCADE")
      */
     private $Page;
+    /**
+     *  * @var Article
+     * @ORM\OneToOne(targetEntity="Article", inversedBy="seo")
+     * @ORM\JoinColumn(name="article",referencedColumnName="id", nullable=true, onDelete="CASCADE"  )
+     */
+    private $article;
 
     public function getId(): ?int
     {
@@ -78,4 +84,41 @@ class SEO
 
         return $this;
     }
+
+    /**
+     * @return Page
+     */
+    public function getPage(): Page
+    {
+        return $this->Page;
+    }
+
+    /**
+     * @param Page $Page
+     * @return SEO
+     */
+    public function setPage(Page $Page): SEO
+    {
+        $this->Page = $Page;
+        return $this;
+    }
+
+    /**
+     * @return Page
+     */
+    public function getArticle(): Page
+    {
+        return $this->article;
+    }
+
+    /**
+     * @param Page $article
+     * @return SEO
+     */
+    public function setArticle(Article $article): SEO
+    {
+        $this->article = $article;
+        return $this;
+    }
+
 }

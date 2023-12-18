@@ -11,6 +11,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 
+
 class FormationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -49,11 +50,12 @@ class FormationType extends AbstractType
                     "class"=>"form-control"
                 ]
             ])
-            ->add('User')
+            /*->add('User')*/
 
             ->add('media', FileType::class, [
                 'label' => 'Images',
                 'mapped'=>false,
+                'required'=>false,
             ])
 
         ;

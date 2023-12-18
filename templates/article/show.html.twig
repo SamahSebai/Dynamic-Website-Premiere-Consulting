@@ -9,12 +9,7 @@
     <!--begin::Base Table Widget 8-->
     <div class="card card-custom card-stretch gutter-b">
         <!--begin::Header-->
-        <div class="card-header border-0 pt-5">
-            <h3 class="card-title align-items-start flex-column">
-                <span class="card-label font-weight-bolder text-dark">Article</span>
-            </h3>
 
-        </div>
         <!--end::Header-->
         <!--begin::Body-->
         <div class="card-body pt-2 pb-0 mt-n3">
@@ -190,7 +185,7 @@
 
                                 </td>
                                 <td class="text-left">
-                                    <div class="text-info-75 font-weight-bold">{{ article.contenu }}</div>
+                                    <div class="text-info-75 font-weight-bold">{{ article.contenu|raw }}</div>
                                 </td>
 
 
@@ -209,7 +204,10 @@
     <div class="card-footer">
         <a href="{{ path('article') }}" class="btn btn-light-primary font-weight-bold mr-2">back to list</a>
         <a href="{{ path('article_edit', {'id': article.id}) }}" class="btn btn-light-success font-weight-bold mr-2">edit</a>
+        {% if app.user  %}
+        {% if is_granted('ROLE_ADMIN')  %}
         <a href="#" onclick="$('#delF').submit()" class="btn btn-light-danger font-weight-bold mr-2">Supprimer</a>
+        {% else %}{% endif %}{% endif %}
         <form id="delF" method="post" action="{{ path('article_delete', {'id': article.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
             <input type="hidden" name="_method" value="DELETE">
             <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ article.id) }}">

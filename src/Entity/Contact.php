@@ -51,7 +51,7 @@ class Contact
     /**
       * @var User
      * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumn(name="user",referencedColumnName="id")
+     * @ORM\JoinColumn(name="user",referencedColumnName="id" ,nullable=true)
      * 
      */
     private $User;
@@ -144,4 +144,25 @@ class Contact
 
         return $this;
     }
+
+    /**
+     * @return User
+     */
+    public function getUser(): User
+    {
+        return $this->User;
+    }
+
+    /**
+     * @param User $User
+     * @return Contact
+     */
+    public function setUser(User $User): Contact
+    {
+        $this->User = $User;
+        return $this;
+    }
+
+
+
 }

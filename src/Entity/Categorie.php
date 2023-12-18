@@ -35,19 +35,24 @@ class Categorie
     private $niveau;
     /**
      * @var Categorie
-     * @ORM\ManyToOne(targetEntity="Categorie", inversedBy="children")
-     * @ORM\JoinColumn(name="parent_id",referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Categorie", inversedBy="children" )
+     * @ORM\JoinColumn(name="parent_id",referencedColumnName="id" )
      */
     private $parent;
 
     /**
      *
      * @ORM\OneToMany(targetEntity="Categorie", mappedBy="parent")
-     * @ORM\JoinColumn(name="children_id",referencedColumnName="id")
+     * @ORM\JoinColumn(name="children_id",referencedColumnName="id" )
      */
     private $children;
 
-    
+    /**
+     * @var User
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="user",referencedColumnName="id")
+     */
+    private $User;
 
    
 
@@ -75,35 +80,6 @@ class Categorie
     public function setNom(string $nom): self
     {
         $this->nom = $nom;
-
-        return $this;
-    }
-     /**
-     * @return Collection|ArticleCategorie[]
-     */
-    public function getArticleCategorie(): Collection
-    {
-        return $this->ArticleCategorie;
-    }
-
-    public function addArticleCategorie(ArticleCategorie $ArticleCategorie): self
-    {
-        if (!$this->ArticleCategorie->contains($ArticleCategorie)) {
-            $this->ArticleCategorie[] = $ArticleCategorie;
-            $ArticleCategorie->setCategorie($this);
-        }
-
-        return $this;
-    }
-
-    public function removeArticleCategorie(Condidature $ArticleCategorie): self
-    {
-        if ($this->ArticleCategorie->removeElement($ArticleCategorie)) {
-            // set the owning side to null (unless already changed)
-            if ($ArticleCategorie->getCategorie() === $this) {
-                $ArticleCategorie->setCategorie(null);
-            }
-        }
 
         return $this;
     }
@@ -164,6 +140,42 @@ class Categorie
     public function __toString()
     {
         return $this->nom;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getArticleCategorie(): ArrayCollection
+    {
+        return $this->ArticleCategorie;
+    }
+
+    /**
+     * @param ArrayCollection $ArticleCategorie
+     * @return Categorie
+     */
+    public function setArticleCategorie(ArrayCollection $ArticleCategorie): Categorie
+    {
+        $this->ArticleCategorie = $ArticleCategorie;
+        return $this;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser(): User
+    {
+        return $this->User;
+    }
+
+    /**
+     * @param User $User
+     * @return Categorie
+     */
+    public function setUser(User $User): Categorie
+    {
+        $this->User = $User;
+        return $this;
     }
 
 

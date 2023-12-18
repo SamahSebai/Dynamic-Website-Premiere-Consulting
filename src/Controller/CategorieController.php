@@ -45,6 +45,7 @@ class CategorieController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        $user = $this->getUser();
         $categorie = new Categorie();
         $form = $this->createForm(CategorieType::class, $categorie);
         $form->handleRequest($request);
@@ -58,9 +59,10 @@ class CategorieController extends AbstractController
             else{
                 $categorie->setNiveau(0);
             }
+            $categorie->setUser($user);
             $entityManager->persist($categorie);
             $entityManager->flush();
-
+            $this->addFlash('success', 'Categorie ajoutée avec succées!');
             return $this->redirectToRoute('categorie');
         }
 
@@ -85,12 +87,14 @@ class CategorieController extends AbstractController
      */
     public function edit(Request $request, Categorie $categorie): Response
     {
+        $user = $this->getUser();
         $form = $this->createForm(CategorieType::class, $categorie);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $categorie->setUser($user);
             $this->getDoctrine()->getManager()->flush();
-
+            $this->addFlash('info', 'Categorie modifié!');
             return $this->redirectToRoute('categorie');
         }
 
@@ -109,6 +113,7 @@ class CategorieController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($categorie);
             $entityManager->flush();
+            $this->addFlash('danger', 'Categorie supprimé!');
         }
 
         return $this->redirectToRoute('categorie');

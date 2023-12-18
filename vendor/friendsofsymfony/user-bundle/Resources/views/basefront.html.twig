@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>{% block title %}Première Consulting{% endblock %}</title>
+    <meta charset="utf-8">
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800,900&display=swap"rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
+
+    <link rel="shortcut icon" type="image/x-icon" href="/themefront/assets/img/favicon.ico">
+
+    <link href="https://libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="{{asset('themefront/assets/css/open-iconic-bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('themefront/assets/css/owl.carousel.min.css')}}">
+    <link rel="stylesheet" href="{{asset('themefront/assets/css/animate.css')}}">
+    <link rel="stylesheet" href="{{asset('themefront/assets/css/owl.theme.default.min.css')}}">
+    <link rel="stylesheet" href="{{asset('themefront/assets/css/magnific-popup.css')}}">
+    <link rel="stylesheet" href="{{asset('themefront/assets/css/aos.css')}}">
+    <link rel="stylesheet" href="{{asset('themefront/assets/css/ionicons.min.css')}}">
+    <link rel="stylesheet" href="{{asset('themefront/assets/css/flaticon.css')}}">
+    <link rel="stylesheet" href="{{asset('themefront/assets/css/flaticon1.css')}}">
+    <link rel="stylesheet" href="{{asset('themefront/assets/font/flaticon.css')}}">
+    <link rel="stylesheet" href="{{asset('themefront/assets/css/icomoon.css')}}">
+    <link rel="stylesheet" href="{{asset('themefront/assets/css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('themefront/assets/css/style1.css  ')}}">
+    {% block customstylesheet %}{% endblock %}
+    {% block head %}{% endblock %}
+
+
+</head>
+
+<body>
+<header>
+        <div class="bg-warning py-2">
+            <div class="container">
+                <div class="row">
+                    <div class=" col order-first">
+                        <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-3">
+                            <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-3">
+                                <li class="ftco-animate"><a href="https://www.linkedin.com/company/premi%C3%A8re-consulting?originalSubdomain=fr"><span class="icon-linkedin"></span></a></li>
+                                <li class="ftco-animate"><a href="https://www.facebook.com/PremiereConsulting/"><span class="icon-facebook"></span></a></li>
+                                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+                                <li class="ftco-animate"><a href="mailto:contact@premiere-consulting.tn "><span class="icon-google"></span></a></li>
+                            </ul>
+                        </ul></div>
+                    <div class=" inline-block">
+                        <ul>
+                           {%  if app.user %} <li> <a class="nav-link" href="{{ path('connexion') }}"><i class="far fa-user" style="font-size: 14px;padding-right: 5px; align: right;"></i> {{ app.user.username }}  </a></li> {% else %}<li> <a class="nav-link" href="{{ path('fos_user_security_login') }}"><i class="far fa-user" style="font-size: 14px;padding-right: 5px; align: right;"></i>se connecter  </a></li>
+
+                            <li> <a class="nav-link" href="{{ path('user_registration') }}"><i class="far fa-user" style="font-size: 14px;padding-right: 5px; align: right;"></i>s'inscrire  {{ app.user.username }}  </a></li>
+{% endif %}
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+            <nav id="navbar_top" class="navbar navbar-expand-lg navbar-dark bg-primary"
+                 style="box-shadow: 0px 11px 7px 0px rgba(15,14,14,0.11);-webkit-box-shadow: 0px 11px 7px 0px rgba(15,14,14,0.11);-moz-box-shadow: 0px 11px 7px 0px rgba(15,14,14,0.11);">
+
+                <div class="container">
+
+                    <a class="navbar-brand" href="index.html">
+                        <img src="{{asset('themefront/assets/images/footer-logo.png')}}" style="height:70px;">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-bs-target="#main_nav"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon" style="color: black;"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="main_nav">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item active font-weight-bold"> <a class="nav-link" href="{{ path('accueil') }}">Acceuil
+                                </a> </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle font-weight-bold" href="about.html"
+                                   data-toggle="dropdown"> A Propos</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item font-weight-bold" href="{{path('page_show2' , {'slug' : 'qui-somme-nous'}) }}"> Qui Somme Nous ? </a></li>
+                                    <li><a class="dropdown-item font-weight-bold" href="{{path('page_show2' , {'slug' : 'notre-equipe'}) }} "> Notre Equipe </a>
+
+                                    <li><a class="dropdown-item font-weight-bold" href="{{ path('partenaire_list') }}"> Nos Partenaires </a></li>
+                                    <li><a class="dropdown-item font-weight-bold" href="{{ path('temoingage_list') }}"> Témoingages </a>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle font-weight-bold" href="services.html" data-toggle="dropdown"> Nos
+                                    Services </a>
+                                <ul class="dropdown-menu">
+
+                               <li><a class="dropdown-item dropdown-toggle font-weight-bold" href="{{path('page_show2' , {'slug' : 'assistance-et-coaching'}) }}"> Assitance et
+                                            Coaching </a>
+
+                                    <ul class="submenu dropdown-menu">
+                                            <li><a class="dropdown-item font-weight-bold" href="{{path('page_show2' , {'slug' : 'coaching-et-mise-en-place-des-systemes-de-management'}) }} ">Coaching
+                                                    et Mise en place des Systèmes de Management</a></li>
+                                            <li><a class="dropdown-item font-weight-bold" href="{{path('page_show2' , {'slug' : 'audit-de-conformite-reglementaire'}) }}">Audits de conformité
+                                                    réglementaire</a></li>
+                                            <li><a class="dropdown-item font-weight-bold" href="{{path('page_show2' , {'slug' : 'preparation-des-dossier-de-mise-a-niveau'}) }}">Préparation des
+                                                    dossier de mise à niveau</a></li>
+                                            <li><a class="dropdown-item font-weight-bold" href="{{path('page_show2' , {'slug' : 'reparation-des-plans-daffaires'}) }}">réparation des plan
+                                                    d’affaire</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a class="dropdown-item dropdown-toggle font-weight-bold" href="{{path('page_show2' , {'slug' : 'securite-industrielle-et-environnement'}) }}"> Sécurité
+                                            industrielle et environement </a>
+                                        <ul class="submenu dropdown-menu">
+                                            <li><a class="dropdown-item dropdown-toggle font-weight-bold" href="{{path('page_show2' , {'slug' : 'ingenierie-de-la-securite'}) }}">Ingenieurie de la sécurité</a>
+                                                <ul class="submenu dropdown-menu">
+                                                    <li><a class="dropdown-item font-weight-bold" href="{{path('page_show2' , {'slug' : 'classement'}) }}">Classement</a></li>
+                                                    <li><a class="dropdown-item font-weight-bold" href="{{path('page_show2' , {'slug' : 'etudes-de-dangers'}) }}">Etude de dangers</a></li>
+                                                    <li><a class="dropdown-item font-weight-bold" href="{{path('page_show2' , {'slug' : 'audit-et-etudes-securite-incendi'}) }}"> Audit et études sécurité incendie</a></li>
+                                                    <li><a class="dropdown-item font-weight-bold" href="{{path('page_show2' , {'slug' : 'etudes-atex'}) }}">Etudes ATEX</a></li>
+                                                    <li><a class="dropdown-item font-weight-bold" href="{{path('page_show2' , {'slug' : 'etudes-daffichage-et-de-signalisation-en-entreprise'}) }}">Etudes d'affichage et de signalisation<br> en entreprise </a></li>
+                                                    <li><a class="dropdown-item font-weight-bold" href="{{path('page_show2' , {'slug' : 'plans-doperations-internes'}) }}">Plans d'opérations internes </a></li>
+                                                </ul>
+                                            </li>
+
+                                            <li><a class="dropdown-item dropdown-toggle font-weight-bold" href="{{path('page_show2' , {'slug' : 'ingenierie-de-lenvironnemente'}) }}">Ingenieurie de l'environnement</a>
+                                                <ul class="submenu dropdown-menu">
+                                                    <li><a class="dropdown-item font-weight-bold" href="{{path('page_show2' , {'slug' : 'etudes-techniques-de-depollution'}) }}">Etude technique de dépollution</a></li>
+                                                    <li><a class="dropdown-item font-weight-bold" href="{{path('page_show2' , {'slug' : 'etude-dimpacte-sur-lenvironnement'}) }}">Etude d'impacte sur l'environnement</a></li>
+                                                    <li><a class="dropdown-item font-weight-bold" href="{{path('page_show2' , {'slug' : 'maitrise-de-la-gestion-de-dechets'}) }}">Maitrise de la gestion des déchets</a></li>
+                                                </ul>
+                                            </li>
+
+                                            <li><a class="dropdown-item dropdown-toggle font-weight-bold" href="{{path('page_show2' , {'slug' : 'elaboration-des-plans'}) }}">Elaboration des plan</a>
+                                                <ul class="submenu dropdown-menu">
+                                                    <li><a class="dropdown-item font-weight-bold" href="{{path('page_show2' , {'slug' : 'plans-devacuation-et-plans-de-circulation'}) }}">Plans d'évacuation et plans de circulation
+                                                        </a>
+                                                    </li>
+                                                    <li><a class="dropdown-item font-weight-bold" href="{{path('page_show2' , {'slug' : 'plans-reglementaire'}) }}">Plans  Réglementaires
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li><a class="dropdown-item dropdown-toggle font-weight-bold" href="{{path('page_show2' , {'slug' : 'logicielle-et-application-qhse'}) }}"> Logiciel et
+                                            application QHSE </a>
+                                        <ul class="submenu dropdown-menu">
+                                            <li><a class="dropdown-item font-weight-bold" href="{{path('page_show2' , {'slug' : 'regwtch-360'}) }}">RegWatch 360
+                                                </a></li>
+
+                                        </ul>
+                                    </li>
+                                    <li><a class="dropdown-item font-weight-bold" href="{{ path('formation_list') }}"> Formations</a></li>
+                                </ul>
+
+                            </li>
+
+                            </li>
+
+                            <li class="nav-item active font-weight-bold"> <a class="nav-link" href="{{ path('calendar_show') }}">Agenda </a> </li>
+                            <li class="nav-item active font-weight-bold"> <a class="nav-link" href="{{ path('blog') }}">Blog</a>
+                            </li>
+                            <li class="nav-item active font-weight-bold"> <a class="nav-link" href="{{ path('offresF_index') }}">Nous
+                                    Rejoindre</a></li>
+                            <li class="nav-item active font-weight-bold"> <a class="nav-link" href="{{ path('contact') }}">Contact</a> </li>
+                        </ul>
+                        </li>
+
+                        <ul class="navbar-nav ml-auto">
+                        </ul>
+
+                        <form action="#" class="searchform order-lg-last">
+                            <div class="form-group d-flex">
+                                <input type="text" class="form-control pl-3" placeholder="Search">
+                                <button type="submit" placeholder="" class="form-control search">
+                                    <span class="ion-ios-search"></span></button>
+                            </div>
+                        </form>
+                    </div>
+                </div> <!-- navbar-collapse.// -->
+            </nav>
+
+        </div> <!-- container.// -->
+
+
+</header>
+
+<nav class="social" style="z-index: 2;">
+    <ul>
+        <li><a href="mailto: contact@premiere-consulting.tn">Email <span class="icon-envelope"></span></a></span>
+        </li>
+        <li><a href="https://www.linkedin.com/company/premi%C3%A8re-consulting?originalSubdomain=fr"> Linkedin<span
+                        class="icon-linkedin"></span></a></li>
+        <li><a href="https://www.facebook.com/PremiereConsulting/">Facebook <span class="icon-facebook"></span></a>
+        </li>
+    </ul>
+</nav>
+{% block fos_user_content %}
+{% endblock fos_user_content %}
+<!-- ======= Clients Section ======= -->
+<section id="clients" class="clients" style="padding-top: 60px">
+    <div class="container">
+
+        <div class="owl-carousel clients-carousel">
+            <img src="{{asset('themefront/assets/images/04/patenaires/c1.png')}}">
+            <img src="{{asset('themefront/assets/images/04/patenaires/c2.png')}}">
+            <img src="{{asset('themefront/assets/images/04/patenaires/c3.png')}}">
+            <img src="{{asset('themefront/assets/images/04/patenaires/c4.png')}}">
+            <img src="{{asset('themefront/assets/images/04/patenaires/c5.png')}}">
+            <img src="{{asset('themefront/assets/images/04/patenaires/c6.png')}}">
+            <img src="{{asset('themefront/assets/images/04/patenaires/c7.png')}}">
+            <img src="{{asset('themefront/assets/images/04/patenaires/c8.png')}}">
+            <img src="{{asset('themefront/assets/images/04/patenaires/c9.png')}}">
+            <img src="{{asset('themefront/assets/images/04/patenaires/c10.png')}}">
+            <img src="{{asset('themefront/assets/images/04/patenaires/c11.png')}}">
+            <img src="{{asset('themefront/assets/images/04/patenaires/c12.png')}}">
+            <img src="{{asset('themefront/assets/images/04/patenaires/c13.png')}}">
+            <img src="{{asset('themefront/assets/images/04/patenaires/c14.png')}}">
+            <img src="{{asset('themefront/assets/images/04/patenaires/c15.png')}}">
+            <img src="{{asset('themefront/assets/images/04/patenaires/c16.png')}}">
+            <img src="{{asset('themefront/assets/images/04/patenaires/c17.png')}}">
+            <img src="{{asset('themefront/assets/images/04/patenaires/c18.png')}}">
+            <img src="{{asset('themefront/assets/images/04/patenaires/c19.png')}}">
+            <img src="{{asset('themefront/assets/images/04/patenaires/c20.png')}}">
+            <img src="{{asset('themefront/assets/images/04/patenaires/c21.png')}}">
+            <img src="{{asset('themefront/assets/images/04/patenaires/c22.png')}}">
+            <img src="{{asset('themefront/assets/images/04/patenaires/c23.png')}}">
+            <img src="{{asset('themefront/assets/images/04/patenaires/c24.png')}}">
+            <img src="{{asset('themefront/assets/images/04/patenaires/c25.png')}}">
+            <img src="{{asset('themefront/assets/images/04/patenaires/c26.png')}}">
+        </div>
+
+    </div>
+</section><!-- End Clients Section -->
+<!--footer-->
+<footer class="ftco-footer ftco-bg-dark ftco-section">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-md-6 col-lg-3">
+                <div class="ftco-footer-widget mb-5">
+                    <h2 class="ftco-heading-2">Contacter Nous</h2>
+                    <div class="block-23 mb-3">
+                        <ul>
+                            <li><span class="icon icon-map-marker"></span><span class="text">73 ter Avenue Habib
+                                        Bourguiba, Manouba 2010 APPAR 2.1</span></li>
+                            <li><a href="#"><span class="icon icon-phone"></span>+216 71 601
+                                    561</a></li>
+                            <li><a href="#"><span class="icon icon-fax"></span>+216 71 601
+                                    361</a></li>
+                            <li><a href="#"><span class="icon icon-envelope"></span>
+                                    contact@premiere-consulting.tn</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="ftco-footer-widget mb-5">
+                    <h2 class="ftco-heading-2">Actualités</h2>
+                    <div class="block-21 mb-4 d-flex">
+                        <a class="blog-img mr-4" style="background-image: url('{{ asset('themefront/assets/images/image_1.jpg')}}');"></a>
+                        <div class="text">
+                            <h3 class="heading"><a href="#">RegWatch 360-Présentation</a></h3>
+                            <div class="meta">
+                                <div><a href="#"><span class="icon-calendar"></span> Juin 27, 2019</a></div>
+                                <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="block-21 mb-5 d-flex">
+                        <a class="blog-img mr-4" style="background-image: url('{{ asset('themefront/assets/images/image_2.jpg')}}');"></a>
+                        <div class="text">
+                            <h3 class="heading"><a href="#">Notre dernière session de formation QHSE</a></h3>
+                            <div class="meta">
+                                <div><a href="#"><span class="icon-calendar"></span> Juin 27, 2019</a></div>
+                                <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="ftco-footer-widget mb-5 ml-md-4">
+                    <h2 class="ftco-heading-2">Links</h2>
+                    <ul class="list-unstyled">
+                        <li><a href="#"><span class="ion-ios-arrow-round-forward mr-2"></span>Acceuil</a></li>
+                        <li><a href="#"><span class="ion-ios-arrow-round-forward mr-2"></span>A Propos</a></li>
+                        <li><a href="#"><span class="ion-ios-arrow-round-forward mr-2"></span>Nos Services</a></li>
+                        <li><a href="#"><span class="ion-ios-arrow-round-forward mr-2"></span>Formations</a></li>
+                        <li><a href="#"><span class="ion-ios-arrow-round-forward mr-2"></span>Agenda</a></li>
+                        <li><a href="#"><span class="ion-ios-arrow-round-forward mr-2"></span>Blog</a></li>
+                        <li><a href="#"><span class="ion-ios-arrow-round-forward mr-2"></span>Nous Rejoindre</a>
+                        </li>
+                        <li><a href="#"><span class="ion-ios-arrow-round-forward mr-2"></span>Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="ftco-footer-widget mb-5">
+                    <h2 class="ftco-heading-2">Suivez nous</h2>
+                    <p>Inscrivez-vous pour recevoir les notifications des nouveautés des domaines l'environnement,
+                        l'hygiène et la santé sécurité au travail</p>
+                    <form action="#" class="subscribe-form">
+                        <div class="form-group">
+                            <input type="text" class="form-control mb-2 text-center"
+                                   placeholder="écrire votre adresse">
+                            <input type="submit" value="Inscrivez-Vous" class="form-control submit px-3">
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</footer>
+<!--back to top-->
+<a id="back-to-top" href="#" class="btn btn-light btn-lg back-to-top" role="button" style=" position: fixed;
+    bottom: 25px;
+    right: 25px;
+    display: none;background-color: #d91a5b;
+}"><i class="fas fa-chevron-up" style="color: white"></i></a>
+
+
+
+<!-- loader -->
+<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
+        <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+        <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
+                stroke="#F96D00" />
+    </svg>
+</div>
+
+
+<script src="{{asset('themefront/assets/js/jquery.min.js')}}"></script>
+<script src="{{asset('themefront/assets/js/jquery-migrate-3.0.1.min.js')}}"></script>
+<script src="{{asset('themefront/assets/js/popper.min.js')}}"></script>
+<script src="{{asset('themefront/assets/js/bootstrap.min.js')}}"></script>
+<script src="{{asset('themefront/assets/js/jquery.easing.1.3.js')}}"></script>
+<script src="{{asset('themefront/assets/js/jquery.waypoints.min.js')}}"></script>
+<script src="{{asset('themefront/assets/js/jquery.stellar.min.js')}}"></script>
+<script src="{{asset('themefront/assets/js/owl.carousel.min.js')}}"></script>
+<script src="{{asset('themefront/assets/js/jquery.magnific-popup.min.js')}}"></script>
+<script src="{{asset('themefront/assets/js/aos.js')}}"></script>
+<script src="{{asset('themefront/assets/js/jquery.animateNumber.min.js')}}"></script>
+<script src="{{asset('themefront/assets/js/scrollax.min.js')}}"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+<script src="{{asset('themefront/assets/js/google-map.js')}}"></script>
+<script src="{{asset('themefront/assets/js/main.js')}}"></script>
+
+</body>
+<script type="text/javascript">
+    /// some script
+
+    // jquery ready start
+    $(document).ready(function () {
+        // jQuery code
+
+        //////////////////////// Prevent closing from click inside dropdown
+
+        $(document).on('click', '.dropdown-menu', function (e) {
+            e.stopPropagation();
+        });
+
+        // make it as accordion for smaller screens
+        if ($(window).width() < 992) {
+            $('.dropdown-menu a').click(function (e) {
+                e.preventDefault();
+                if ($(this).next('.submenu').length) {
+                    $(this).next('.submenu').toggle();
+                }
+                $('.dropdown').on('hide.bs.dropdown', function () {
+                    $(this).find('.submenu').hide();
+                })
+            });
+        }
+
+    });
+
+    ///////////////// fixed menu on scroll for desktop
+    if ($(window).width() > 992) {
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 40) {
+                $('#navbar_top').addClass("fixed-top");
+                // add padding top to show content behind navbar
+                $('body').css('padding-top', $('.navbar').outerHeight() + 'px');
+            } else {
+                $('#navbar_top').removeClass("fixed-top");
+                // remove padding top from body
+                $('body').css('padding-top', '0');
+            }
+        });
+    }
+    $(document).ready(function(){
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 50) {
+                $('#back-to-top').fadeIn();
+            } else {
+                $('#back-to-top').fadeOut();
+            }
+        });
+        // scroll body to 0px on click
+        $('#back-to-top').click(function () {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 400);
+            return false;
+        });
+    });
+    // Clients carousel (uses the Owl Carousel library)
+    $(".clients-carousel").owlCarousel({
+        autoplay: true,
+        dots: true,
+        loop: true,
+        responsive: {
+            0: {
+                items: 2
+            },
+            768: {
+                items: 4
+            },
+            900: {
+                items: 6
+            }
+        }
+    });
+</script>
+{% block javascripts %}
+{% endblock %}
+
+</html>

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\NewsletterRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -30,12 +31,12 @@ class Newsletter
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $type;
+    private $objet;
     /**
       * @var User
      * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumn(name="user",referencedColumnName="id")
-     * 
+     *
      */
     private $User;
     /**
@@ -80,45 +81,51 @@ class Newsletter
         return $this;
     }
 
-    public function getType(): ?string
+    public function getObjet(): ?string
     {
-        return $this->type;
+        return $this->objet;
     }
 
-    public function setType(string $type): self
+    public function setObjet(string $objet): self
     {
-        $this->type = $type;
+        $this->objet = $objet;
 
         return $this;
     }
+
     /**
-     * @return Collection|NewsletterAbonner[]
+     * @return ArrayCollection
      */
-    public function getNewsletterAbonner(): Collection
+    public function getNewsletterAbonner(): ?ArrayCollection
     {
         return $this->NewsletterAbonner;
     }
 
-    public function addNewsletterAbonner(NewsletterAbonner $NewsletterAbonner): self
+    /**
+     * @param ArrayCollection $NewsletterAbonner
+     * @return Newsletter
+     */
+    public function setNewsletterAbonner(ArrayCollection $NewsletterAbonner): Newsletter
     {
-        if (!$this->NewsletterAbonner->contains($newsletterAbonner)) {
-            $this->NewsletterAbonner[] = $newsletterAbonner;
-            $newsletterAbonner->setNewsletter($this);
-        }
-
+        $this->NewsletterAbonner = $NewsletterAbonner;
         return $this;
     }
 
-    public function removeNewsletterAbonner(NewsletterAbonner $newsletterAbonner): self
+    /**
+     * @return User
+     */
+    public function getUser(): User
     {
-        if ($this->NewsletterAbonner->removeElement($newsletterAbonner)) {
-            // set the owning side to null (unless already changed)
-            if ($newsletterAbonner->getNewsletter() === $this) {
-                $newsletterAbonner->setNewsletter(null);
-            }
-        }
-
-        return $this;
+        return $this->User;
     }
+
+    /**
+     * @param User $User
+     */
+    public function setUser(User $User)
+    {
+        $this->User = $User;
+    }
+
 
 }

@@ -5,7 +5,7 @@
 {% block body %}
 
 
-    <section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_1.jpg');">
+    <section class="hero-wrap hero-wrap-2" style="background-image: url('{{ asset('themefront/assets/images/bg_1.jpg')}}');">
         <div class="overlay"></div>
         <div class="container">
             <div class="row no-gutters slider-text align-items-center justify-content-center">
@@ -18,7 +18,7 @@
                                     <div class="col-lg-12">
                                         <div class="text-content">
                                             <h4 style="color: #FFFFFF;margin: 0px;"></h4>
-                                            <h2 style="color: #FFFFFF;margin: 0px;">Intitulé offre</h2>
+                                            <h2 style="color: #FFFFFF;margin: 0px;">{{ offre.titre }}</h2>
                                         </div>
                                     </div>
                                 </div>
@@ -40,7 +40,8 @@
             <div class="row">
                 <div class="col-md-4">
                     <div>
-                        <img alt="" class="img-fluid wc-image" src="images/04/blog-post-19.jpg">
+                        <img alt="" class="img-fluid wc-image" src="{{ asset('themefront/assets/
+images/04/blog-post-19.jpg') }}">
                     </div>
 
                     <br>
@@ -65,7 +66,13 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="main-button">
-                                <a href="#">Condidature spontannée</a>
+
+                                    {% if is_granted('ROLE_USER')  %}
+                                    <a href="{{ path('condidature',{'id':offre.id}) }}">Condidature</a>
+                                {% else %}
+                                    <a href="{{ path('fos_user_security_login') }}">Condidature</a>
+                                {% endif %}
+
                             </div>
                         </div>
                     </div>
@@ -85,18 +92,19 @@
 
                 <div class="content">
                     <p style="margin-bottom: 0px;font-size: 15px;font-weight: 400;color: #7a7a7a;line-height: 30px;">
-                        {{ offre.description }}</p>
-
+                        {{ offre.description }}
+                    </p>
                     <br>
 
 
                     <br>
 
-                    <p style="margin-bottom: 0px;font-size: 15px;font-weight: 400;color: #7a7a7a;line-height: 30px;">{{ offre.experience }}</p>
+                    <h5 style="margin-bottom: 0px;font-size: 15px;font-weight: 400;color: #7a7a7a;line-height: 30px;">{{ offre.experience }}</h5>
                 </div>
 
                 <br>
                 <br>
+
             </div>
 
             <div class="row">
@@ -198,7 +206,6 @@
                     </div>
                 </div>
             </div>
-
 
         </div>
     </div>

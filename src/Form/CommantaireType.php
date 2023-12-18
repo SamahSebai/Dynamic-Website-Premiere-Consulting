@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Commantaire;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
@@ -31,18 +32,13 @@ class CommantaireType extends AbstractType
                   'class' => 'form-control'
               ]
           ])
-            ->add('contenu', CKEditorType::class ,[
+            ->add('contenu', TextareaType::class ,[
                 'label' => 'Votre commentaire',
                 'attr' => [
                     'class' => 'form-control'
                 ]
             ])
 
-            ->add('rgpd', CheckboxType::class, [
-                'constraints' => [
-                    new NotBlank()
-                ]
-            ])
             ->add('parentid', HiddenType::class, [
                 'mapped' => false
             ])

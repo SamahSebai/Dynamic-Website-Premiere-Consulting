@@ -51,10 +51,10 @@ class PartenaireType extends AbstractType
                     "class"=>"form-control"
                 ]
             ])
-            ->add('media', FileType::class, [
-                'label' => 'Images',
+            ->add('image', FileType::class, [
                 'mapped'=>false,
-            ])
+                'required'=>false
+            ]);
         ;
     }
 

@@ -6,6 +6,7 @@ use App\Entity\Formation;
 use App\Entity\Media;
 use App\Entity\Valpub;
 use App\Form\FormationType;
+use App\Repository\ArticleRepository;
 use App\Repository\FormationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -33,6 +34,7 @@ class FormationController extends AbstractController
      */
     public function index(FormationRepository $formationRepository, Request $request,PaginatorInterface $paginator)
     {
+
         $em=$this->getDoctrine()->getManager();
         $search = $request->query->get('f');
         if ($search) {
@@ -61,11 +63,10 @@ class FormationController extends AbstractController
 
     /**
      * @Route("/new", name="formation_new", methods={"GET","POST"})
-
-
      */
     public function new(Request $request): Response
     {
+        $user = $this->getUser();
         $formation = new Formation();
         $form = $this->createForm(FormationType::class, $formation);
         $form->handleRequest($request);
@@ -75,7 +76,7 @@ class FormationController extends AbstractController
             /**
              * @var image $image
              */
-            $image= $form->get('image')->getData();
+            $image= $form->get('media')->getData();
             $em = $this->getDoctrine()->getManager();
             $formation->setTheme($request->request->get('param'));
             $em->persist($formation);
@@ -100,9 +101,11 @@ class FormationController extends AbstractController
                 $media = new Media();
                 $media->setURL($newFilename);
                 $media->setFormation($formation);
+                $formation->setUser($user);
                 $em->persist($media);
                 $em->flush();
-
+                $this->addFlash('success', 'Formation ajoutée avec succées!');
+                return $this->redirectToRoute('formation_index');
             }
 
         }
@@ -116,10 +119,11 @@ class FormationController extends AbstractController
      * @Route("/List/", name="formation_list", methods={"GET"})
 
      */
-    public function showList( ): Response
+    public function showList(  ArticleRepository $artRepo): Response
     {
 
         $em=$this->getDoctrine()->getManager();
+        $articlelast1 = $artRepo->findLastArticles2();
 
         $theme="";
         $F1=$em->getRepository(Formation::class)->createQueryBuilder('T')
@@ -149,7 +153,7 @@ class FormationController extends AbstractController
             ->setParameter('C','Communication')
             ->getQuery()->getResult();
         return $this->render('formation/show1.html.twig', [
-            'F1'=>$F1,'F2'=>$F2,'F3'=>$F3,'F4'=>$F4,'F5'=>$F5,'F6'=>$F6,
+            'F1'=>$F1,'F2'=>$F2,'F3'=>$F3,'F4'=>$F4,'F5'=>$F5,'F6'=>$F6,'articlelast1' => $articlelast1
         ]);
 
     }
@@ -159,10 +163,10 @@ class FormationController extends AbstractController
      * @Route("/{id}", name="formation_show", methods={"GET"})
 
      */
-    public function show(Formation $formation): Response
-    {
+    public function show(Formation $formation,ArticleRepository $articlerepo): Response
+    {   $articlelast1 = $articlerepo->findLastArticles2();
         return $this->render('formation/show.html.twig', [
-            'formation' => $formation,
+            'formation' => $formation,'articlelast1' => $articlelast1
         ]);
     }
 
@@ -171,11 +175,13 @@ class FormationController extends AbstractController
      * @Route("/{id}/edit", name="formation_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Formation $formation): Response
-    {
+    {        $user = $this->getUser();
+
         $form = $this->createForm(FormationType::class, $formation);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $formation->setUser($user);
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('formation_index');
@@ -196,6 +202,8 @@ class FormationController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($formation);
             $entityManager->flush();
+            $this->addFlash('danger', 'Formation supprimé!');
+
         }
 
         return $this->redirectToRoute('formation_index');

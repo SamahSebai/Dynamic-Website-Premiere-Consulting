@@ -58,9 +58,15 @@ class Services
      */
     private $ServicePage;
     /**
-     * @ORM\OneToMany(targetEntity="Valpub", mappedBy="Services")
+     * @ORM\OneToMany(targetEntity="Valpub", mappedBy="service")
      */
     private $valpub;
+    /**
+     * @var User
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="user",referencedColumnName="id")
+     */
+    private $User;
 
 
     public function __construct()
@@ -149,7 +155,7 @@ class Services
         return $this;
     }
     /**
-     * @return Collection|ElementDevis[]
+     * @return ArrayCollection
      */
     public function getElementDevis(): Collection
     {
@@ -224,5 +230,34 @@ class Services
         $this->valpub = $valpub;
         return $this;
     }
+
+    /**
+     * @param mixed $ElementDevis
+     * @return Services
+     */
+    public function setElementDevis($ElementDevis)
+    {
+        $this->ElementDevis = $ElementDevis;
+        return $this;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser(): User
+    {
+        return $this->User;
+    }
+
+    /**
+     * @param User $User
+     * @return Services
+     */
+    public function setUser(User $User): Services
+    {
+        $this->User = $User;
+        return $this;
+    }
+
 
 }

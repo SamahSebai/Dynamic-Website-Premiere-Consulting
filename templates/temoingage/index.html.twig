@@ -4,32 +4,23 @@
 
 {% block body %}
 <div class="card card-custom gutter-b" >
-    <!--begin::Header--> <div class="container  align-items-stretch ">
-
-        <form class="form" action="" method="get" id="formsearch9">
-
-            <div class="form-group row">
-                <input type="text"  name="t" class="form-control col-8" placeholder="recherche..."/>
-                <button type="submit" class="btn btn-primary mr-2 "><span><i class="flaticon2-search-1 icon-md"></i></span></button>
-            </div>
-
-
-        </form>
-    </div>
+    <!--begin::Header-->
     <div class="card-header border-0 py-5" >
         <h3 class="card-title align-items-start flex-column">
             <span class="card-label font-weight-bolder text-dark">liste des témoingages</span>
 
         </h3>
+
         <div class="card-toolbar">
             <a href="{{ path('temoingage_new') }}" class="btn btn-success font-weight-bolder font-size-sm">
 											<span class="svg-icon svg-icon-md svg-icon-white">
 
 											</span>Ajouter une nouvelle temoingage</a>
         </div>
+
     </div>
     <div class="card-body py-0" >
-        <!--begin::Table-->
+
         <div class="table-responsive" >
             <table class="table table-head-custom table-vertical-center" id="kt_advance_table_widget_1" style="height:100%" >
             <thead>
@@ -76,16 +67,17 @@
 </svg><!--end::Svg Icon--></span>&ensp;Afficher</a>
 
                             <!-- <a class="dropdown-item" href="#">Something else here</a>-->
-
-                            <a class="dropdown-item" onclick="$('#delF').submit() "><span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\General\Trash.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                            {% if app.user  %}
+                            {% if is_granted('ROLE_ADMIN')  %}
+                            <a class="dropdown-item" onclick="$('#delF{{ temoingage.id }}').submit() "><span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\General\Trash.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <rect x="0" y="0" width="24" height="24"/>
         <path d="M6,8 L6,20.5 C6,21.3284271 6.67157288,22 7.5,22 L16.5,22 C17.3284271,22 18,21.3284271 18,20.5 L18,8 L6,8 Z" fill="#000000" fill-rule="nonzero"/>
         <path d="M14,4.5 L14,4 C14,3.44771525 13.5522847,3 13,3 L11,3 C10.4477153,3 10,3.44771525 10,4 L10,4.5 L5.5,4.5 C5.22385763,4.5 5,4.72385763 5,5 L5,5.5 C5,5.77614237 5.22385763,6 5.5,6 L18.5,6 C18.7761424,6 19,5.77614237 19,5.5 L19,5 C19,4.72385763 18.7761424,4.5 18.5,4.5 L14,4.5 Z" fill="#000000" opacity="0.3"/>
     </g>
 </svg><!--end::Svg Icon--></span>&ensp;Supprimer</a>
-
-                            <form id="delF" method="post" action="{{ path('temoingage_delete', {'id': temoingage.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                            {% else %}{% endif %}{% endif %}
+                            <form id="delF{{ temoingage.id }}" method="post" action="{{ path('temoingage_delete', {'id': temoingage.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
                                 <input type="hidden" name="_method" value="DELETE">
                                 <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ temoingage.id) }}">
                             </form>
@@ -96,13 +88,16 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <td colspan="4">aucun enregistrement trouvé</td>
             </tr>
         {% endfor %}
         </tbody>
             </table>
         </div>
         <!--end::Table-->
+        <div class="navigation text-center  st-color-blue d-flex justify-content-center "  style="font-size: large ; letter-spacing: 5px ; color:#eb1c1c">
+            {{ knp_pagination_render(temoingages) }}
+        </div>
     </div>
     <!--end::Body-->
 </div>

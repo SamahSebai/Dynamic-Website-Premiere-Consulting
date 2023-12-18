@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Abonner{% endblock %}
+
+{% block body %}
+
+
+
+
+
+    <h1>Create new Abonner</h1>
+
+    {{ include('abonner/_form.html.twig') }}
+
+    <a href="{{ path('abonner_index') }}">back to list</a>
+{% endblock %}

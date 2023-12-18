@@ -47,4 +47,13 @@ class DevisRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function search($term)
+    {
+        $query=$this->createQueryBuilder('devis')->select('devis');
+        $query ->Where('devis.nom LIKE :searchTerm  or devis.date  LIKE :searchTerm or devis.email  LIKE :searchTerm or devis.prenom  LIKE :searchTerm or devis.entreprise  LIKE :searchTerm or devis.reference  LIKE :searchTerm ')
+            ->setParameter('searchTerm','%' .$term.'%');
+        $query ->getQuery()
+            ->getResult();
+        return $query;
+    }
 }

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Entity;
+use Doctrine\Common\Collections\Collection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -47,8 +48,11 @@ class User extends BaseUser
     private $Condidature;
 
 
-    
-    
+    /**
+     * @ORM\Column(type="string", length=255,nullable=true )
+     */
+    private $photo;
+
 
     
 
@@ -156,6 +160,27 @@ class User extends BaseUser
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getPhoto():?string
+    {
+        return $this->photo;
+    }
+
+    /**
+     * @param mixed $photo
+     */
+    public function setPhoto(?string $photo) :self
+    {
+        $this->photo = $photo;
+        return $this;
+    }
+
+
+
+
 
 
 

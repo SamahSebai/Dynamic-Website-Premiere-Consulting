@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\DevisRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -18,7 +20,7 @@ class Devis
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer")
      */
     private $TVA;
     /**
@@ -73,10 +75,20 @@ class Devis
      * @ORM\Column(type="string", length=255)
      */
     private $entreprise;
+    /**
+     * @var User
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="user",referencedColumnName="id")
+     */
+    private $User;
 
     public function __construct()
     {
         $this->ElementDevis = new ArrayCollection();
+        $this->TVA =19;
+        $this->montantHT= 0;
+        $this->montantTTC=0;
+        $this->reference=0;
     }
 
 
@@ -95,37 +107,10 @@ class Devis
     {
         $this->TVA = $TVA;
 
-        return $this;
-    }
-    /**
-     * @return Collection|ElementDevis[]
-     */
-    public function getElementDevis(): Collection
-    {
-        return $this->ElementDevis;
-    }
-
-    public function addElementDevis(ElementDevis $ElementDevis): self
-    {
-        if (!$this->ElementDevis->contains($ElementDevis)) {
-            $this->ElementDevis[] = $ElementDevis;
-            $ElementDevis->setDevis($this);
-        }
 
         return $this;
     }
 
-    public function removeElementDevis(ElementDevis $ElementDevis): self
-    {
-        if ($this->ElementDevis->removeElement($ElementDevis)) {
-            // set the owning side to null (unless already changed)
-            if ($ElementDevis->getDevis() === $this) {
-                $ElementDevis->setDevis(null);
-            }
-        }
-
-        return $this;
-    }
 
     public function getMontantTTC(): ?int
     {
@@ -220,6 +205,63 @@ class Devis
     {
         $this->entreprise = $entreprise;
 
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getElementDevis(): Collection
+    {
+        return $this->ElementDevis;
+    }
+
+    public function addElementDevis(ElementDevis $ElementDevis): self
+    {
+        if (!$this->ElementDevis->contains($ElementDevis)) {
+            $this->ElementDevis[] = $ElementDevis;
+            $ElementDevis->setDevis($this);
+        }
+
+        return $this;
+    }
+
+    public function removeElementDevis(ElementDevis $ElementDevis): self
+    {
+        if ($this->ElementDevis->removeElement($ElementDevis)) {
+            // set the owning side to null (unless already changed)
+            if ($ElementDevis->getDevis() === $this) {
+                $ElementDevis->setDevis(null);
+            }
+        }
+
+        return $this;
+    }
+    /**
+     * @param mixed $ElementDevis
+     * @return Devis
+     */
+    public function setElementDevis($ElementDevis)
+    {
+        $this->ElementDevis = $ElementDevis;
+        return $this;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser(): User
+    {
+        return $this->User;
+    }
+
+    /**
+     * @param User $User
+     * @return Devis
+     */
+    public function setUser(User $User): Devis
+    {
+        $this->User = $User;
         return $this;
     }
 

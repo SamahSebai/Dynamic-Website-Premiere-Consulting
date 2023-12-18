@@ -1,9 +1,24 @@
 <?php
 
 namespace App\Controller;
+use App\Entity\Abonner;
+use App\Entity\Article;
+use App\Entity\ArticleCategorie;
+use App\Entity\Categorie;
+use App\Entity\Commantaire;
+use App\Entity\Condidature;
+use App\Entity\Contact;
+use App\Entity\Devis;
+use App\Entity\Evenement;
+use App\Entity\Newsletter;
+use App\Entity\Offres;
+use App\Entity\Page;
+use App\Entity\Partenaire;
 use App\Entity\User;
 use App\Form\ResetPassType;
 use App\Form\UserType;
+use App\Repository\ArticleRepository;
+use App\Repository\CommantaireRepository;
 use App\Repository\UserRepository;
 use FOS\UserBundle\Model\UserInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -11,15 +26,17 @@ use Knp\Component\Pager\PaginatorInterface;
 use FOS\UserBundle\Util\TokenGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-class DefaultController extends AbstractController
+class
+DefaultController extends AbstractController
 {
     /**
-     * @Route("/",name="acceuil")
+     * @Route("/ProfileB",name="ProfileB")
      */
     public function indexAction(Request $request)
     {
@@ -31,8 +48,22 @@ class DefaultController extends AbstractController
         return $this->render('FOSUserBundle:Profile:show.html.twig',['user'=>$user]);
     }
     /**
-     *@Route("/dashboard",name="dashboard");
+     * @Route("/Profile",name="Profile")
      */
+    public function profile(Request $request,ArticleRepository $artRepo)
+    {        $articlelast1 = $artRepo->findLastArticles2();
+
+        $user=$this->getUser();
+        if(!is_object($user)||!$user instanceof UserInterface){
+            return $this->redirectToRoute('fos_user_security_login');
+        }
+
+        return $this->render('profile/index.html.twig',['user'=>$user,'articlelast1' => $articlelast1
+]);
+    }
+    /**
+     *@Route("/dashboard",name="dashboard");
+
     public function dashboarAction(){
 
 
@@ -42,7 +73,26 @@ class DefaultController extends AbstractController
 
         return $this->render('utilisateur/dashboard.html.twig', ['users' => $users]);
 
-    }
+    }*/
+
+//    /**
+//     * @Route("/dashboard", name="stats")
+//     */
+//    public function statistiques(CommantaireRepository $commantaireRepository){
+//        $commentaires = $commantaireRepository->findAll();
+//        $dates = [];
+//        $articles = [];
+//        foreach($commentaires as $commentaire){
+//            $date[] = $commentaire->getDate();
+//            $article[] = $commentaire->getArticle();
+//        }
+//        //  $commentaires= $commentaires->countByArticle();
+//        return $this->render('accueil/stats.html.twig', [
+//            'article' =>json_encode($articles),
+//            'date' => json_encode($dates),
+//        ]);
+//    }
+
     /**
      * @Route("/user", name="user", methods={"GET"})
      */
@@ -58,7 +108,7 @@ class DefaultController extends AbstractController
         $user = $paginator->paginate(
             $user,
             $request->query->getInt('page', 1),
-            1000
+            5
         );
 
         return $this->render('utilisateur/index.html.twig', [
@@ -78,6 +128,28 @@ class DefaultController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $role = $form->get('role')->getData();
+            $image= $form->get('image')->getData();
+
+            if ($image) {
+                $originalFilename = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $image->guessExtension();
+
+                // Move the file to the directory where brochures are stored
+                try {
+                    $image->move(
+                        $this->getParameter('images_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+
+                }
+
+                $user->setPhoto($newFilename);
+
+            }
+
             $user->setRoles(array($role));
             $entityManager->persist($user);
             $entityManager->flush();
@@ -95,11 +167,11 @@ class DefaultController extends AbstractController
 
     /**
      * @Route("/editUser/{id}",name="user_edit")
-     * @IsGranted("ROLE_ADMIN")
+     *
      */
 
 
-    public function editUserAction(Request $request, User $user){
+    public function editUserAction(Request $request, User $user ){
 
         $roles =$this->getUser()->getRoles();
 
@@ -116,7 +188,27 @@ class DefaultController extends AbstractController
                 $role = $form->get('role')->getData();
                 $user->setRoles(array($role));
                 $em->persist($user);
+                $image= $form->get('image')->getData();
 
+                if ($image) {
+                    $originalFilename = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                    // this is needed to safely include the file name as part of the URL
+                    $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                    $newFilename = $safeFilename . '-' . uniqid() . '.' . $image->guessExtension();
+
+                    // Move the file to the directory where brochures are stored
+                    try {
+                        $image->move(
+                            $this->getParameter('images_directory'),
+                            $newFilename
+                        );
+                    } catch (FileException $e) {
+
+                    }
+
+                    $user->setPhoto($newFilename);
+
+                }
                 $em->flush();
                 return $this->redirectToRoute('user');
             }
@@ -124,10 +216,74 @@ class DefaultController extends AbstractController
                 'user' => $user,
                 'form' => $form->createView()]);
         }
-        return $this->redirectToRoute('fos_user_security_login');
+        else{
+            return $this->redirectToRoute('accueil');
+        }
 
 //        $this->render('utilisateur/editUser.html.twig', array('form' => $form->createView()));
     }
+
+
+
+
+
+    /**
+     * @Route("/editProfil/{id}",name="Profil_edit")
+     *
+     */
+
+
+    public function editUserAction1(Request $request, User $user,ArticleRepository $artRepo){
+
+
+        $articlelast1 = $artRepo->findLastArticles2();
+
+
+
+            $em = $this->getDoctrine()->getManager();
+
+            $form = $this->createForm(UserType::class, $user);
+            $form->remove("current_password");
+            $form->remove("plainPassword");
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $role = $form->get('role')->getData();
+                $user->setRoles(array($role));
+                $em->persist($user);
+                $image= $form->get('image')->getData();
+
+                if ($image) {
+                    $originalFilename = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                    // this is needed to safely include the file name as part of the URL
+                    $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                    $newFilename = $safeFilename . '-' . uniqid() . '.' . $image->guessExtension();
+
+                    // Move the file to the directory where brochures are stored
+                    try {
+                        $image->move(
+                            $this->getParameter('images_directory'),
+                            $newFilename
+                        );
+                    } catch (FileException $e) {
+
+                    }
+                    $user->setPhoto($newFilename);
+                }
+                $em->flush();
+                return $this->redirectToRoute('user');
+            }
+            return $this->render('utilisateur/editProfil.html.twig', [
+                'user' => $user,'articlelast1' => $articlelast1,
+                'form' => $form->createView()]);
+
+
+//        $this->render('utilisateur/editUser.html.twig', array('form' => $form->createView()));
+    }
+
+
+
+
 
 
 
@@ -144,10 +300,9 @@ class DefaultController extends AbstractController
         $entityManager->remove($user[0]);
 
         $entityManager->flush();
+        $this->addFlash('danger', 'Utilisateur supprimé!');
         return $this->redirectToRoute('user');
     }
-
-
 
     /**
      * @Route("usershow/{id}", name="user_show", methods={"GET"})
@@ -158,9 +313,6 @@ class DefaultController extends AbstractController
             'user' => $user,
         ]);
     }
-
-
-
 
 
     /**
@@ -234,6 +386,99 @@ class DefaultController extends AbstractController
         return $this->render('registration/forgotten_password.html.twig',['emailForm' => $form->createView()]);
 
     }
+    /**
+     * @Route("/dashboard", name="stats")
+     * @IsGranted("ROLE_ADMIN")
+     */
+    public function statistiques( CommantaireRepository $commantaireRepository){
+
+        $em = $this->getDoctrine()->getManager();
+        $articles = $em->getRepository(Article::class)->findAll();
+        $nbart= count($articles);
+        $pages =$em->getRepository(Page::class)->findAll();
+        $nbpage=count($pages);
+        $evenements=$em->getRepository(Evenement::class)->findAll();
+        $nbeve= count($evenements);
+        $offres=$em->getRepository(Offres::class)->findAll();
+        $nboff= count($offres);
+        $categories=$em->getRepository(Categorie::class)->findAll();
+        $cat= count($categories);
+        $devis=$em->getRepository(Devis::class)->findAll();
+        $nbdevis= count($devis);
+        $candidatures=$em->getRepository(Condidature::class)->findAll();
+        $nbcandidat= count($candidatures);
+        $abonnees=$em->getRepository(Abonner::class)->findAll();
+        $nbabonn= count($abonnees);
+        $commentaires=$em->getRepository(Commantaire::class)->findAll();
+        $nbcommnt= count($commentaires);
+        $newsletter=$em->getRepository(Newsletter::class)->findAll();
+        $nbnewsletter= count($newsletter);
+        $contact=$em->getRepository(Contact::class)->findAll();
+        $nbcontact= count($contact);
+        $utilisateur=$em->getRepository(User::class)->findAll();
+        $nbutil= count($utilisateur);
+        $paretanire=$em->getRepository(Partenaire::class)->findAll();
+        $nbparte= count($paretanire);
+        $categories=$em->getRepository(Partenaire::class)->findAll();
+        $catnom=$categories;
+
+        $roles =$this->getUser()->getRoles();
+
+        if (in_array("ROLE_ADMIN",$roles) ) {
 
 
+
+        $em=$this->getDoctrine()->getConnection();
+        $query= $em->executeQuery("SELECT COUNT(article_categorie.id) as nb, Categorie.nom as name FROM article_categorie left join Categorie on Categorie.id= article_categorie.Categorie GROUP BY categorie ");
+        $cat=$query->fetchAllAssociative();
+        $query= $em->executeQuery("SELECT nom FROM `categorie` ");
+        $catnom=$query->fetchAllAssociative();
+        $query= $em->executeQuery("SELECT COUNT(id) as nb FROM page ");
+        $nbpage=$query->fetchAllAssociative();
+        $query= $em->executeQuery("SELECT COUNT(id) as nb FROM commantaire ");
+        $nbcommnt=$query->fetchAllAssociative();
+        $query= $em->executeQuery("SELECT COUNT(id) as nb FROM contact ");
+        $nbcontact=$query->fetchAllAssociative();
+        $query= $em->executeQuery("SELECT COUNT(id) as nb FROM abonner ");
+        $nbabonn=$query->fetchAllAssociative();
+        $query= $em->executeQuery("SELECT COUNT(id) as nb FROM newsletter ");
+        $nbnewsletter=$query->fetchAllAssociative();
+        $query= $em->executeQuery("SELECT COUNT(id) as nb FROM evenement ");
+        $nbeve =$query->fetchAllAssociative();
+        $query= $em->executeQuery("SELECT COUNT(id) as nb FROM services ");
+        $nbservice =$query->fetchAllAssociative();
+        $query= $em->executeQuery("SELECT COUNT(id) as nb FROM condidature ");
+        $nbcandidat =$query->fetchAllAssociative();
+        $query= $em->executeQuery("SELECT COUNT(id) as nb FROM devis ");
+        $nbdevis =$query->fetchAllAssociative();
+        $query= $em->executeQuery("SELECT COUNT(id) as nb FROM offres GROUP BY  type ");
+        $nboff =$query->fetchAllAssociative();
+        $query= $em->executeQuery("SELECT COUNT(id) as nb FROM fos_user");
+        $nbutil =$query->fetchAllAssociative();
+        $query= $em->executeQuery("SELECT COUNT(id) as nb FROM partenaire");
+        $nbparte =$query->fetchAllAssociative();
+
+
+        return $this->render('stats.html.twig', [
+            'nbart' => ($nbart),
+            'cat'=>($cat),
+            'nbpage' => ($nbpage),
+            'nbeve' => ($nbeve),
+            'nboff' => ($nboff),
+            'nbcommnt'=>($nbcommnt),
+            'nbcontact'=>($nbcontact),
+            'nbabonn'=>($nbabonn),
+            'nbnewsletter'=>($nbnewsletter),
+            'nbservice'=>($nbservice),
+            'nbcandidat'=>($nbcandidat),
+            'nbdevis'=>($nbdevis),
+            'nbutil'=>($nbutil),
+            'nbpart'=>($nbparte),
+            'catnom'=>($catnom),
+        ]);
+
+    }else{
+return $this->redirectToRoute('accueil');
 }
+
+}}

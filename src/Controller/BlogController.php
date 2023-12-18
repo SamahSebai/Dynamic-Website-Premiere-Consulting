@@ -5,6 +5,7 @@ use App\Entity\Article;
 use App\Entity\Commantaire;
 use App\Form\CommantaireType;
 use App\Repository\ArticleRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,16 +21,30 @@ class BlogController extends AbstractController
     /**
      * @Route("/blog", name="blog")
      */
-    public function index(ArticleRepository $artRepo): Response
-    {
-        $articlepop = $artRepo->findBestArticles();
-        $em=$this->getDoctrine()->getManager();
-        $articles = $em->getRepository(Article::class)->findAll();
 
-                return $this->render('blog/index.html.twig', [
-            'articles' => $articles,'articlepop' => $articlepop
-        ]);
+
+    public function index(ArticleRepository $articleRepository,Request $request,PaginatorInterface $paginator)
+    {
+        $em=$this->getDoctrine()->getManager();
+        $search = $request->query->get('a');
+        $articlelast1 = $articleRepository->findLastArticles2();
+
+        $articlepop = $articleRepository->findBestArticles();
+        if ($search) {
+            $articles = $articleRepository->search($search);
+        } else {
+            $articles = $articleRepository->createQueryBuilder('a')->getQuery();
+        }
+        $articles = $paginator->paginate(
+            $articles,
+            $request->query->getInt('page', 1),
+            6
+        ); return $this->render('blog/index.html.twig', [
+        'articles' => $articles,'articlepop' => $articlepop,'articlelast1'=>$articleRepository
+    ]);
+
     }
+
 //    /**
 //     * @Route("/blog", name="blog")
 //     */
@@ -51,10 +66,12 @@ class BlogController extends AbstractController
     public function show( $id, ArticleRepository $articlerepo, Request $request ): Response
     {
         $article = $articlerepo->findOneBy(['id' => $id]);
-
+        $articlelast1 = $articlerepo->findLastArticles2();
         // Partie commentaires
         // On crée le commentaire "vierge"
         $commantaire = new Commantaire;
+        $articlepop = $articlerepo->findBestArticles();
+
         // On génère le formulaire
         $commentForm = $this->createForm(CommantaireType::class, $commantaire);
         $commentForm->handleRequest($request);
@@ -68,7 +85,6 @@ class BlogController extends AbstractController
 
             // On va chercher le commentaire correspondant
             $em = $this->getDoctrine()->getManager();
-
             if ($parentid != null) {
                 $parent = $em->getRepository(Commantaire::class)->find($parentid);
             }
@@ -86,8 +102,8 @@ class BlogController extends AbstractController
         }
 
         return $this->render('blog/show.html.twig', [
-            'article' => $article,
-            'commentForm' => $commentForm->createView()
+            'article' => $article,'articlepop' => $articlepop,
+            'commentForm' => $commentForm->createView(),'articlelast1' => $articlelast1
 
         ]);
 

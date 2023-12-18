@@ -31,7 +31,7 @@ class CalendarType extends AbstractType
             ->add('type')
             ->add('localisation')
 //            ->add('User')
-            ->add('Formation')
+
             ->add('title')
             ->add('start'
                 , DateTimeType

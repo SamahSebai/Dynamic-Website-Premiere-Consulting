@@ -1,0 +1,164 @@
+{% extends 'basefront.html.twig' %}
+
+{% block title %}New Devis{% endblock %}
+
+{% block body %}
+    <section class="ftco-intro ftco-no-pb img " >
+        <div class="container" style="border-radius: 30px">
+            <div class="row mb-5">
+                <div class="col-12 text-center">
+                    <h2 class="section-title mb-3">Envoyer une devis</h2>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 mb-5">
+                    <form action="" method="POST"class="p-5 bg-white" >
+                        {{ form_start(form) }}
+                        <div class="row form-group">
+                            <div class="col-md-6 mb-3 mb-md-0">
+                                <label class="text-black" for="fname">Nom</label>
+                                {{ form_widget(form.nom, {'attr': {'class': "form-control",'name':"devis[nom]" ,'id':"devis_nom" ,'placeholder':"Votre nom"}}) }}
+                            </div>
+                            <div class="col-md-6">
+                                <label class="text-black" for="lname">Prénom</label>
+                                {{ form_widget(form.prenom, {'attr': {'class': 'form-control','name':'devis[prenom]' ,'id':'devis_prenom' ,'placeholder':'Votre prenom'}}) }}
+
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-md-6">
+                                <label class="text-black" for="lname">Entreprise</label>
+                                {{ form_widget(form.entreprise, {'attr': {'class': "form-control",'name':"devis[entreprise]" ,'id':"devis_entreprise" ,'placeholder':"Entreprise"}}) }}
+
+                            </div>
+                            <div class="col-md-6">
+                                <label class="text-black" for="email">Email</label>
+                                {{ form_widget(form.email, {'attr': {'class': 'form-control','name':'devis[email]' ,'id':'devis_email' ,'placeholder':'Votre Email'}}) }}
+                            </div>
+                        </div>
+                        <div id="divser">
+                            <div class="row form-group" id="rowserv1">
+                                {% for el in devis.ElementDevis  %}
+                                    <div class="col-md-4">
+
+                                        <label class="text-black" for="lname">Services</label>
+                                        <div class="select-wrap">
+                                            <input data-min="1"  id="{{ el.id }}" data-max="0"  onchange="calligne({{ el.id }})" class="form-control" type="text" name="service{{ el.id }}" value="{{ el.Services.nom }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label class="text-black" for="lname">Quantité</label>
+                                        <input data-min="1"  id="quantite{{ el.id }}" class="form-control"  onchange="calligne({{ el.id }})" type="text" name="service{{ el.id }}" value="{{ el.Quantite }}">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label class="text-black" for="lname">Prix Unitaire</label>
+                                        <input data-min="1"  id="prix{{ el.id }}" class="form-control"  onchange="calligne({{ el.id }})" type="text" name="montant_ttc{{ el.id }}" value="">
+                                    </div>
+                                    <div class="col-md-2"> <label class="text-black" for="lname">TVA</label>
+                                        <input data-min="0" data-max="25" id="tax{{ el.id }}"  onchange="calligne({{ el.id }})" class="form-control" type="text" name="TVA{{ el.id }}" value="">
+
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <label class="text-black" for="lname">Prix TTC</label>
+                                        <input data-min="0"  id="ttc{{ el.id }}" class="form-control"  onchange="calligne({{ el.id }})" type="text" name="montant_ttc{{ el.id }}" value="">
+                                    </div>
+                                    {#  <div class="col-md-2">
+                                        <label class="text-black" for="lname">Réduction</label>
+                                        <input data-min="1" data-max="0" id="reduction{{ el.id }}" onchange="calligne({{ el.id }})"class="form-control" type="text" name="reduction" value="">
+                                    </div>#}
+
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <hr class="rounded" style=" border-top:3px solid #bbb;border-radius: 3px;">
+                        <div class="row form-group form-horizontal justify-content-md-end">
+                            <div class="col-md-2 form-group pull-righ">
+
+                                <div class="row-md-4 pull-righ">
+                                    <label class="text-black " for="lname">Montant HT</label>
+                                    <input data-min="1" data-max="0" id="mHT" class="form-control"  type="text" name="mHT" value="">
+                                </div>
+                                <div class="row-md-2 pull-right">
+                                    <label class="text-black" for="lname">TVA total</label>
+                                    <input data-min="1" data-max="0" id="tva" class="form-control" type="text" name="tvatot" value="">
+                                </div>
+                                <div class="row-md-2 pull-right">
+                                    <label class="text-black" for="lname">Montant TTC</label>
+                                    <input data-min="1" data-max="0" id="montantTTC" class="form-control" type="text" name="mTTc" value="">
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-12">
+                                <input type="submit" value="Envoyer" class="btn btn-primary btn-md text-white">
+                            </div>
+                        </div>
+                        {{ form_end(form) }}
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <div id="footer" style="padding-top:10px" >
+        <div class="footer-newsletter">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                        <h4>Inscrivez-vous</h4>
+                        <p>Inscrivez-vous pour recevoir les notifications des nouveautés des domaines l'environnement, l'hygiène et la santé sécurité au travail</p>
+                        <form action="" method="post">
+                            <input type="email" name="email"><input type="submit" value="S'abonner">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+
+    <a href="{{ path('devis_index') }}">back to list</a>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+
+        var nb="{{ devis.ElementDevis|length }}";
+        function calligne(id){
+            var pu=document.getElementById('prix'+id).value;
+            var q=document.getElementById('quantite'+id).value;
+            var t=document.getElementById('tax'+id).value;
+            var p=0;
+            if (q>0){
+                p=((pu*q)*(1+(t/100)));
+            }
+            document.getElementById('ttc'+id).value=p;
+            calculT();
+
+        }
+        function  calculT(){
+            var t=0;
+            var p=0;
+            var ph=0;
+
+            {%  for el in devis.ElementDevis %}
+            var pu=document.getElementById('prix{{ el.id }}').value;
+            var q=document.getElementById('quantite{{ el.id }}').value;
+            var tu=document.getElementById('tax{{ el.id }}').value;
+
+            if (q>0) {
+                t = t + ((pu * q) * (tu / 100));
+                ph = ph + (pu * q)
+                p = p+((pu * q) * (1 + (tu / 100)))
+            }
+            document.getElementById("tva").value=t;
+            document.getElementById("mHT").value=ph;
+            document.getElementById("montantTTC").value=p;
+            {% endfor %}
+        }
+    </script>
+{% endblock %}

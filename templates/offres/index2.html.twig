@@ -1,103 +1,110 @@
 {% extends 'basefront.html.twig' %}
 
-{% block title %}Offres index{% endblock %}
+    {% block title %}Offres index{% endblock %}
 
-{% block body %}
-  <section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_1.jpg');">
-    <div class="overlay"></div>
-    <div class="container">
-        <div class="row no-gutters slider-text align-items-center justify-content-center">
-            <div class="col-md-9 ftco-animate text-center">
-                <h1 class="mb-2 bread"> Nos Offres</h1>
-                <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Acceuil <i
-                        class="ion-ios-arrow-forward"></i></a></span> <span class="mr-2"><a
-                        href="NousRejoindre.html">  Nous Rejoindre</a>
+    {% block body %}
+        <section class="hero-wrap hero-wrap-2" style="background-image: url('{{ asset('themefront/assets/images/bg_1.jpg')}}');">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row no-gutters slider-text align-items-center justify-content-center">
+                    <div class="col-md-9 ftco-animate text-center">
+                        <h1 class="mb-2 bread"> Nos Offres</h1>
+                        <p class="breadcrumbs"><span class="mr-2"><a href="{{ path('accueil') }}">Acceuil <i
+                                            class="ion-ios-arrow-forward"></i></a></span> <span class="mr-2"><a
+                                        href="{{ path('offresF_index') }}">  Nous Rejoindre</a>
                 </span>
-                </p>
+                        </p>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-</section>
+        </section>
 
 
 
-<section class="ftco-section bg-light">
-    <div class="container">
-        <div class="row">
-
-            <div class="col-8 pr-lg-4">
-
-
+        <section class="ftco-section bg-light">
+            <div class="container">
                 <div class="row">
 
-                    {% for offre in offres %}
-                    <div class="col-md-12 ftco-animate">
+                    <div class="col-lg-9 pr-lg-4">
+                        {% for offre in offres  %}
+                            <div class="row">
 
-                        <div class="job-post-item p-4 d-block d-lg-flex align-items-center">
-                            <div class="one-third mb-4 mb-md-0">
-                                <div class="job-post-item-header align-items-center">
-                                    <span class="subadge">{{ offre.type}}</span>
-                                    <h2 class="mr-3 text-black"><a href="#">{{ offre.description }}</a></h2>
-                                </div>
-                                <div class="job-post-item-body d-block d-md-flex">
-                                    <div class="mr-3"><span class="icon-layers"></span> {{ offre.experience }}</div>
-                                    <div><span class="icon-my_location"></span> <span>{{ offre.date }}</span></div>
-                                </div>
-                            </div>
+                                <div class="col-md-12 ftco-animate">
+                                    <div class="job-post-item p-4 d-block d-lg-flex align-items-center">
+                                        <div class="one-third mb-4 mb-md-0">
+                                            <div class="job-post-item-header align-items-center">
 
-                            <div class="one-forth ml-auto d-flex align-items-center mt-4 md-md-0">
-                                <div>
-                                    <a href="#" class="icon text-center d-flex justify-content-center align-items-center icon mr-2">
-                                        <span class="icon-heart"></span>
-                                    </a>
+                                                <h2 class="mr-3 text-black"><a href="#">{{ offre.titre}}</a></h2>
+                                            </div>
+                                            <div class="job-post-item-body d-block d-md-flex">
+                                                <div class="mr-3"><span class="icon-layers"></span> <a href="{{ path('Single-offres_show', {'id': offre.id}) }}" >{{ offre.type }}</a></div>
+                                                <div><span class="icon-check"></span> <span>{{ offre.experience }}</span></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="one-forth ml-auto d-flex align-items-center mt-4 md-md-0">
+
+                                            <a href="{{ path('Single-offres_show', {'id': offre.id}) }}" class="btn btn-primary  py-3 px-3">Postuler</a>
+                                        </div>
+                                    </div>
                                 </div>
-                                <a href="{{ path('show', {'id': offre.id}) }}" class="btn btn-primary py-2">Postuler</a>
+
                             </div>
-                        </div>
+                        {% else %}
+                            <h4>Aucun offre</h4>
                         {% endfor %}
-                    </div><!-- end -->
-                </div>
-            </div>
 
-
-            <div class="col-4 sidebar">
-
-
-                <div class="sidebar-box bg-white p-4 ftco-animate">
-                    <h3 class="heading-sidebar">Select Location</h3>
-                    <form action="" method="get" id="formsearch" class="search-form mb-3">
-                        <div class="form-group">
-                            <button type="submit" class="icon icon-search" ></button>
-                            <input type="text" name="o" class="form-control" placeholder="Search..." id="search">
+                        <div class="navigation text-center  st-color-blue d-flex justify-content-center " >
+                            {{ knp_pagination_render(offres) }}
                         </div>
-                    </form>
-                    <ul class="nav" id="side-menu">
-                        <li>
-                            <a href="#">SearchResult <span class="fa arrow"></span> </a>
-                        </li>
-                    </ul>
 
-                    <h3 class="heading-sidebar">Job Type</h3>
-                    <form action="#" class="browse-form">
-                        <label for="option-job-type-1"><input type="checkbox" id="option-job-type-1" name="vehicle" value="" checked> Emploi</label><br>
-                        <label for="option-job-type-2"><input type="checkbox" id="option-job-type-2" name="vehicle" value=""> Stage</label><br>
 
-                    </form>
+                    </div>
+                    <div class="col-lg-3 sidebar">
+
+
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="main-button">
+
+                                    {% if is_granted('ROLE_USER')  %}
+                                        <a href="{{ path('condidature') }}"style="color:#d91a5b;border-color: #d91a5b;background-color: white" class="btn">Candidature spontannée</a>
+                                    {% else %}
+                                        <a href="{{ path('fos_user_security_login') }}"style="color:#d91a5b;border-color: #d91a5b;background-color: white" class="btn">Candidature spontannée</a>
+                                    {% endif %}
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+
+
+                        <div class="sidebar-box bg-white p-4 ftco-animate">
+                            <h3 class="heading-sidebar">Rechercher une offre</h3>
+                            <form action="" method="get" id="formsearch" class="search-form mb-3">
+                                <div class="form-group">
+                                    <span class="icon icon-search"></span>
+                                    <input type="text" name="o" class="form-control" placeholder="Search..." id="search">
+                                </div>
+
+
+                                <h3 class="heading-sidebar">Type offre</h3>
+
+                                <label for="option-job-type-1"><input type="radio" id="option-job-type-1" name="tes" value="1" > Emploi</label><br>
+                                <label for="option-job-type-2"><input type="radio" id="option-job-type-2" name="tes" value="2"> Stage</label><br>
+                                <button class="btn btn-primary" type="submit" style="color:#d91a5b;border-color: #d91a5b;background-color: white ">Recherche</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <div class="col">
-            <div class="navigation text-center text-primary st-color-blue>
-            {{ knp_pagination_render(offres) }}
-          </div>
-    </div>
-    </div>
+        </section>
 
 
-
-
-</section>
-
-
-{% endblock %}
+    {% endblock %}

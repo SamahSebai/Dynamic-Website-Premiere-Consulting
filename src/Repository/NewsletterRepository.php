@@ -47,4 +47,13 @@ class NewsletterRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function search($term)
+    {
+        $query=$this->createQueryBuilder('newsletter')->select('newsletter');
+        $query ->Where('newsletter.id LIKE :searchTerm  or newsletter.objet   LIKE :searchTerm ')
+            ->setParameter('searchTerm','%' .$term.'%');
+        $query ->getQuery()
+            ->getResult();
+        return $query;
+    }
 }

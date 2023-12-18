@@ -1,9 +1,12 @@
 <?php
 
 namespace App\Entity;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use App\Repository\FormationRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Form\FormTypeExtensionInterface;
+
 
 
 
@@ -53,21 +56,8 @@ class Formation
      * @ORM\Column(type="string", length=255)
      */
     private $description;
-    /**
-     * @var User
-     * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumn(name="user",referencedColumnName="id")
-     *
-     */
-    private $User;
-    /**
-     * @ORM\OneToMany(targetEntity="Demande", mappedBy="Formation")
-     */
-    private $Demande;
-    /**
-     * @ORM\OneToMany(targetEntity="Calendar", mappedBy="Formation")
-     */
-    private $Calendar;
+
+
     /**
      * @ORM\OneToMany(targetEntity="FormationPage", mappedBy="Formation")
      */
@@ -79,24 +69,28 @@ class Formation
     private $theme;
 
     /**
-     * @ORM\OneToMany(targetEntity="Valpub", mappedBy="Formation")
+     * @ORM\OneToMany(targetEntity="Valpub", mappedBy="formation")
      * @ORM\OrderBy({"date" = "ASC"})
      */
     private $valpub;
     /**
      * @ORM\OneToMany(targetEntity="Media", mappedBy="formation")
-
+     * @ORM\JoinColumn(name="Media",referencedColumnName="id")
      */
     private $medias;
-
+    /**
+     * @var User
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="user",referencedColumnName="id")
+     */
+    private $User;
     public function __construct()
     {
 
 
         $this->medias = new ArrayCollection();
-        $this->Demande = new ArrayCollection();
-        $this->Calendar= new ArrayCollection();
         $this->FormationPage = new ArrayCollection();
+        $this->valpub = new ArrayCollection();
     }
 
 
@@ -188,35 +182,7 @@ class Formation
 
         return $this;
     }
-    /**
-     * @return ArrayCollection
-     */
-    public function getDemande(): ArrayCollection
-    {
-        return $this->Demande;
-    }
 
-    public function addDemande(Demande $demande): self
-    {
-        if (!$this->Demande->contains($demande)) {
-            $this->Demande[] = $demande;
-            $demande->setFormation($this);
-        }
-
-        return $this;
-    }
-
-    public function removeDemande(Demande $demande): self
-    {
-        if ($this->Demande->removeElement($demande)) {
-            // set the owning side to null (unless already changed)
-            if ($demande->getFormation() === $this) {
-                $demande->setFormation(null);
-            }
-        }
-
-        return $this;
-    }
     /**
      * @return ArrayCollection
      */
@@ -224,7 +190,7 @@ class Formation
     {
         return $this->Evenement;
     }
-
+/*
     public function addEvenement(Evenement $Evenement): self
     {
         if (!$this->Evenement->contains($Evenement)) {
@@ -245,7 +211,7 @@ class Formation
         }
 
         return $this;
-    }
+    }*/
     /**
      * @return ArrayCollection
      */
@@ -276,23 +242,10 @@ class Formation
         return $this;
     }
 
-    /**
-     * @return User
-     */
-    public function getUser(): ?User
-    {
-        return $this->User;
-    }
 
-    /**
-     * @param User $User
-     * @return Formation
-     */
-    public function setUser(?User $User): Formation
-    {
-        $this->User = $User;
-        return $this;
-    }
+
+
+
 
     public function __toString()
     {
@@ -311,6 +264,7 @@ class Formation
         return $this;
     }
 
+
     /**
      * @return mixed
      */
@@ -321,11 +275,14 @@ class Formation
 
     /**
      * @param mixed $valpub
+     * @return Formation
      */
     public function setValpub($valpub)
     {
         $this->valpub = $valpub;
+        return $this;
     }
+
 
     /**
      * @return mixed
@@ -346,22 +303,23 @@ class Formation
     }
 
     /**
-     * @return ArrayCollection
+     * @return User
      */
-    public function getCalendar(): ArrayCollection
+    public function getUser(): User
     {
-        return $this->Calendar;
+        return $this->User;
     }
 
     /**
-     * @param ArrayCollection $Calendar
+     * @param User $User
      * @return Formation
      */
-    public function setCalendar(ArrayCollection $Calendar): Formation
+    public function setUser(User $User): Formation
     {
-        $this->Calendar = $Calendar;
+        $this->User = $User;
         return $this;
     }
+
 
 
 

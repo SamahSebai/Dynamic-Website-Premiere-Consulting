@@ -211,22 +211,22 @@
 <form class="fos_user_resetting_request" action="{{ path("fos_user_resetting_send_email") }}" method="post">
 
     <h4>
-        Just provide your email<br>
-        and we can do the rest
+        écrire votre email<br>
+       pour récupérer le mot de passe
     </h4>
     <formgroup>
         <input type="text" id="username" name="username" required="required" >
         <label for="email"><br>Email</label>
-        <span>enter your email</span>
+        <span>écrire email</span>
     </formgroup>
 
 
-    <button id="login-btn" value="{{ 'resetting.request.submit'|trans }}">Next</button>
+    <button id="login-btn" value="{{ 'resetting.request.submit'|trans }}">suivant</button>
 
 
 
 </form>
-    <p>Did you remember? <a href="{{ path('fos_user_security_login') }}">Sign In</a></p>
+    <p>déja inscrit? <a href="{{ path('fos_user_security_login') }}">S'inscrire</a></p>
 </div></div>
 
 

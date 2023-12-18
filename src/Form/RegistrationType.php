@@ -4,6 +4,7 @@ use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\UserBundle\Form\Type\RegistrationType as BaseRegistrationType;
@@ -19,8 +20,12 @@ class RegistrationType extends AbstractType{
             ->add('telephone')
             ->add('adress')
             ->add('entreprise')
-            ->add('email');
-
+            ->add('email')
+           ->add('photo',FileType::class, [
+                'label' => 'Image',
+                'mapped'=>false,
+            ]);
+;
 
     }
     public function getParent()

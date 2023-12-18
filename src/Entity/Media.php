@@ -40,24 +40,24 @@ class Media
 
     /**
      * var Formation
-     * @ORM\ManyToOne(targetEntity="Formation")
-     * @ORM\JoinColumn(name="formation",referencedColumnName="id" ,nullable=true)
+     * @ORM\ManyToOne(targetEntity="Formation",inversedBy="medias")
+     * @ORM\JoinColumn(name="formation",referencedColumnName="id" ,nullable=true , onDelete="CASCADE")
      */
     private $formation;
     /**
      * var article
-     * @ORM\ManyToOne(targetEntity="Article")
-     * @ORM\JoinColumn(name="article",referencedColumnName="id" ,nullable=true)
+     * @ORM\ManyToOne(targetEntity="Article",inversedBy="medias")
+     * @ORM\JoinColumn(name="article",referencedColumnName="id" ,nullable=true, onDelete="CASCADE")
      */
     private $article;
 
-
     /**
-     * var patenaire
-     * @ORM\ManyToOne(targetEntity="Partenaire")
-     * @ORM\JoinColumn(name="partenaire",referencedColumnName="id" ,nullable=true)
+     * var page
+     * @ORM\ManyToOne(targetEntity="Page",inversedBy="medias")
+     * @ORM\JoinColumn(name="page",referencedColumnName="id" ,nullable=true, onDelete="CASCADE")
      */
-    private $partenaire;
+    private $page;
+
 
     public function __construct()
     {
@@ -175,18 +175,22 @@ class Media
     /**
      * @return mixed
      */
-    public function getPartenaire()
+    public function getPage()
     {
-        return $this->partenaire;
+        return $this->page;
     }
 
     /**
-     * @param mixed $partenaire
+     * @param mixed $page
+     * @return Media
      */
-    public function setPartenaire($partenaire): void
+    public function setPage($page)
     {
-        $this->partenaire = $partenaire;
+        $this->page = $page;
+        return $this;
     }
+
+
 
 
 

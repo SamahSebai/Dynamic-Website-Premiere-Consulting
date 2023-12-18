@@ -67,7 +67,7 @@ class OffresRepository extends ServiceEntityRepository
              LIKE :searchTerm or offre.experience   LIKE :searchTerm')
             ->setParameter('searchTerm','%' .$term.'%');
         $query ->getQuery()
-            ->getResult();
+            ;
         return $query;
     }
     public function search($term,$tes)

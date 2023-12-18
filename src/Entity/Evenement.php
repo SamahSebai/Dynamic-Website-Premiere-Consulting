@@ -65,10 +65,7 @@ class Evenement
      * 
      */
     private $User;
-     /**
-     * @ORM\OneToMany(targetEntity="Demande", mappedBy="Evenement")
-     */
-    private $Demande;
+
     /**
      * @var Formation
      * @ORM\ManyToOne(targetEntity="Formation", inversedBy="Evenement")
@@ -76,10 +73,7 @@ class Evenement
      */
     private $Formation;
 
-    public function __construct()
-    {
-        $this->Demande = new ArrayCollection();
-    }
+
 
     public function getId(): ?int
     {
@@ -181,35 +175,7 @@ class Evenement
 
         return $this;
     }
-      /**
-     * @return Collection|Demande[]
-     */
-    public function getDemande(): Collection
-    {
-        return $this->Demande;
-    }
 
-    public function addDemande(Demande $demande): self
-    {
-        if (!$this->Demande->contains($demande)) {
-            $this->Demande[] = $demande;
-            $demande->setEvenement($this);
-        }
-
-        return $this;
-    }
-
-    public function removeDemande(Demande $demande): self
-    {
-        if ($this->Demande->removeElement($demande)) {
-            // set the owning side to null (unless already changed)
-            if ($demande->getEvenement() === $this) {
-                $demande->setEvenement(null);
-            }
-        }
-
-        return $this;
-    }
 
     /**
      * @return User

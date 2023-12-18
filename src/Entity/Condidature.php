@@ -31,7 +31,10 @@ class Condidature
      * @ORM\Column(type="string", length=255)
      */
     private $LM;
-
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $tel;
     /**
      * @ORM\Column(type="string", length=255)
      */
@@ -135,4 +138,59 @@ class Condidature
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getTel()
+    {
+        return $this->tel;
+    }
+
+    /**
+     * @param mixed $tel
+     * @return Condidature
+     */
+    public function setTel($tel)
+    {
+        $this->tel = $tel;
+        return $this;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser(): User
+    {
+        return $this->User;
+    }
+
+    /**
+     * @param User $User
+     * @return Condidature
+     */
+    public function setUser(User $User): Condidature
+    {
+        $this->User = $User;
+        return $this;
+    }
+
+    /**
+     * @return Offres
+     */
+    public function getOffres(): Offres
+    {
+        return $this->Offres;
+    }
+
+    /**
+     * @param Offres $Offres
+     * @return Condidature
+     */
+    public function setOffres(Offres $Offres): Condidature
+    {
+        $this->Offres = $Offres;
+        return $this;
+    }
+
 }

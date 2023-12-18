@@ -1,93 +1,283 @@
-    {% extends 'basefront.html.twig' %}
+{% extends 'baseBack.html.twig' %}
 
-    {% block title %}Offres index{% endblock %}
+{% block title %}Offres{% endblock %}
 
-    {% block body %}
-  <section class="hero-wrap hero-wrap-2" style="background-image: url('{{ asset('themefront/assets/images/bg_1.jpg')}}');">
-    <div class="overlay"></div>
-    <div class="container">
-        <div class="row no-gutters slider-text align-items-center justify-content-center">
-            <div class="col-md-9 ftco-animate text-center">
-                <h1 class="mb-2 bread"> Nos Offres</h1>
-                <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Acceuil <i
-                        class="ion-ios-arrow-forward"></i></a></span> <span class="mr-2"><a
-                        href="NousRejoindre.html">  Nous Rejoindre</a>
-                </span>
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
+{% block body %}
 
 
-
-<section class="ftco-section bg-light">
-    <div class="container">
-        <div class="row">
-
-            <div class="col-lg-9 pr-lg-4">
-                {% for offre in offres  %}
-                <div class="row">
-
-                    <div class="col-md-12 ftco-animate">
-                        <div class="job-post-item p-4 d-block d-lg-flex align-items-center">
-                            <div class="one-third mb-4 mb-md-0">
-                                <div class="job-post-item-header align-items-center">
-
-                                    <h2 class="mr-3 text-black"><a href="#">{{ offre.description }}</a></h2>
-                                </div>
-                                <div class="job-post-item-body d-block d-md-flex">
-                                    <div class="mr-3"><span class="icon-layers"></span> <a href="#">{{ offre.type }}</a></div>
-                                    <div><span class="icon-check"></span> <span>{{ offre.experience }}</span></div>
-                                </div>
-                            </div>
-
-                            <div class="one-forth ml-auto d-flex align-items-center mt-4 md-md-0">
-                                <div>
-                                    <a href="#" class="icon text-center d-flex justify-content-center align-items-center icon mr-2">
-                                        <span class="icon-heart"></span>
-                                    </a>
-                                </div>
-                                {#<a href="{{ path('page_show2', {'id': offre.id}) }}" class="btn btn-primary py-2">Postuler</a>#}
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                    {% else %}
-                    <h4>Aucun offre</h4>
-                {% endfor %}
-
-            <div class="navigation text-center  st-color-blue">
-            {{ knp_pagination_render(offres) }}
-          </div>
-
-
-        </div>
-            <div class="col-lg-3 sidebar">
-                <div class="sidebar-box bg-white p-4 ftco-animate">
-                    <h3 class="heading-sidebar">Rechercher une offre</h3>
-                    <form action="" method="get" id="formsearch" class="search-form mb-3">
-                        <div class="form-group">
-                            <button type="submit" class="icon icon-search" ></button>
-                            <input type="text" name="o" class="form-control" placeholder="Search..." id="search">
-                        </div>
-
-
-                    <h3 class="heading-sidebar">Type offre</h3>
-
-                        <label for="option-job-type-1"><input type="radio" id="option-job-type-1" name="tes" value="1" > Emploi</label><br>
-                        <label for="option-job-type-2"><input type="radio" id="option-job-type-2" name="tes" value="2"> Stage</label><br>
-                        <button type="submit" >Recherche</button>
+    <div class="col-xl-12">
+        <!--begin::Base Table Widget 8-->
+        <div class="card card-custom card-stretch gutter-b">
+            <!--begin::Header-->
+            <div class="card-header border-0 pt-5">
+                <h3 class="card-title align-items-start flex-column">
+                    <span class="card-label font-weight-bolder text-dark">Offres</span>
+                </h3>
+                <div>
+                    <a href="{{ path('offres_index') }}" class="btn btn-primary">retourner à la list</a>
+                    {% if app.user  %}
+                    {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_REDACTE') %}
+                    <a href="{{ path('offres_edit', {'id': offre.id})  }}" class="btn btn-success">Modifier Offre</a>
+                    {% else %}{% endif %}{% endif %}
+                    {% if app.user  %}
+                    {% if is_granted('ROLE_ADMIN')  %}
+                    <a href="#" onclick="$('#delF{{ offre.id }}').submit() " class="btn btn-danger">Supprimer</a>
+                    {% else %}{% endif %}{% endif %}
+                    <form id="delF" method="post" action="{{ path('offres_delete', {'id': offre.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ offre.id) }}">
                     </form>
                 </div>
             </div>
+            <!--end::Header-->
+            <!--begin::Body-->
+            <div class="card-body pt-2 pb-0 mt-n3">
+
+                <!--begin::Tap pane-->
+                <!--begin::Table-->
+                <div class="table-responsive">
+                    <table class="table table-borderless table-vertical-center">
+                        <thead>
+                        <tr>
+                            <th class="p-0 w-40px"></th>
+                            <th class="p-0 min-w-200px"></th>
+                            <th class="p-0 min-w-150px"></th>
+                            <th class="p-0 min-w-100px"></th>
+                            <th class="p-0 min-w-50px"></th>
+                            <th class="p-0 min-w-50px"></th>
+                            <th class="p-0 min-w-50px"></th>
+                            <th class="p-0 min-w-50px"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td class="pl-0">
+                                <div class="symbol symbol-35 symbol-circle symbol-light-success mr-2 mt-1">
+																				<span class="symbol-label">
+																					<span class="svg-icon svg-icon-2x svg-icon-success">
+																						<!--begin::Svg Icon | path:assets/media/svg/icons/Media/Play.svg-->
+																						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+																							<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+																								<rect x="0" y="0" width="24" height="24" />
+																								<path d="M9.82866499,18.2771971 L16.5693679,12.3976203 C16.7774696,12.2161036 16.7990211,11.9002555 16.6175044,11.6921539 C16.6029128,11.6754252 16.5872233,11.6596867 16.5705402,11.6450431 L9.82983723,5.72838979 C9.62230202,5.54622572 9.30638833,5.56679309 9.12422426,5.7743283 C9.04415337,5.86555116 9,5.98278612 9,6.10416552 L9,17.9003957 C9,18.1765381 9.22385763,18.4003957 9.5,18.4003957 C9.62084305,18.4003957 9.73759731,18.3566309 9.82866499,18.2771971 Z" fill="#000000" />
+																							</g>
+																						</svg>
+                                                                                        <!--end::Svg Icon-->
+																					</span>
+																				</span>
+                                </div>
+                            </td>
+                            <td class="pl-0">
+                                <div class="text-dark font-weight-bolder text-hover-primary d-block my-1 font-size-lg">ID</div>
+
+                            </td>
+                            <td class="text-left">
+                                <div class="text-info-75 font-weight-bold">{{ offre.id }}</div>
+                            </td>
+
+
+                        </tr>
+                        <tr>
+                            <td class="pl-0">
+                                <div class="symbol symbol-35 symbol-circle symbol-light-success mr-2 mt-1">
+																				<span class="symbol-label">
+																					<span class="svg-icon svg-icon-2x svg-icon-success">
+																						<!--begin::Svg Icon | path:assets/media/svg/icons/Media/Play.svg-->
+																						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+																							<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+																								<rect x="0" y="0" width="24" height="24" />
+																								<path d="M9.82866499,18.2771971 L16.5693679,12.3976203 C16.7774696,12.2161036 16.7990211,11.9002555 16.6175044,11.6921539 C16.6029128,11.6754252 16.5872233,11.6596867 16.5705402,11.6450431 L9.82983723,5.72838979 C9.62230202,5.54622572 9.30638833,5.56679309 9.12422426,5.7743283 C9.04415337,5.86555116 9,5.98278612 9,6.10416552 L9,17.9003957 C9,18.1765381 9.22385763,18.4003957 9.5,18.4003957 C9.62084305,18.4003957 9.73759731,18.3566309 9.82866499,18.2771971 Z" fill="#000000" />
+																							</g>
+																						</svg>
+                                                                                        <!--end::Svg Icon-->
+																					</span>
+																				</span>
+                                </div>
+                            </td>
+                            <td class="pl-0">
+                                <div class="text-dark font-weight-bolder text-hover-primary d-block my-1 font-size-lg">Titre</div>
+
+                            </td>
+                            <td class="text-left">
+                                <div class="text-info-75 font-weight-bold">{{ offre.titre }}</div>
+                            </td>
+
+
+                        </tr>
+                        <tr>
+                            <td class="pl-0">
+                                <div class="symbol symbol-35 symbol-circle symbol-light-success mr-2 mt-1">
+																				<span class="symbol-label">
+																					<span class="svg-icon svg-icon-2x svg-icon-success">
+																						<!--begin::Svg Icon | path:assets/media/svg/icons/Media/Play.svg-->
+																						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+																							<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+																								<rect x="0" y="0" width="24" height="24" />
+																								<path d="M9.82866499,18.2771971 L16.5693679,12.3976203 C16.7774696,12.2161036 16.7990211,11.9002555 16.6175044,11.6921539 C16.6029128,11.6754252 16.5872233,11.6596867 16.5705402,11.6450431 L9.82983723,5.72838979 C9.62230202,5.54622572 9.30638833,5.56679309 9.12422426,5.7743283 C9.04415337,5.86555116 9,5.98278612 9,6.10416552 L9,17.9003957 C9,18.1765381 9.22385763,18.4003957 9.5,18.4003957 C9.62084305,18.4003957 9.73759731,18.3566309 9.82866499,18.2771971 Z" fill="#000000" />
+																							</g>
+																						</svg>
+                                                                                        <!--end::Svg Icon-->
+																					</span>
+																				</span>
+                                </div>
+                            </td>
+                            <td class="pl-0">
+                                <div class="text-dark font-weight-bolder text-hover-primary d-block my-1 font-size-lg">Type</div>
+
+                            </td>
+                            <td class="text-left">
+                                <div class="text-info-75 font-weight-bold">{{ offre.type }}</div>
+                            </td>
+
+
+                        </tr>
+                        <tr>
+                            <td class="pl-0">
+                                <div class="symbol symbol-35 symbol-circle symbol-light-success mr-2 mt-1">
+																				<span class="symbol-label">
+																					<span class="svg-icon svg-icon-2x svg-icon-success">
+																						<!--begin::Svg Icon | path:assets/media/svg/icons/Media/Play.svg-->
+																						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+																							<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+																								<rect x="0" y="0" width="24" height="24" />
+																								<path d="M9.82866499,18.2771971 L16.5693679,12.3976203 C16.7774696,12.2161036 16.7990211,11.9002555 16.6175044,11.6921539 C16.6029128,11.6754252 16.5872233,11.6596867 16.5705402,11.6450431 L9.82983723,5.72838979 C9.62230202,5.54622572 9.30638833,5.56679309 9.12422426,5.7743283 C9.04415337,5.86555116 9,5.98278612 9,6.10416552 L9,17.9003957 C9,18.1765381 9.22385763,18.4003957 9.5,18.4003957 C9.62084305,18.4003957 9.73759731,18.3566309 9.82866499,18.2771971 Z" fill="#000000" />
+																							</g>
+																						</svg>
+                                                                                        <!--end::Svg Icon-->
+																					</span>
+																				</span>
+                                </div>
+                            </td>
+                            <td class="pl-0">
+                                <div class="text-dark font-weight-bolder text-hover-primary d-block my-1 font-size-lg">Nombre</div>
+
+                            </td>
+                            <td class="text-left">
+                                <div class="text-info-75 font-weight-bold">{{ offre.nombre }}</div>
+                            </td>
+
+
+                        </tr>
+                        <tr>
+                            <td class="pl-0">
+                                <div class="symbol symbol-35 symbol-circle symbol-light-success mr-2 mt-1">
+																				<span class="symbol-label">
+																					<span class="svg-icon svg-icon-2x svg-icon-success">
+																						<!--begin::Svg Icon | path:assets/media/svg/icons/Media/Play.svg-->
+																						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+																							<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+																								<rect x="0" y="0" width="24" height="24" />
+																								<path d="M9.82866499,18.2771971 L16.5693679,12.3976203 C16.7774696,12.2161036 16.7990211,11.9002555 16.6175044,11.6921539 C16.6029128,11.6754252 16.5872233,11.6596867 16.5705402,11.6450431 L9.82983723,5.72838979 C9.62230202,5.54622572 9.30638833,5.56679309 9.12422426,5.7743283 C9.04415337,5.86555116 9,5.98278612 9,6.10416552 L9,17.9003957 C9,18.1765381 9.22385763,18.4003957 9.5,18.4003957 C9.62084305,18.4003957 9.73759731,18.3566309 9.82866499,18.2771971 Z" fill="#000000" />
+																							</g>
+																						</svg>
+                                                                                        <!--end::Svg Icon-->
+																					</span>
+																				</span>
+                                </div>
+                            </td>
+                            <td class="pl-0">
+                                <div class="text-dark font-weight-bolder text-hover-primary d-block my-1 font-size-lg">Description</div>
+
+                            </td>
+                            <td class="text-left">
+                                <div class="text-info-75 font-weight-bold">{{ offre.description }}</div>
+                            </td>
+
+
+                        </tr>
+                        <tr>
+                            <td class="pl-0">
+                                <div class="symbol symbol-35 symbol-circle symbol-light-success mr-2 mt-1">
+																				<span class="symbol-label">
+																					<span class="svg-icon svg-icon-2x svg-icon-success">
+																						<!--begin::Svg Icon | path:assets/media/svg/icons/Media/Play.svg-->
+																						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+																							<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+																								<rect x="0" y="0" width="24" height="24" />
+																								<path d="M9.82866499,18.2771971 L16.5693679,12.3976203 C16.7774696,12.2161036 16.7990211,11.9002555 16.6175044,11.6921539 C16.6029128,11.6754252 16.5872233,11.6596867 16.5705402,11.6450431 L9.82983723,5.72838979 C9.62230202,5.54622572 9.30638833,5.56679309 9.12422426,5.7743283 C9.04415337,5.86555116 9,5.98278612 9,6.10416552 L9,17.9003957 C9,18.1765381 9.22385763,18.4003957 9.5,18.4003957 C9.62084305,18.4003957 9.73759731,18.3566309 9.82866499,18.2771971 Z" fill="#000000" />
+																							</g>
+																						</svg>
+                                                                                        <!--end::Svg Icon-->
+																					</span>
+																				</span>
+                                </div>
+                            </td>
+                            <td class="pl-0">
+                                <div class="text-dark font-weight-bolder text-hover-primary d-block my-1 font-size-lg">Date</div>
+
+                            </td>
+                            <td class="text-left">
+                                <div class="text-info-75 font-weight-bold">{{ offre.date |date('Y-m-d')}}</div>
+                            </td>
+
+
+                        </tr>
+                        <tr>
+                            <td class="pl-0">
+                                <div class="symbol symbol-35 symbol-circle symbol-light-success mr-2 mt-1">
+																				<span class="symbol-label">
+																					<span class="svg-icon svg-icon-2x svg-icon-success">
+																						<!--begin::Svg Icon | path:assets/media/svg/icons/Media/Play.svg-->
+																						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+																							<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+																								<rect x="0" y="0" width="24" height="24" />
+																								<path d="M9.82866499,18.2771971 L16.5693679,12.3976203 C16.7774696,12.2161036 16.7990211,11.9002555 16.6175044,11.6921539 C16.6029128,11.6754252 16.5872233,11.6596867 16.5705402,11.6450431 L9.82983723,5.72838979 C9.62230202,5.54622572 9.30638833,5.56679309 9.12422426,5.7743283 C9.04415337,5.86555116 9,5.98278612 9,6.10416552 L9,17.9003957 C9,18.1765381 9.22385763,18.4003957 9.5,18.4003957 C9.62084305,18.4003957 9.73759731,18.3566309 9.82866499,18.2771971 Z" fill="#000000" />
+																							</g>
+																						</svg>
+                                                                                        <!--end::Svg Icon-->
+																					</span>
+																				</span>
+                                </div>
+                            </td>
+                            <td class="pl-0">
+                                <div class="text-dark font-weight-bolder text-hover-primary d-block my-1 font-size-lg">Qualification</div>
+
+                            </td>
+                            <td class="text-left">
+                                <div class="text-info-75 font-weight-bold">{{offre.qualification}}</div>
+                            </td>
+
+
+                        </tr>
+                        <tr>
+                            <td class="pl-0">
+                                <div class="symbol symbol-35 symbol-circle symbol-light-success mr-2 mt-1">
+																				<span class="symbol-label">
+																					<span class="svg-icon svg-icon-2x svg-icon-success">
+																						<!--begin::Svg Icon | path:assets/media/svg/icons/Media/Play.svg-->
+																						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+																							<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+																								<rect x="0" y="0" width="24" height="24" />
+																								<path d="M9.82866499,18.2771971 L16.5693679,12.3976203 C16.7774696,12.2161036 16.7990211,11.9002555 16.6175044,11.6921539 C16.6029128,11.6754252 16.5872233,11.6596867 16.5705402,11.6450431 L9.82983723,5.72838979 C9.62230202,5.54622572 9.30638833,5.56679309 9.12422426,5.7743283 C9.04415337,5.86555116 9,5.98278612 9,6.10416552 L9,17.9003957 C9,18.1765381 9.22385763,18.4003957 9.5,18.4003957 C9.62084305,18.4003957 9.73759731,18.3566309 9.82866499,18.2771971 Z" fill="#000000" />
+																							</g>
+																						</svg>
+                                                                                        <!--end::Svg Icon-->
+																					</span>
+																				</span>
+                                </div>
+                            </td>
+                            <td class="pl-0">
+                                <div class="text-dark font-weight-bolder text-hover-primary d-block my-1 font-size-lg">Experience</div>
+
+                            </td>
+                            <td class="text-left">
+                                <div class="text-info-75 font-weight-bold">{{ offre.experience }}</div>
+                            </td>
+
+
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <!--end::Tap pane-->
+
+                </div>
+            </div>
+            <!--end::Body-->
+
         </div>
+        <!--end::Base Table Widget 8-->
+
     </div>
-</section>
-
-
-
-</section>
 
 {% endblock %}

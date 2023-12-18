@@ -46,6 +46,7 @@ class ArticleType extends AbstractType
             ->add('image', FileType::class, [
                 'label' => 'Image',
                 'mapped'=>false,
+                'required'=>false
             ])
 
 

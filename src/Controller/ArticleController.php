@@ -5,9 +5,10 @@ namespace App\Controller;
 use App\Entity\ArticleCategorie;
 use App\Entity\Categorie;
 use App\Entity\Article;
-use App\Entity\ValidationEtPublication;
+use App\Entity\SEO;
 use App\Entity\Valpub;
 use App\Form\ArticleType;
+use App\Form\SEOType;
 use App\Repository\ArticleRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -49,14 +50,17 @@ class ArticleController extends AbstractController
     /**
      * @Route("/new", name="article_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request ): Response
 
     {
-
+        $user = $this->getUser();
         $entityManager = $this->getDoctrine()->getManager();
         $article = new Article();
+        $seo= new SEO();
         $form = $this->createForm(ArticleType::class, $article);
+        $form2=$this->createForm(SEOType::class,$seo);
         $form->handleRequest($request);
+        $form2->handleRequest($request);
         $max=0;
         $list = $entityManager->getRepository(Categorie::class)->createQueryBuilder('c')->select('c')->orderBy('c.niveau','DESC')->setMaxResults(1)->getQuery()->getOneOrNullResult();
         if ($list)
@@ -81,6 +85,7 @@ class ArticleController extends AbstractController
                     $CA->setArticle($article);
                     $CA->setCategorie($cat);
                     $entityManager->persist($article);
+
                     $entityManager->flush();
                 }
 
@@ -108,16 +113,21 @@ class ArticleController extends AbstractController
                 $article->setImage($newFilename);
 
             }
-
+            $seo->setArticle($article);
+            $entityManager->persist($seo);
+            $seo->setDescription($article->getIntroduction());
+            $article->setUser($user);
             $em->persist($article);
             $em->flush();
-            $this->addFlash('success', 'Article Created! Knowledge is power!');
+            $this->addFlash('success', 'Article Cree!');
             return $this->redirectToRoute('article');
         }
 
         return $this->render('article/new.html.twig', [
             'article' => $article,'categories' => $categories,
             'form' => $form->createView(),'max'=>$max,'tab'=>$tab,
+            'seo' => $seo,
+            'form2' => $form2->createView(),
         ]);
     }
 
@@ -138,12 +148,15 @@ class ArticleController extends AbstractController
      */
     public function edit(Request $request, Article $article): Response
     {
+        $user = $this->getUser();
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $article->setUser($user);
             $this->getDoctrine()->getManager()->flush();
 
+            $this->addFlash('info', 'Article modifié!');
             return $this->redirectToRoute('article');
         }
 
@@ -164,7 +177,7 @@ class ArticleController extends AbstractController
             $entityManager->remove($article);
             $entityManager->flush();
         }
-
+        $this->addFlash('danger', 'Article supprimé!');
         return $this->redirectToRoute('article');
     }
     /**

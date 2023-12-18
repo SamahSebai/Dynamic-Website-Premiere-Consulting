@@ -1,0 +1,50 @@
+{% extends 'basefront.html.twig' %}
+
+{% block title %}Recherche : {% endblock %}
+
+{% block body %}
+    <section class="hero-wrap hero-wrap-2" style="background-image: url('{{ asset('themefront/assets/images/bg_1.jpg')}}');">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row no-gutters slider-text align-items-center justify-content-center">
+                <div class="col-md-9 ftco-animate text-center">
+                    <h1 class="mb-2 bread">Recherche : {{ search }}</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="ftco-section bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 pr-lg-4">  {% for element in elements %}
+                    <div class="row">
+                        <div class="col-md-12 ftco-animate">
+                            <div class="job-post-item p-4 d-block d-lg-flex align-items-center">
+
+                                <div class="one-third mb-4 mb-md-0">
+                                    <div class="job-post-item-header align-items-center">
+                                        <span class="subadge"> {{ element.id }}</span>
+                                        <h2 class="mr-3 text-black"><a
+                                                    {% if (element.elpage==1) %}
+                                                    href="{{path('page_show2' , {'slug' : element.url}) }}"
+{% else %}
+                                                    href="{{ path('show', {'id': element.id}) }}"
+                                                    {% endif %}
+                                            > {{ element.titre }}</a></h2>
+                                    </div>
+                                    <div class="job-post-item-body d-block d-md-flex">
+                                        <div class="mr-3"><span class="icon-layers"></span> <a href="#">{{ element.url }}.</a></div>
+                                        <div><span class="icon-my_location"></span> <span>{{ element.elpage }}</span></div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div><!-- end -->
+                    </div> {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+{% endblock %}

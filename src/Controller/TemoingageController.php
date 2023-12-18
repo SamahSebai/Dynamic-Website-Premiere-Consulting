@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Partenaire;
 use App\Entity\Temoingage;
 use App\Form\TemoingageType;
+use App\Repository\ArticleRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use App\Repository\TemoingageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,6 +26,7 @@ class TemoingageController extends AbstractController
     {
 
         $em=$this->getDoctrine()->getManager();
+
         $search = $request->query->get('t');
         if ($search) {
             $temoingages = $temoingageRepository->search($search);
@@ -33,8 +35,7 @@ class TemoingageController extends AbstractController
         }
         $temoingage = $paginator->paginate(
             $temoingages,
-            $request->query->getInt('page', 1),
-            5
+            $request->query->getInt('page', 1),5
         );
 
         return $this->render('temoingage/index.html.twig', [
@@ -47,6 +48,7 @@ class TemoingageController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        $user = $this->getUser();
         $temoingage = new Temoingage();
         $form = $this->createForm(TemoingageType::class, $temoingage);
         $form->handleRequest($request);
@@ -71,7 +73,7 @@ class TemoingageController extends AbstractController
             }
 
             $temoingage->setImage($newFilename);
-
+            $temoingage->setUser($user);
             $em->persist($temoingage);
             $em->flush();
             $this->addFlash('success', 'Témoingage ajoutée avec succées!');
@@ -88,12 +90,12 @@ class TemoingageController extends AbstractController
     /**
      * @Route("/List", name="temoingage_list", methods={"GET"})
      */
-    public function showList(): Response
-    {
+    public function showList(ArticleRepository $artRepo): Response
+    {$articlelast1 = $artRepo->findLastArticles2();
         $em=$this->getDoctrine()->getManager();
         $temoingages = $em->getRepository(Temoingage::class)->findAll();
         return $this->render('temoingage/show1.html.twig', [
-            'temoingages' => $temoingages,
+            'temoingages' => $temoingages,'articlelast1' => $articlelast1
         ]);
     }
     /**
@@ -109,14 +111,16 @@ class TemoingageController extends AbstractController
     /**
      * @Route("/{id}/edit", name="temoingage_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Temoingage $temoingage): Response
+    public function edit(Request $request, Temoingage $temoingage ): Response
     {
+        $user = $this->getUser();
         $form = $this->createForm(TemoingageType::class, $temoingage);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $temoingage->setUser($user);
             $this->getDoctrine()->getManager()->flush();
-
+            $this->addFlash('info', 'Temoingage modifié!');
             return $this->redirectToRoute('temoingage_index');
         }
 
@@ -127,7 +131,7 @@ class TemoingageController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="temoingage_delete", methods={"POST"})
+     * @Route("/{id}", name="temoingage_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Temoingage $temoingage): Response
     {
@@ -136,7 +140,8 @@ class TemoingageController extends AbstractController
             $entityManager->remove($temoingage);
             $entityManager->flush();
         }
-
+            $this->addFlash('danger', 'Temoingage supprimé!');
         return $this->redirectToRoute('temoingage_index');
     }
+
 }

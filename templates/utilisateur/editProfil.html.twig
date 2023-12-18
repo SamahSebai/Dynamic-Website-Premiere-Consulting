@@ -1,0 +1,168 @@
+{% extends "basefront.html.twig" %}
+    {% block customstylesheet %}
+        <link rel="stylesheet" href="{{asset('themefront/assets/css/profil/style.css  ')}}">
+    {% endblock %}
+{% block body %}
+
+
+
+    <div class="">
+        <!-- Top navbar -->
+        <!-- Header -->
+        <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="max-height: 500px; background-size: auto; background-position: center top;)">
+            <!-- Mask -->
+            <span class="mask bg-gradient-default opacity-8"></span>
+            <!-- Header container -->
+            <div class="container-fluid d-flex align-items-center" style="background: transparent !important;">
+                <div class="" style="width: 80%">
+                    <div class="col-lg-7 col-md-10">
+                        <h1 class="display-2 text-white" >Bonjour  {{ user.nom }} {{ user.prenom }}</h1>
+                        {# <a href="#!" class="btn btn-info">Edit profile</a>#}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Page content -->
+        <div class="container mt--7">
+            <div class="row">
+                <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+                    <div class="card2 card-profile shadow">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-3 order-lg-2">
+                                <div class="card-profile-image">
+                                  <a href="#">
+                                        {% if app.user.photo %}
+                                            <img src="{{ asset('upload/'~app.user.photo) }}" class="rounded-circle circular rounded">
+                                        {% else %}
+                                            <img src="#" class="rounded-circle">
+                                        {% endif %}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card2-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+                            <div class="d-flex justify-content-between">
+                            </div>
+                        </div>
+                        <div class="card2-body pt-50 pt-md-4">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card-profile-stats d-flex justify-content-center mt-md-5">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <h3>
+                                    {{ user.nom }} {{ user.prenom }}
+                                </h3>
+                                <div class="h5 font-weight-300">
+                                    <i class="ni location_pin mr-2"></i>{{ user.adress }}
+                                </div>
+                                <hr class="my-4">
+                                <div>
+                                    <i class="ni education_hat mr-2"></i>{{ user.entreprise }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-8 order-xl-1">
+                    <div class="card2 bg-secondary shadow">
+                        <div class="card2-header bg-white border-0">
+                            <div class="row align-items-center">
+                                <div class="col-8">
+                                    <h3 class="mb-0">Mon compte</h3>
+                                </div>
+                                <div class="col-4 text-right">
+                                    <a href="#" onclick="$('#formedit').submit()" class="btn btn-sm btn-primary">Modifier Profil</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card2-body">
+                            <form if="formedit" method="post" action="#">
+
+                                {{ form_start(form ) }}
+
+                                <h6 class="heading-small text-muted mb-4">vos coordonées</h6>
+                                <div class="pl-lg-4">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group focused">
+                                                <label class="form-control-label" for="input-username">pseudo</label>
+                                                {{ form_widget(form.username ,{'attr':{'class':"form-control form-control-solid",'placeholder':"Entrer le pseudo"}})}}
+
+                                                {#                                                <input type="text" id="input-username" class="form-control form-control-alternative" placeholder="pseudo" value="{{ user.username }}">#}
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="input-email"> address mail  </label>
+                                                {{ form_widget(form.email, {'attr': {'class': 'form-control form-control-solid','name':'user[email]' ,'id':'user_email' ,'placeholder':'Votre Email'}}) }}
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group focused">
+
+                                                <label class="form-control-label" for="input-first-name">Nom</label>
+                                                {{ form_widget(form.nom ,{'attr':{'class':"form-control form-control-solid",'placeholder':"Entrer le nom"}})}}
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group focused">
+                                                <label class="form-control-label" for="input-last-name">Prénom</label>
+                                                {{ form_widget(form.prenom ,{'attr':{'class':"form-control form-control-solid",'placeholder':"Entrer le prenom "}})}}
+                                            </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                <hr class="my-4">
+                                <!-- Address -->
+                                <h6 class="heading-small text-muted mb-4">Contact information</h6>
+                                <div class="pl-lg-4">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                           <div class="form-group focused">
+                                                <label class="form-control-label" for="input-address">Telephone</label>
+                                                {{ form_widget(form.telephone ,{'attr':{'class':"form-control form-control-lg form-control-solid"}})}}
+                                            </div>
+                                            <div class="form-group focused">
+                                                <label class="form-control-label" for="input-address">Address</label>
+                                                {{ form_widget(form.adress ,{'attr':{'class':"form-control form-control-lg form-control-solid"}})}}
+                                            </div>
+                                            <div class="form-group focused">
+                                                <label class="form-control-label" for="input-address">Entreprise</label>
+                                                {{ form_widget(form.entreprise ,{'attr':{'class':"form-control form-control-lg form-control-solid"}})}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" name="submit" id="submit" class="form-submit btn btn-primary" value="Sign up"> enregister</button>
+                                </div>
+
+                                 <div style="display: none">
+                        {{form_rest(form)}}
+                         </div>
+                                {{ form_end(form) }}
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
+{% block javascripts %}
+
+    <script src="{{asset('themefront/assets/js/pages/widgets.js')}}"></script>
+    <script src="{{asset('themefront/assets/js/pages/custom/profile/profile.js')}}"></script>
+{% endblock %}

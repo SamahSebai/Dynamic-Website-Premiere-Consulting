@@ -39,7 +39,7 @@ class Commantaire
     /**
      * @var Article
      * @ORM\ManyToOne(targetEntity="Article", inversedBy="Commantaire")
-     * @ORM\JoinColumn(name="article",referencedColumnName="id")
+     * @ORM\JoinColumn(name="article",referencedColumnName="id" , onDelete="CASCADE")
      */
     private $Article;
 
@@ -57,11 +57,6 @@ class Commantaire
      * @ORM\Column(type="string", length=255)
      */
     private $pseudo;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $rgpd;
 
     /**
      * @ORM\ManyToOne(targetEntity=Commantaire::class, inversedBy="reponse")
@@ -150,17 +145,6 @@ class Commantaire
         return $this;
     }
 
-    public function getRgpd(): ?bool
-    {
-        return $this->rgpd;
-    }
-
-    public function setRgpd(bool $rgpd): self
-    {
-        $this->rgpd = $rgpd;
-
-        return $this;
-    }
 
     /**
      * @return Collection|Commantaire[]

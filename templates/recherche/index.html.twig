@@ -1,0 +1,39 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Recherche index{% endblock %}
+
+{% block body %}
+    <h1>Recherche index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date_recherche</th>
+                <th>Requete</th>
+                <th>Resultat</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for recherche in recherches %}
+            <tr>
+                <td>{{ recherche.id }}</td>
+                <td>{{ recherche.dateRecherche ? recherche.dateRecherche|date('Y-m-d') : '' }}</td>
+                <td>{{ recherche.requete }}</td>
+                <td>{{ recherche.resultat }}</td>
+                <td>
+                    <a href="{{ path('recherche_show', {'id': recherche.id}) }}">show</a>
+                    <a href="{{ path('recherche_edit', {'id': recherche.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('recherche_new') }}">Create new</a>
+{% endblock %}

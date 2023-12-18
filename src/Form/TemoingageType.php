@@ -18,6 +18,7 @@ class TemoingageType extends AbstractType
             ->add('image', FileType::class, [
                 'label' => 'Images',
                 'mapped'=>false,
+                'required'=>false
             ])
         ;
     }

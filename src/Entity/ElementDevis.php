@@ -28,14 +28,14 @@ class ElementDevis
     private $Tax;
     /**
      * @var Devis
-     * @ORM\ManyToOne(targetEntity="Devis", inversedBy="ElementDevis")
-     * @ORM\JoinColumn(name="Devis",referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Devis", inversedBy="ElementDevis" )
+     * @ORM\JoinColumn(name="Devis",referencedColumnName="id" , onDelete="CASCADE")
      */
     private $Devis;
     /**
      * @var Services
      * @ORM\ManyToOne(targetEntity="Services", inversedBy="ElementDevis")
-     * @ORM\JoinColumn(name="Services",referencedColumnName="id")
+     * @ORM\JoinColumn(name="Services",referencedColumnName="id" , onDelete="CASCADE")
      */
     private $Services;
 
@@ -53,6 +53,14 @@ class ElementDevis
      * @ORM\Column(type="integer")
      */
     private $PTTC;
+    public function __construct()
+    {
+
+        $this->Tax =19;
+        $this->prixUnitaire= 0;
+        $this->PTTC=0;
+        $this->reduction=0;
+    }
 
     public function getId(): ?int
     {
